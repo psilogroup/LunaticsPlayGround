@@ -1,0 +1,43 @@
+!!ARBfp1.0
+PARAM diffuse = {1.0, 0.5, 0.0, 1.0};
+PARAM specular = {1.0, 0.5, 1.0, 1.0};
+PARAM ambient = {1.0, 1.0, 0.5, 1.0};
+PARAM shine = {30.0, 0.0, 0.0, 0.0};
+ATTRIB nvector = fragment.texcoord[0];
+ATTRIB lvector = fragment.texcoord[1];
+ATTRIB hvector = fragment.texcoord[2];
+TEMP temp;
+TEMP LN;
+TEMP R0;
+TEMP Id;
+TEMP HN;
+TEMP spec;
+TEMP mSpec;
+TEMP fcolor;
+ATTRIB col0 = fragment.color;
+PARAM pink = { 1.0, 0.4, 0.4, 1.0 };
+OUTPUT out = result.color;
+
+MUL HN, hvector, nvector;
+POW mSpec.x, HN.x, shine.x;
+POW mSpec.y, HN.y, shine.x;
+POW mSpec.z, HN.z, shine.x;
+
+MAX spec, mSpec, 0;
+
+POW spec.x, spec.x, specular.x;
+POW spec.y, spec.y, specular.y;
+POW spec.z, spec.z, specular.z;
+
+MUL LN, lvector, nvector;
+
+POW Id.x, LN.x, diffuse.x;
+POW Id.y, LN.y, diffuse.y;
+POW Id.z, LN.z, diffuse.z;
+
+MOV temp, 0;
+ADD temp, spec, Id;
+MUL temp, col0, temp;
+#ADD temp, temp, ambient;
+MOV out, temp; 
+END

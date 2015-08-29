@@ -1,0 +1,23 @@
+!!ARBvp1.0
+
+PARAM mvp[4] = { state.matrix.mvp };
+
+OUTPUT outPosition = result.position;
+
+ATTRIB nvector = vertex.normal;
+PARAM lvector = state.light[0].position;
+PARAM hvector = state.light[0].half;
+#TEMP norm;
+MOV result.texcoord[0], nvector;
+MOV result.texcoord[1], lvector;
+MOV result.texcoord[2], hvector;
+
+DP4 outPosition.x, mvp[0], vertex.position; 
+DP4 outPosition.y, mvp[1], vertex.position;
+DP4 outPosition.z, mvp[2], vertex.position;
+DP4 outPosition.w, mvp[3], vertex.position;
+
+#DP3 norm.w, nvector, nvector;
+#RSQ norm.w, norm.w;
+#MUL result.texcoord[0].xyz, norm.w, nvector;
+END

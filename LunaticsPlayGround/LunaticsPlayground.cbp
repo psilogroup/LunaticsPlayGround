@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LunaticsPlayground" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/LunaticsPlayground" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../newbie-engine/include/AbstractVeichle.h" />
+		<Unit filename="../newbie-engine/include/BZK_DOMNode.h" />
+		<Unit filename="../newbie-engine/include/BZK_List.h" />
+		<Unit filename="../newbie-engine/include/BZK_ParsingTools.h" />
+		<Unit filename="../newbie-engine/include/BZK_Time.h" />
+		<Unit filename="../newbie-engine/include/BZK_XMLReader.h" />
+		<Unit filename="../newbie-engine/include/BZK_XMLTag.h" />
+		<Unit filename="../newbie-engine/include/BZK_XMLTagManager.h" />
+		<Unit filename="../newbie-engine/include/Buggy.cpp" />
+		<Unit filename="../newbie-engine/include/Buggy.h" />
+		<Unit filename="../newbie-engine/include/Camera.h" />
+		<Unit filename="../newbie-engine/include/Command.h" />
+		<Unit filename="../newbie-engine/include/Console.h" />
+		<Unit filename="../newbie-engine/include/Cube.h" />
+		<Unit filename="../newbie-engine/include/Cylinder.h" />
+		<Unit filename="../newbie-engine/include/Event.h" />
+		<Unit filename="../newbie-engine/include/Explosion.h" />
+		<Unit filename="../newbie-engine/include/Font.h" />
+		<Unit filename="../newbie-engine/include/Graphics.h" />
+		<Unit filename="../newbie-engine/include/Joint.h" />
+		<Unit filename="../newbie-engine/include/Material.h" />
+		<Unit filename="../newbie-engine/include/Matrix.h" />
+		<Unit filename="../newbie-engine/include/Mesh.h" />
+		<Unit filename="../newbie-engine/include/NewbieEngine.h" />
+		<Unit filename="../newbie-engine/include/Object.h" />
+		<Unit filename="../newbie-engine/include/ObjectManager.h" />
+		<Unit filename="../newbie-engine/include/ParticleManager.h" />
+		<Unit filename="../newbie-engine/include/ParticleSystem.h" />
+		<Unit filename="../newbie-engine/include/Plane.h" />
+		<Unit filename="../newbie-engine/include/Scene.h" />
+		<Unit filename="../newbie-engine/include/Shader.h" />
+		<Unit filename="../newbie-engine/include/Space.h" />
+		<Unit filename="../newbie-engine/include/SpaceManager.h" />
+		<Unit filename="../newbie-engine/include/Sphere.h" />
+		<Unit filename="../newbie-engine/include/Terrian.h" />
+		<Unit filename="../newbie-engine/include/TexCoord2.h" />
+		<Unit filename="../newbie-engine/include/Texture.h" />
+		<Unit filename="../newbie-engine/include/TexturePCX.h" />
+		<Unit filename="../newbie-engine/include/Trigon.h" />
+		<Unit filename="../newbie-engine/include/Veichle.h" />
+		<Unit filename="../newbie-engine/include/VertexBufferObject.h" />
+		<Unit filename="../newbie-engine/include/Wavefront.h" />
+		<Unit filename="../newbie-engine/include/World.h" />
+		<Unit filename="../newbie-engine/include/definitions.h" />
+		<Unit filename="../newbie-engine/include/glsl.h" />
+		<Unit filename="../newbie-engine/include/sdlfunc.h" />
+		<Unit filename="../newbie-engine/include/vec3d.h" />
+		<Unit filename="../newbie-engine/include/vec4.h" />
+		<Unit filename="../newbie-engine/include/wavefrontLoader.h" />
+		<Unit filename="../newbie-engine/src/BZK_DOMNode.cpp" />
+		<Unit filename="../newbie-engine/src/BZK_Time.cpp" />
+		<Unit filename="../newbie-engine/src/BZK_XMLReader.cpp" />
+		<Unit filename="../newbie-engine/src/BZK_XMLTag.cpp" />
+		<Unit filename="../newbie-engine/src/BZK_XMLTagManager.cpp" />
+		<Unit filename="../newbie-engine/src/Buggy.cpp" />
+		<Unit filename="../newbie-engine/src/Camera.cpp" />
+		<Unit filename="../newbie-engine/src/Cube.cpp" />
+		<Unit filename="../newbie-engine/src/Cylinder.cpp" />
+		<Unit filename="../newbie-engine/src/Explosion.cpp" />
+		<Unit filename="../newbie-engine/src/Graphics.cpp" />
+		<Unit filename="../newbie-engine/src/Joint.cpp" />
+		<Unit filename="../newbie-engine/src/Material.cpp" />
+		<Unit filename="../newbie-engine/src/Matrix.cpp" />
+		<Unit filename="../newbie-engine/src/Mesh.cpp" />
+		<Unit filename="../newbie-engine/src/NewbieEngine.cpp" />
+		<Unit filename="../newbie-engine/src/Object.cpp" />
+		<Unit filename="../newbie-engine/src/ObjectManager.cpp" />
+		<Unit filename="../newbie-engine/src/ParticleManager.cpp" />
+		<Unit filename="../newbie-engine/src/ParticleSystem.cpp" />
+		<Unit filename="../newbie-engine/src/Plane.cpp" />
+		<Unit filename="../newbie-engine/src/Scene.cpp" />
+		<Unit filename="../newbie-engine/src/Shader.cpp" />
+		<Unit filename="../newbie-engine/src/Space.cpp" />
+		<Unit filename="../newbie-engine/src/SpaceManager.cpp" />
+		<Unit filename="../newbie-engine/src/Sphere.cpp" />
+		<Unit filename="../newbie-engine/src/Terrian.cpp" />
+		<Unit filename="../newbie-engine/src/Texture.cpp" />
+		<Unit filename="../newbie-engine/src/TexturePCX.cpp" />
+		<Unit filename="../newbie-engine/src/Trigon.cpp" />
+		<Unit filename="../newbie-engine/src/VertexBufferObject.cpp" />
+		<Unit filename="../newbie-engine/src/Wavefront.cpp" />
+		<Unit filename="../newbie-engine/src/World.cpp" />
+		<Unit filename="../newbie-engine/src/glsl.cpp" />
+		<Unit filename="../newbie-engine/src/sdlfunc.cpp" />
+		<Unit filename="../newbie-engine/src/wavefrontLoader.cpp" />
+		<Unit filename="Lunatics.cpp" />
+		<Unit filename="R1D1.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

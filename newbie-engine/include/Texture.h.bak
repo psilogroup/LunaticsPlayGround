@@ -1,0 +1,71 @@
+
+#ifndef TEXTURE_H
+#define TEXTURE_H
+#ifdef WIN32
+#include <windows.h>
+#endif
+#ifdef WIN32
+#include <windows.h>
+#endif
+#include <SDL/SDL.h>
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+/**
+ * Texture is RGB or RGBA
+ */
+typedef enum {TEXTURE_RGB,TEXTURE_RGBA}TextureColorFormat;
+
+/**
+ * Texture in one (Shaders) or two (Images)
+ */
+typedef enum {TEXTURE_1D,TEXTURE_2D}TextureDimension;
+
+/**
+  * class Texture
+  * Class for Textures
+  */
+
+
+class Texture
+{
+public:
+
+	/**
+	 * data of texture
+	 */
+	void *data;
+
+	/**
+	 * the color format of texture (RGB/RGBA)
+	 */
+	TextureColorFormat colorFormat;
+	TextureDimension dimension;
+
+
+	/**
+	 * Empty Constructor
+	 */
+	Texture ( ){};
+
+	/**
+	 * Empty Destructor
+	 */
+	virtual ~Texture ( ){};
+
+	// Public attributes
+	//
+
+	/**
+	 * bind the texture
+	 */
+	void bind (){};
+
+	void begin(){};
+
+	void end(){};
+
+};
+
+#endif // TEXTURE_H
