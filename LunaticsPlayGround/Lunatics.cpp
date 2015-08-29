@@ -33,313 +33,302 @@ Robot1 *R1D1 = NULL; //Nosso Robo
 static Uint32 next_time;
 static Uint32 elapsedTime = 1;
 
-void sair(int code) {
-	SDL_Quit();
-	//dWorldDestroy(world);
-	/* Exit program. */
-	exit(code);
+void sair(int code)
+{
+    SDL_Quit();
+    //dWorldDestroy(world);
+    /* Exit program. */
+    exit(code);
 };
 
-void posicionaCamera() {
+void posicionaCamera()
+{
 
-	// setCamera(eye->position.x,eye->position.y,eye->position.z,
-	//        eye->rotation.x,eye->rotation.y,eye->rotation.z);
-
-
-	if (R1D1 != NULL) {
+    // setCamera(eye->position.x,eye->position.y,eye->position.z,
+    //        eye->rotation.x,eye->rotation.y,eye->rotation.z);
 
 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		//glScalef(0.5f,0.5f,0.5f);
-		//Camera acompanhando o robo
-		const dReal *pos = dBodyGetPosition(R1D1->chassi->iBody);
-		const dReal *rot = dBodyGetRotation(R1D1->chassi->iBody);
-		gluLookAt(
-			pos[0] + 13 - rot[0] + rot[2],
-			pos[1] - rot[4] + rot[6],
-			pos[2] + 1.5 - rot[8] + rot[10],
-			pos[0] + rot[0],
-			pos[1] + rot[4],
-			pos[2] + rot[8],
-			rot[2], rot[6], rot[10]
-		);
-	}
+    if (R1D1 != NULL)
+    {
+
+
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        //glScalef(0.5f,0.5f,0.5f);
+        //Camera acompanhando o robo
+        const dReal *pos = dBodyGetPosition(R1D1->chassi->iBody);
+        const dReal *rot = dBodyGetRotation(R1D1->chassi->iBody);
+        gluLookAt(
+            pos[0] + 13 - rot[0] + rot[2],
+            pos[1] - rot[4] + rot[6],
+            pos[2] + 1.5 - rot[8] + rot[10],
+            pos[0] + rot[0],
+            pos[1] + rot[4],
+            pos[2] + rot[8],
+            rot[2], rot[6], rot[10]
+        );
+    }
 }
 
 char strBuff[255];
 
-void drawMenssagens() {
-	vec4d color;
-	color.w = 1;
-	color.x = 1;
-	color.y = 1;
-	color.z = 1;
-	float velocidade = (R1D1->getSpeed() * 15) -7;
-	//sprintf_s((char*) strBuff, "Velocidade: %d R4/h\0",(int)velocidade );
-	drawString(strBuff, 0, 470, color, font);
-	/*
-	sprintf((char*) strBuff, "Torque:%f\0", R1D1->getTorque());
-	drawString(strBuff, 0, 460, color, font);
+void drawMenssagens()
+{
+    vec4d color;
+    color.w = 1;
+    color.x = 1;
+    color.y = 1;
+    color.z = 1;
+    float velocidade = (R1D1->getSpeed() * 15) -7;
+    //sprintf_s((char*) strBuff, "Velocidade: %d R4/h\0",(int)velocidade );
+    drawString(strBuff, 0, 470, color, font);
+    /*
+    sprintf((char*) strBuff, "Torque:%f\0", R1D1->getTorque());
+    drawString(strBuff, 0, 460, color, font);
 
-	sprintf((char*) strBuff, "Time:%d\0", elapsedTime);
-	drawString(strBuff, 0, 450, color, font);
+    sprintf((char*) strBuff, "Time:%d\0", elapsedTime);
+    drawString(strBuff, 0, 450, color, font);
 
-	sprintf((char*) strBuff, "Frr:%f\0", R1D1->getFrr());
-	drawString(strBuff, 0, 440, color, font);
-	*/
+    sprintf((char*) strBuff, "Frr:%f\0", R1D1->getFrr());
+    drawString(strBuff, 0, 440, color, font);
+    */
 }
 
-static void draw_screen(void) {
+static void draw_screen(void)
+{
 
-	int i;
+    int i;
 
-	glClearColor(0.0, 0.0, 0.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.6f, 0.6f, 0.6f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	posicionaCamera();
-
-
-
-	glColor3f(0.0,1.0,0.0);
-
-	if (PPLshader != 0)
-		PPLshader->begin();
-	terreno->Draw();
-	R1D1->Draw();
-
-	glColor3f(1.0, 0.0, 0.0);
-
-	//Desenha objetos carregados do XML
-	currentWorld->Draw();
-	if (PPLshader != 0)
-		PPLshader->end();
+    posicionaCamera();
 
 
-	/*    
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDisable(GL_LIGHT0);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_FOG);
-	glColor4f(0.0, 0.0, 0.8, 0.5);
+    if (PPLshader != 0)
+        PPLshader->begin();
 
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-	glTranslatef(-1.6, 0.6, 0);
-	glBegin(GL_QUADS);
-	glVertex3f(0.0, 0.0, -2.0);
-	glVertex3f(1.0, 0.0, -2.0);
-	glVertex3f(1.0, 1.0, -2.0);
-	glVertex3f(0.0, 1.0, -2.0);
-	glVertex3f(0.0, 0.0, -2.0);
-	glEnd();
+    terreno->Draw();
 
-	glPopMatrix();
+    if (PPLshader != 0)
+        PPLshader->end();
 
-	glDisable(GL_BLEND);
-	*/  
 
-	drawMenssagens();
-	SDL_GL_SwapBuffers();
+    if (PPLshader != 0)
+        PPLshader->begin();
+    R1D1->Draw();
+
+    if (PPLshader != 0)
+        PPLshader->end();
+
+
+    if (PPLshader != 0)
+        PPLshader->begin();
+    currentWorld->Draw();
+    if (PPLshader != 0)
+        PPLshader->end();
+
+    //drawMenssagens();
+    SDL_GL_SwapWindow( Singleton::getInstance().mainwindow );
 }
 
 #define TICK_INTERVAL    30
 
-Uint32 time_left(void) {
-	Uint32 now;
+Uint32 time_left(void)
+{
+    Uint32 now;
 
-	now = SDL_GetTicks();
-	elapsedTime = next_time - now;
-	if (next_time <= now)
-		return 0;
-	else
-		return next_time - now;
+    now = SDL_GetTicks();
+    elapsedTime = next_time - now;
+    if (next_time <= now)
+        return 0;
+    else
+        return next_time - now;
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
 
-	if (!Iniciar()) {
-		printf("Erro ao iniciar\n");
-		exit(1);
+    if (!Iniciar())
+    {
+        printf("Erro ao iniciar\n");
+        exit(1);
 
-	}
+    }
 
-	currentWorld = new World("storage\\rampas.xml");
-
-
-	int i = 0;
-	int j = 0;
-	terreno = new Terrain(256, 256, 5);
-
-	//terreno->MakeGeom(currentWorld->topLevelSpace);
-	ground = dCreatePlane(currentWorld->topLevelSpace, 0, 0, 1, 0);
+    currentWorld = new World("storage/rampas.xml");
 
 
-	vec3d R1Pos;
-	R1Pos.x = 60;
-	R1Pos.y = 0;
-	R1Pos.z = 1;
+    int i = 0;
+    int j = 0;
+    terreno = new Terrain(256, 256, 5);
 
-	 PPLshader = SM.loadfromFile("storage\\shaders\\PerPixelLight\\vertexshader.txt","storage\\shaders\\PerPixelLight\\fragmentshader.txt");
+    terreno->MakeGeom(currentWorld->topLevelSpace);
+    ground = dCreatePlane(currentWorld->topLevelSpace, 0, 0, 1, 0);
+
+
+    vec3d R1Pos;
+    R1Pos.x = 60;
+    R1Pos.y = 0;
+    R1Pos.z = 1;
+
+    PPLshader = SM.loadfromFile("storage/shaders/PerPixelLight/vertexshader.txt","storage/shaders/PerPixelLight/fragmentshader.txt");
     if (PPLshader == 0)
         printf("Shader não foi compilado");
-      
 
 
 
 
-	R1D1 = new Robot1(R1Pos, currentWorld);
-	eye = new Camera();
-	vec3d p;
-	p.x = 10;
-	p.y = -0;
-	p.z = 5;
-	vec3d r;
-	r.x = 180.0;
-	r.y = -20;
-	r.z = 0;
-	eye->setPosition(p);
-	eye->setRotation(r);
+
+    R1D1 = new Robot1(R1Pos, currentWorld);
+    eye = new Camera();
+    vec3d p;
+    p.x = 10;
+    p.y = -0;
+    p.z = 5;
+    vec3d r;
+    r.x = 180.0;
+    r.y = -20;
+    r.z = 0;
+    eye->setPosition(p);
+    eye->setRotation(r);
+
+//	setKeyDownFunction(&onKeyDown);
+//	setKeyUpFunction(&onKeyUp);
+
+    double simstep = 0.05;
+    //    rz = ry = rx = 0.0f;
 
 
-	// BZK_Time Timer(20);
-	// Timer.Start();
+    next_time = SDL_GetTicks() + TICK_INTERVAL;
+    while (1)
+    {
 
 
-	setKeyDownFunction(&onKeyDown);
-	setKeyUpFunction(&onKeyUp);
+        int nrofsteps = (int) ceilf((TICK_INTERVAL / simstep) / 100);
+        process_events();
 
-	double simstep = 0.05;
-	//    rz = ry = rx = 0.0f;
-
-
-	next_time = SDL_GetTicks() + TICK_INTERVAL;
-	while (1) {
-
-
-		int nrofsteps = (int) ceilf((TICK_INTERVAL / simstep) / 100);
-		process_events();
-
-		currentWorld->iSpaces->Update();
+        currentWorld->iSpaces->Update();
 
 
 
-		R1D1->Update(0.05);
-		for (int i = 0; i < nrofsteps; i++) {
-			dSpaceCollide(currentWorld->topLevelSpace, 0, &nearCallback);
-			currentWorld->Update(0.05f);
-		}
-		draw_screen();
-		SDL_Delay(time_left());
-		next_time += TICK_INTERVAL;
+        R1D1->Update(0.05);
+        for (int i = 0; i < nrofsteps; i++)
+        {
+            dSpaceCollide(currentWorld->topLevelSpace, 0, &nearCallback);
+            currentWorld->Update(0.05f);
+        }
+        draw_screen();
+        SDL_Delay(time_left());
+        next_time += TICK_INTERVAL;
 
 
-	}
-	return 0;
+    }
+    return 0;
 }
 
-void onKeyUp(void *p) {
+void onKeyUp(void *p)
+{
 
 
-	int k = int(p);
-	switch (k) {
-	case SDLK_w:
-		R1D1->accellPressed = true;
-		break;
+    /*	int k = int(p);
+    	switch (k) {
+    	case SDLK_w:
+    		R1D1->accellPressed = true;
+    		break;
 
 
-	case SDLK_d:
-		R1D1->rightPressed = true;
-		break;
-	case SDLK_a:
-		R1D1->leftPressed = true;
-		break;
+    	case SDLK_d:
+    		R1D1->rightPressed = true;
+    		break;
+    	case SDLK_a:
+    		R1D1->leftPressed = true;
+    		break;
 
 
-	case SDLK_s:
-		R1D1->reversePressed = true;
-		break;
+    	case SDLK_s:
+    		R1D1->reversePressed = true;
+    		break;
 
-	case SDLK_SPACE:
-		R1D1->breaking = true;
-		break;
-	case SDLK_LEFT:
-		R1D1->rotingLeft = true;
-		break;
+    	case SDLK_SPACE:
+    		R1D1->breaking = true;
+    		break;
+    	case SDLK_LEFT:
+    		R1D1->rotingLeft = true;
+    		break;
 
-	case SDLK_RIGHT:
-		R1D1->rotingRight = true;
+    	case SDLK_RIGHT:
+    		R1D1->rotingRight = true;
 
-		break;
+    		break;
 
-	case SDLK_LCTRL:
-		R1D1->shot();
-		break;
+    	case SDLK_LCTRL:
+    		R1D1->shot();
+    		break;
 
-	case SDLK_UP:
-		R1D1->rotingUp = true;
-		break;
+    	case SDLK_UP:
+    		R1D1->rotingUp = true;
+    		break;
 
-	case SDLK_DOWN:
-		R1D1->rotingDown = true;
-		break;
+    	case SDLK_DOWN:
+    		R1D1->rotingDown = true;
+    		break;
 
-	default:
-		break;
-	}
+    	default:
+    		break;
+    	}*/
 }
 
-void onKeyDown(void *p) {
-	int k = int(p);
-	switch (k) {
+void onKeyDown(void *p)
+{
+    /*	int k = int(p);
+    	switch (k) {
 
-	case SDLK_w:
-		R1D1->accellPressed = false;
-		break;
+    	case SDLK_w:
+    		R1D1->accellPressed = false;
+    		break;
 
 
 
-	case SDLK_SPACE:
-		R1D1->breaking = false;
-		break;
+    	case SDLK_SPACE:
+    		R1D1->breaking = false;
+    		break;
 
-	case SDLK_a:
-		R1D1->leftPressed = false;
-		break;
+    	case SDLK_a:
+    		R1D1->leftPressed = false;
+    		break;
 
-	case SDLK_d:
-		R1D1->rightPressed = false;
+    	case SDLK_d:
+    		R1D1->rightPressed = false;
 
-		break;
+    		break;
 
-	case SDLK_s:
-		R1D1->reversePressed = false;
-		break;
+    	case SDLK_s:
+    		R1D1->reversePressed = false;
+    		break;
 
-	case SDLK_ESCAPE:
-		sair(0);
-		break;
+    	case SDLK_ESCAPE:
+    		sair(0);
+    		break;
 
-	case SDLK_LEFT:
-		R1D1->rotingLeft = false;
-		break;
+    	case SDLK_LEFT:
+    		R1D1->rotingLeft = false;
+    		break;
 
-	case SDLK_RIGHT:
-		R1D1->rotingRight = false;
+    	case SDLK_RIGHT:
+    		R1D1->rotingRight = false;
 
-		break;
+    		break;
 
-	case SDLK_UP:
-		R1D1->rotingUp = false;
-		break;
+    	case SDLK_UP:
+    		R1D1->rotingUp = false;
+    		break;
 
-	case SDLK_DOWN:
-		R1D1->rotingDown = false;
-		break;
+    	case SDLK_DOWN:
+    		R1D1->rotingDown = false;
+    		break;
 
-	default:
-		break;
-	}
+    	default:
+    		break;
+    	}*/
 }
