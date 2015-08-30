@@ -10,7 +10,7 @@
 #include <windows.h>
 #endif
 
-#include <windows.h>
+
 
 #include <ode/ode.h>
 #include <float.h>
@@ -33,6 +33,7 @@
 #include "Camera.h"
 #include "Texture.h"
 #include "Texture.h"
+#include "SkyBox.h"
 #include "Material.h"
 #include "Shader.h"
 #include "Joint.h"
@@ -41,13 +42,14 @@
 #include "VertexBufferObject.h"
 #include "Event.h"
 #include "glsl.h"
-#include "Audio.h"
+#include "Singleton.h"
+
 
 static SDL_Surface *surface;
 
 static World *currentWorld = NULL;
 static dGeomID ground;
-static GLfloat light_pos[4] = {0.0f,-30.0f,0.0f,0.0f};
+static GLfloat light_pos[4] = {1000.0f,1.0f,10000.0f,0.0f};
 //vec3d pos = {0.0f,-8.0f,-50.0f};
 //vec3d rot = {-90.0f,0.0f,0.0f};
 static float xyz[3] = {3.8548f,8.90843f,7.5900f};
@@ -82,7 +84,7 @@ static void nearCallback (void *data, dGeomID o1, dGeomID o2)
     {
         for (i=0; i<n; i++)
         {
-            
+
 
     contact[i].surface.mode = dContactSlip1 | dContactSlip2 | dContactSoftERP | dContactSoftCFM | dContactApprox1;
     if (dGeomGetClass(o1) == dCylinderClass || dGeomGetClass(o2) == dCylinderClass)
@@ -101,7 +103,7 @@ static void nearCallback (void *data, dGeomID o1, dGeomID o2)
 };
 
 
-
+/*
 static void setKeyUpFunction(EventFn *fn)
 {
     kupFn = fn;
@@ -132,23 +134,23 @@ static void handle_key_up( SDL_keysym* keysym )
 
 }
 
-
+*/
 static void process_events( void )
 {
     SDL_Event event;
 
-    while( SDL_PollEvent( &event ) )
+/*    while( SDL_PollEvent( &event ) )
     {
 
         switch( event.type )
         {
         case SDL_KEYUP:
 
-           handle_key_down(&event.key.keysym);
+//           handle_key_down(&event.key.keysym);
             break;
 
         case SDL_KEYDOWN:
-            handle_key_up(&event.key.keysym);
+      //      handle_key_up(&event.key.keysym);
             break;
 
         case SDL_MOUSEMOTION:
@@ -175,7 +177,7 @@ static void process_events( void )
 
         inputEvents.processEvents();
 
-    }
+    }*/
 
 
 };

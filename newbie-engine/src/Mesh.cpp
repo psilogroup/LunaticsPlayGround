@@ -55,7 +55,7 @@ Mesh::Mesh(std::string filepath)
 
         if (Echo == "tex:")
         {
-            texture = new Texture(BZK_ParsingTools::GetNextToken(&Datafile).c_str());
+//            texture = new Texture(BZK_ParsingTools::GetNextToken(&Datafile).c_str());
         }
 
         if (Echo == "t:")

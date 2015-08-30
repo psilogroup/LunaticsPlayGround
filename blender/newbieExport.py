@@ -1,4 +1,5 @@
 import bpy
+import bmesh
 
 def export_vector(vector,file):
     file.write("<Vec>\n")
@@ -44,6 +45,40 @@ def export_material(material,file):
     file.write("</Ka>\n")
     file.write("</Mat>\n")
 
+def export_mesh_data(mesh,file):
+    
+    me = mesh.data
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bmesh.ops.triangulate(bm, faces=bm.faces)   
+    bm.to_mesh(me)
+    bm.free()
+    faceuv = len(me.uv_textures) > 0
+    
+    file.write("<IndexData>\n")  
+    for face in me.polygons:
+        for vert in face.vertices:
+            file.write("%d\n" % vert)
+    
+    file.write("</IndexData>\n")
+    file.write("<VertexeData>\n")  
+    
+    for vert in me.vertices:
+        file.write("%f %f %f\n" % (vert.co[0], vert.co.y, vert.co.z))
+    
+    file.write("</VertexeData>\n")           
+    if faceuv:
+        uv_texture = me.uv_textures.active.data
+        uv_layer = me.uv_layers.active.data
+        file.write("<UVData>\n")
+        for poly in me.polygons:
+            # range is used here to show how the polygons reference loops,
+            # for convenience 'poly.loop_indices' can be used instead.
+            for loop_index in range(poly.loop_start, poly.loop_start + poly.loop_total):
+                file.write("%f %f\n" % (uv_layer[loop_index].uv[0],uv_layer[loop_index].uv[0]))
+            
+        file.write("</UVData>\n")
+    
 def export_cube(cubeData,file):
     file.write("<Cube>\n")
     file.write("<Name>\n")
@@ -66,17 +101,19 @@ def export_cube(cubeData,file):
         file.write("</Mass>\n")
         file.write("<Type>\n")
         file.write("0\n")
-        file.write("</Type>\n")   
-        
+        file.write("</Type>\n")
+           
+    export_mesh_data(cubeData,file)
     file.write("</Cube>\n")
+
     
 
 def write_some_data(context, filepath, use_some_setting):
-    print("running write_some_data...")
     f = open(filepath, 'w', encoding='utf-8')
     for x in bpy.data.scenes['Scene'].objects:
             if "Cube" in x.name:
                 export_cube(x,f)
+                
     f.close()
 
     return {'FINISHED'}

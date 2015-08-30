@@ -5,13 +5,13 @@
 #  include <windows.h>
 # endif
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 class BZK_Time
 {
  public:
    BZK_Time(int interval);
-   void Reset();  
+   void Reset();
    void Start();
    void Refresh();
    Uint32 left_time();

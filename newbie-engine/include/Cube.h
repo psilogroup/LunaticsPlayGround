@@ -4,18 +4,24 @@
 #  include <windows.h>
 # endif
 #include "Object.h"
-#include "TexturePCX.h"
+#include "Texture.h"
 class Cube:public Object
 {
- public:
-   Cube();
-   virtual void Draw();
-   virtual void Update();
-   bool useTexture;
-   TexturePCX *texture;
+public:
+    Cube();
+    Cube(bool useVbo);
+    virtual void Draw();
+    virtual void Update();
+    vec3d *vecs;
+    dTriMeshDataID triData;
+    dTriIndex *indexs;
+    TexCoord2 *texCoord;
+    int numVecs;
+    int numTrigs;
+    int numIndexs;
+    int numTexs;
+    bool useVBO;
 
-
-
-   virtual ~Cube(){};
+    virtual ~Cube();
 };
 #endif

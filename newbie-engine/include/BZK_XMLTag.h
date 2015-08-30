@@ -9,7 +9,7 @@
 # include <fstream>
 #include <string>
 #include <sstream>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 # include "vec3d.h"
 #include "vec4.h"

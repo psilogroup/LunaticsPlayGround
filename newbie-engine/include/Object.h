@@ -11,6 +11,7 @@
 #include "definitions.h"
 #include "BZK_List.h"
 #include "VertexBufferObject.h"
+#include "Texture.h"
 #include "glsl.h"
 # include <iostream>
 # include <fstream>
@@ -56,6 +57,7 @@ public:
     dBodyID iBody;
     dGeomID iGeom;
     VertexBufferObject *vbo;
+    Texture *texture;
     BodyData *data;
     virtual ~Object();
 

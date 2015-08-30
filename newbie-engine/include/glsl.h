@@ -40,7 +40,11 @@ Make sure to check extension "GL_EXT_geometry_shader4" before using Geometry sha
 #include <vector>
 #include <iostream>
 //#define GLEW_STATIC
-#include <Windows.h>
+
+#ifdef WIN32
+#include <windows.h>
+#endif
+
 #include <GL/glew.h>
 #include <GL/gl.h>
 #define GLSLAPI    // static build

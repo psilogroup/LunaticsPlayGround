@@ -14,7 +14,8 @@ SkyBox::SkyBox (const char *f,const char *b,const char *l,const char *r,const ch
 
 void SkyBox::Draw(vec3d angles)
 {
-
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
     float x = Size  * 0.5;
     float y = Size * 0.5;
     float z = Size * 0.5;

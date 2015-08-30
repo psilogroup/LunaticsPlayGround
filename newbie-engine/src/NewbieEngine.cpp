@@ -1,5 +1,3 @@
-
-
 #include "NewbieEngine.h"
 #include <GL/freeglut.h>
 
@@ -29,18 +27,18 @@ void setup_opengl( int width, int height )
     glEnable (GL_LIGHTING);
     glShadeModel (GL_SMOOTH);
     glEnable (GL_DEPTH_TEST);
-    glDepthFunc (GL_LESS);
+    glDepthFunc (GL_LEQUAL);
     glEnable (GL_CULL_FACE);
     glCullFace (GL_BACK);
     glFrontFace (GL_CCW);
-    
+
     glViewport(0,0,width,height);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity();
 
     const float vnear = 0.1f;
-    const float vfar = 300.0f;
-    const float k = 0.8f;
+    const float vfar = 6000.0f;
+    const float k = 1.0f;
 
     if (width >= height)
     {
@@ -63,14 +61,15 @@ void setup_opengl( int width, int height )
     glLoadIdentity();
     setCamera(xyz[0],xyz[1],xyz[2],hpr[0],hpr[1],hpr[2]);
 
-    GLfloat light_Ka[]  = {0.5f,0.5f,0.5f,1.0f};
-    GLfloat light_Kd[]  = {0.5f,0.5f,0.5f,1.0f};
-    GLfloat light_Ks[]  = {0.5f,0.5f,0.5f,1.0f};
+    GLfloat light_Ka[]  = {0.1f,0.1f,0.1f,1.0f};
+    GLfloat light_Kd[]  = {1.0f,1.0f,1.0f,1.0f};
+    GLfloat light_Ks[]  = {1.0f,1.0f,1.0f,1.0f};
 
     glLightfv(GL_LIGHT0,GL_POSITION, light_pos);
     glLightfv(GL_LIGHT0,GL_AMBIENT,light_Ka);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light_Kd);
     glLightfv(GL_LIGHT0,GL_SPECULAR,light_Ks);
+    glMateriali(GL_FRONT,GL_SHININESS,60);
 
 }
 
@@ -79,48 +78,52 @@ void setup_opengl( int width, int height )
 int Iniciar()
 {
 
-    const SDL_VideoInfo* info = NULL;
+
 
     int width = 0;
     int height = 0;
     double stepSize = 30/1000.0;
     int bpp = 32;
 
-    int flags = 0;
 
-    if( SDL_Init( SDL_INIT_VIDEO|SDL_INIT_TIMER | SDL_INIT_AUDIO ) < 0 )
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        fprintf( stderr, "Video initialization failed: %s\n",
-                 SDL_GetError( ) );
-        return 0;
+        std::cout << "Unable to initialize SDL";
+        return 1;
     }
 
-    info = SDL_GetVideoInfo( );
-
-    if( !info )
-    {
-
-        fprintf( stderr, "Video query failed: %s\n",
-                 SDL_GetError( ) );
-        return 0;
-    }
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     Singleton::getInstance().rootCamera.width = 800;
     Singleton::getInstance().rootCamera.height = 600;
 
-    bpp = info->vfmt->BitsPerPixel;
+    Singleton::getInstance().mainwindow = SDL_CreateWindow( "Lunatycs PlayGround",
+                                          SDL_WINDOWPOS_UNDEFINED,
+                                          SDL_WINDOWPOS_UNDEFINED,
+                                          Singleton::getInstance().rootCamera.width,
+                                          Singleton::getInstance().rootCamera.height,
+                                          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
 
-   SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
-    SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE,   bpp);
-    SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 0);
-    SDL_GL_SetAttribute( SDL_GL_ACCUM_RED_SIZE, 0);
-    SDL_GL_SetAttribute( SDL_GL_ACCUM_GREEN_SIZE, 0);
-    SDL_GL_SetAttribute( SDL_GL_ACCUM_BLUE_SIZE, 0);
-    SDL_GL_SetAttribute( SDL_GL_ACCUM_ALPHA_SIZE, 0);
+    if (!Singleton::getInstance().mainwindow)
+    {
+        std::cout << "SDL Error: " << SDL_GetError() << std::endl;
 
-    surface = SDL_SetVideoMode( Singleton::getInstance().rootCamera.width, Singleton::getInstance().rootCamera.height, bpp, SDL_OPENGL );
-    InitAudio();
+        SDL_Quit();
 
+        return 1;
+
+    }
+
+
+    Singleton::getInstance().maincontext = SDL_GL_CreateContext(Singleton::getInstance().mainwindow);
+    if( Singleton::getInstance().maincontext == NULL )
+    {
+        printf( "OpenGL context could not be created! SDL Error: %s\n", SDL_GetError() );
+//        success = false;
+    }
     setup_opengl( Singleton::getInstance().rootCamera.width, Singleton::getInstance().rootCamera.height );
 
     char fakeParam[] = "fake";

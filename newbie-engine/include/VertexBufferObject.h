@@ -21,10 +21,10 @@ class VertexBufferObject
         unsigned int normalBuffId; //id do buffer de normal
         unsigned int texBuffId; //id do buffer de coordenada de textura
         unsigned int numIndices;
-        vec3d *vertices; // data dos vertices
-        unsigned int *indexs; // data dos indicex
+        void *vertices; // data dos vertices
+        void *indexs; // data dos indicex
         float *normals; // data das normais
-        TexCoord2 *texCoord; //data das coordenadas de Texturas
+        void *texCoord; //data das coordenadas de Texturas
         int glMode; //GL_
         VertexBufferObject();
 
@@ -33,14 +33,14 @@ class VertexBufferObject
         * @param vec3d *data ponteiro para os vertices
         * @param uint32 size tamanho do buffer
         */
-        void setVertices(vec3d *data,unsigned int size);
+        void setVertices(void *data,unsigned int size);
 
         /**
         * @brief seta os indices do VBO
         * @param uint32 *data ponteiro para os indices
         * @param uint32 size tamanho do buffer
         */
-        void setIndexs(unsigned int *data,unsigned int size);
+        void setIndexs(void*data,unsigned int size);
 
         /**
         * @brief seta as normais do VBO
@@ -54,7 +54,7 @@ class VertexBufferObject
         * @param TexCoord2 *data ponteiro para os vertices
         * @param uint32 size tamanho do buffer
         */
-        void setTexCoords(TexCoord2 *data,unsigned int size);
+        void setTexCoords(void *data,unsigned int size);
 
         /**
         * @brief desenha o VBO

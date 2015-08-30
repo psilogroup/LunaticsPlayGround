@@ -1,8 +1,7 @@
 #include "Texture.h"
 #include <string.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_opengl.h>
-static int texCount = 1;
+#include <SDL2/SDL_image.h>
+//static int texCount = 1;
 /**
  * @param  filename Load a Texteture
  */
@@ -47,9 +46,6 @@ Texture::Texture (const char * filename )
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST); //The minifying function
 
 
-
-
-
         glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, image->w, image->h, 0,
                       texture_format, GL_UNSIGNED_BYTE, image->pixels );
 
@@ -60,6 +56,7 @@ Texture::Texture (const char * filename )
 
         glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
     }
+
 }
 
 
@@ -68,7 +65,7 @@ void Texture::bind ()
 {
     try
     {
-
+        glEnable(GL_TEXTURE);
         glEnable(GL_TEXTURE_2D);
         if (&name !=NULL && &name > 0)
         {

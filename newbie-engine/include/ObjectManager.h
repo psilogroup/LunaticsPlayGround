@@ -5,7 +5,7 @@
 #include <windows.h>
 #endif
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "BZK_List.h"
 #include "Object.h"
 

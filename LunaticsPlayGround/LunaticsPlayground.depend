@@ -379,7 +379,7 @@
 	"BZK_XMLTag.h"
 	<map>
 
-1440809438 /home/gabriel/LunaticsPlayGround/newbie-engine/include/World.h
+1440899437 /home/gabriel/LunaticsPlayGround/newbie-engine/include/World.h
 	<windows.h>
 	<iostream>
 	<fstream>
@@ -394,6 +394,7 @@
 	"Cube.h"
 	"Camera.h"
 	"Scene.h"
+	"AssetLibrary.h"
 
 1440809454 /home/gabriel/LunaticsPlayGround/newbie-engine/include/BZK_List.h
 	<windows.h>
@@ -411,7 +412,7 @@
 	"BZK_List.h"
 	"Object.h"
 
-1418846255 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Object.h
+1440898553 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Object.h
 	<windows.h>
 	<ode/ode.h>
 	"vec3d.h"
@@ -419,6 +420,7 @@
 	"definitions.h"
 	"BZK_List.h"
 	"VertexBufferObject.h"
+	"Texture.h"
 	"glsl.h"
 	<iostream>
 	<fstream>
@@ -544,7 +546,7 @@
 	<GL/glew.h>
 	<GL/gl.h>
 
-1418845366 /home/gabriel/LunaticsPlayGround/newbie-engine/include/VertexBufferObject.h
+1440889473 /home/gabriel/LunaticsPlayGround/newbie-engine/include/VertexBufferObject.h
 	<windows.h>
 	<GL/glew.h>
 	<GL/gl.h>
@@ -567,10 +569,10 @@
 	"Space.h"
 	<ode/ode.h>
 
-1418844790 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Cube.h
+1440899636 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Cube.h
 	<windows.h>
 	"Object.h"
-	"TexturePCX.h"
+	"Texture.h"
 
 1419111771 /home/gabriel/LunaticsPlayGround/newbie-engine/include/TexturePCX.h
 	"Texture.h"
@@ -601,7 +603,7 @@
 	"definitions.h"
 	<math.h>
 
-1440817717 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Cube.cpp
+1440899687 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Cube.cpp
 	"Cube.h"
 	"Graphics.h"
 	<GL/glut.h>
@@ -692,7 +694,7 @@
 	"Graphics.h"
 	"BZK_List.h"
 
-1418844937 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Mesh.h
+1440820951 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Mesh.h
 	<windows.h>
 	"vec3d.h"
 	"Object.h"
@@ -705,11 +707,11 @@
 	<string>
 	<iostream>
 
-1440817201 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/NewbieEngine.cpp
+1440860595 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/NewbieEngine.cpp
 	"NewbieEngine.h"
 	<GL/freeglut.h>
 
-1440817781 /home/gabriel/LunaticsPlayGround/newbie-engine/include/NewbieEngine.h
+1440860328 /home/gabriel/LunaticsPlayGround/newbie-engine/include/NewbieEngine.h
 	<windows.h>
 	<ode/ode.h>
 	<float.h>
@@ -731,6 +733,7 @@
 	"Camera.h"
 	"Texture.h"
 	"Texture.h"
+	"SkyBox.h"
 	"Material.h"
 	"Shader.h"
 	"Joint.h"
@@ -850,7 +853,7 @@
 	<GL/glut.h>
 	<stdio.h>
 
-1440812017 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Terrian.cpp
+1440854249 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Terrian.cpp
 	<windows.h>
 	"Terrian.h"
 	<stdlib.h>
@@ -864,9 +867,10 @@
 	<cstdlib>
 	<ctime>
 
-1440812051 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Texture.cpp
+1440858836 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Texture.cpp
 	"Texture.h"
 	<string.h>
+	<SDL2/SDL_image.h>
 
 1440812073 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/TexturePCX.cpp
 	"TexturePCX.h"
@@ -878,7 +882,7 @@
 
 1279116068 /home/gabriel/LunaticsPlayGround/newbie-engine/include/Trigon.h
 
-1440812086 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/VertexBufferObject.cpp
+1440890259 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/VertexBufferObject.cpp
 	"VertexBufferObject.h"
 	<GL/glew.h>
 
@@ -899,7 +903,7 @@
 	<cstring>
 	<GL/gl.h>
 
-1440814320 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/World.cpp
+1440900703 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/World.cpp
 	"World.h"
 	"Mesh.h"
 	"Sphere.h"
@@ -909,7 +913,7 @@
 	"BZK_XMLTag.h"
 	<map>
 
-1440817903 source:/home/gabriel/LunaticsPlayGround/LunaticsPlayGround/Lunatics.cpp
+1440886145 source:/home/gabriel/LunaticsPlayGround/LunaticsPlayGround/Lunatics.cpp
 	<windows.h>
 	<NewbieEngine.h>
 	"R1D1.h"
@@ -925,4 +929,23 @@
 
 1366441711 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/Singleton.cpp
 	"Singleton.h"
+
+1440820424 /usr/local/include/SDL2/SDL_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1440822271 source:/home/gabriel/LunaticsPlayGround/newbie-engine/src/SkyBox.cpp
+	"SkyBox.h"
+
+1366898841 /home/gabriel/LunaticsPlayGround/newbie-engine/include/SkyBox.h
+	<GL/gl.h>
+	"Texture.h"
+	"vec3d.h"
+	<string.h>
+
+1440903806 /home/gabriel/LunaticsPlayGround/newbie-engine/include/AssetLibrary.h
+	"Texture.h"
+	"BZK_List.h"
 

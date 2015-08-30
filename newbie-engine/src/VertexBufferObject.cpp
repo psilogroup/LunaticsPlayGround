@@ -1,5 +1,5 @@
 #include "VertexBufferObject.h"
-#include <Windows.h>
+//#include <Windows.h>
 #include <GL/glew.h>
 
 VertexBufferObject::VertexBufferObject()
@@ -17,7 +17,7 @@ VertexBufferObject::VertexBufferObject()
 
 }
 
-void VertexBufferObject::setVertices(vec3d *data,unsigned int size)
+void VertexBufferObject::setVertices(void *data,unsigned int size)
 {
 
 
@@ -30,7 +30,7 @@ void VertexBufferObject::setVertices(vec3d *data,unsigned int size)
 	glBufferDataARB( GL_ARRAY_BUFFER, size * 3 * sizeof(float), data, GL_STATIC_DRAW_ARB );
 
 }
-void VertexBufferObject::setIndexs(unsigned int *data,unsigned int size)
+void VertexBufferObject::setIndexs(void *data,unsigned int size)
 {
     glGenBuffers( 1, &indexBuffId );
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffId );
@@ -45,7 +45,7 @@ void VertexBufferObject::setNormals(float *data,unsigned int size)
 {
 }
 
-void VertexBufferObject::setTexCoords(TexCoord2 *data,unsigned int size)
+void VertexBufferObject::setTexCoords(void *data,unsigned int size)
 {
     glGenBuffers( 1, &texBuffId );
 	glBindBuffer( GL_ARRAY_BUFFER, texBuffId );
@@ -86,8 +86,10 @@ void VertexBufferObject::draw()
 
     }
 
-    glDrawArrays(glMode,0,numIndices);
-    //glDrawElements(glMode,numIndices,GL_UNSIGNED_INT,0);
+    if (indexBuffId == 0)
+        glDrawArrays(glMode,0,numIndices);
+    else
+        glDrawElements(glMode,numIndices,GL_UNSIGNED_INT,0);
 
 
 

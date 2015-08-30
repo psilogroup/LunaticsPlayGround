@@ -19,29 +19,29 @@
 class Mesh:public Object
 {
 
- public:
-   Mesh();
-   Mesh(std::string filepath);
-   virtual void MakeBody(dWorldID world);
-   virtual void MakeGeom(dSpaceID space);
-   virtual void Draw();
-   virtual void Update();
+public:
+    Mesh();
+    Mesh(std::string filepath);
+    virtual void MakeBody(dWorldID world);
+    virtual void MakeGeom(dSpaceID space);
+    virtual void Draw();
+    virtual void Update();
 
-   ~Mesh();
+    ~Mesh();
 
-   int numElements;
+    int numElements;
 
-   vec3d *vecs;
-   dTriMeshDataID triData;
-   GLint listId;
-   dTriIndex *indexs;
+    vec3d *vecs;
+    dTriMeshDataID triData;
+    GLint listId;
+    dTriIndex *indexs;
     TexCoord2 *texCoord;
-    TexturePCX *texture;
-   int numVecs;
-   int numTrigs;
-   int numIndexs;
-   int numTexs;
-   ifstream Datafile;
+    Texture *texture;
+    int numVecs;
+    int numTrigs;
+    int numIndexs;
+    int numTexs;
+    ifstream Datafile;
 };
 
 #endif

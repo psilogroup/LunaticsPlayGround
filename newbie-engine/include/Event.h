@@ -4,7 +4,7 @@
 # ifdef WIN32
 #  include <windows.h>
 # endif
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "BZK_List.h"
 
 typedef enum EventType {Keyboard,Mouse,Joystick};
@@ -37,8 +37,8 @@ class KeyBoardEvent: public Event
 {
 public:
     KeyBoardEventType subType;
-    SDLKey key;
-    void setKey(SDLKey k)
+    SDL_Keysym key;
+    void setKey(SDL_Keysym k)
     {
         key = k;
     };
@@ -84,14 +84,14 @@ public:
         {
             KeyBoardEvent kb =  KeyUpEvents[i];
 
-            (*kb.fn) ((void*)kb.key);
+//            (*kb.fn) ((void*)kb.key);
         }
 
         for(i = 0;i<KeyDownEvents.TotalItems();i++)
         {
             KeyBoardEvent kb =  KeyDownEvents[i];
 
-            (*kb.fn) ((void*)kb.key);
+     //       (*kb.fn) ((void*)kb.key);
         }
 
         KeyDownEvents.EraseAll();

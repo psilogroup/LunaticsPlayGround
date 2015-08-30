@@ -14,7 +14,7 @@ cwc::glShaderManager SM;
 
 void onKeyUp(void *k);
 void onKeyDown(void *k);
-
+SkyBox *sky = NULL;
 
 Camera *eye = NULL;
 Terrain* terreno = NULL;
@@ -104,32 +104,19 @@ static void draw_screen(void)
 
     posicionaCamera();
 
-
-    if (PPLshader != 0)
-        PPLshader->begin();
-
     terreno->Draw();
 
-    if (PPLshader != 0)
-        PPLshader->end();
-
-
-    if (PPLshader != 0)
-        PPLshader->begin();
     R1D1->Draw();
-
-    if (PPLshader != 0)
-        PPLshader->end();
-
-
-    if (PPLshader != 0)
-        PPLshader->begin();
     currentWorld->Draw();
-    if (PPLshader != 0)
-        PPLshader->end();
+
+    if (sky)
+        sky->Draw(vec3d {0,0,0});
+
+
 
     //drawMenssagens();
     SDL_GL_SwapWindow( Singleton::getInstance().mainwindow );
+
 }
 
 #define TICK_INTERVAL    30
@@ -148,7 +135,8 @@ Uint32 time_left(void)
 
 int main(int argc, char* argv[])
 {
-
+    SDL_Event e;
+    bool quit = false;
     if (!Iniciar())
     {
         printf("Erro ao iniciar\n");
@@ -156,34 +144,38 @@ int main(int argc, char* argv[])
 
     }
 
-    currentWorld = new World("storage/rampas.xml");
+    currentWorld = new World("storage/Assets.xml");
 
 
     int i = 0;
     int j = 0;
-    terreno = new Terrain(256, 256, 5);
+    terreno = new Terrain(256, 256, 2);
+
+    sky = new SkyBox("storage/textures/skybox/front.png",
+                     "storage/textures/skybox/back.png",
+                     "storage/textures/skybox/left.png",
+                     "storage/textures/skybox/right.png",
+                     "storage/textures/skybox/top.png");
+
+
+    sky->SetPosition(vec3d {0,0,0});
+    sky->SetSize(100);
 
     terreno->MakeGeom(currentWorld->topLevelSpace);
     ground = dCreatePlane(currentWorld->topLevelSpace, 0, 0, 1, 0);
-
+    terreno->texture = new Texture("storage/textures/ground1.png");
 
     vec3d R1Pos;
     R1Pos.x = 60;
     R1Pos.y = 0;
     R1Pos.z = 1;
 
-    PPLshader = SM.loadfromFile("storage/shaders/PerPixelLight/vertexshader.txt","storage/shaders/PerPixelLight/fragmentshader.txt");
-    if (PPLshader == 0)
-        printf("Shader não foi compilado");
-
-
-
 
 
     R1D1 = new Robot1(R1Pos, currentWorld);
     eye = new Camera();
     vec3d p;
-    p.x = 10;
+    p.x = 0;
     p.y = -0;
     p.z = 5;
     vec3d r;
@@ -201,15 +193,75 @@ int main(int argc, char* argv[])
 
 
     next_time = SDL_GetTicks() + TICK_INTERVAL;
-    while (1)
+    while (!quit)
     {
 
 
         int nrofsteps = (int) ceilf((TICK_INTERVAL / simstep) / 100);
-        process_events();
+        while( SDL_PollEvent( &e ) != 0 )
+        {
+            const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+            R1D1->accellPressed = false;
+            R1D1->rightPressed = false;
+            R1D1->leftPressed = false;
+            R1D1->reversePressed = false;
+            R1D1->rotingLeft = false;
+            R1D1->rotingRight = false;
+            R1D1->rotingUp = false;
+            R1D1->rotingDown = false;
 
-        currentWorld->iSpaces->Update();
+            if( e.type == SDL_QUIT )
+            {
+                quit = true;
+            }
 
+            if( currentKeyStates[ SDL_SCANCODE_W ] )
+            {
+                R1D1->accellPressed = true;
+            }
+            if( currentKeyStates[ SDL_SCANCODE_D ] )
+            {
+                R1D1->rightPressed = true;
+            }
+            if( currentKeyStates[ SDL_SCANCODE_A ] )
+            {
+                R1D1->leftPressed = true;
+            }
+
+            if( currentKeyStates[ SDL_SCANCODE_S ] )
+            {
+                R1D1->reversePressed = true;
+            }
+
+            if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
+            {
+                R1D1->rotingLeft = true;
+            }
+
+            if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
+            {
+                R1D1->rotingRight = true;
+            }
+
+            if( currentKeyStates[ SDL_SCANCODE_SPACE ] )
+            {
+                R1D1->shot();
+            }
+
+            if( currentKeyStates[ SDL_SCANCODE_UP] )
+            {
+                R1D1->rotingUp = true;
+            }
+
+            if( currentKeyStates[ SDL_SCANCODE_DOWN] )
+            {
+                R1D1->rotingDown = true;
+            }
+
+
+
+            currentWorld->iSpaces->Update();
+        }
 
 
         R1D1->Update(0.05);

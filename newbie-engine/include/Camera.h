@@ -14,6 +14,8 @@ class Camera
    vec3d rotation;
    Matrix *matrix;
    vec3d *follower;
+   unsigned int width;
+   unsigned int height;
    Camera();
    Camera(vec3d p,vec3d r);
    void setPosition (vec3d p);

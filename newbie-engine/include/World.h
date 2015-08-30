@@ -7,7 +7,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "vec3d.h"
 #include "vec4.h"
 #include "BZK_List.h"
@@ -16,7 +16,7 @@
 #include "Cube.h"
 #include "Camera.h"
 #include "Scene.h"
-
+#include "AssetLibrary.h"
 using namespace std;
 
 /**
@@ -35,7 +35,7 @@ class World
    dSpaceID topLevelSpace;
    Space *currentSpace;
    Scene *sceneNode;
-
+   AssetLibrary *assetLib;
    void Update(float dt);
    void Draw();
 
@@ -83,6 +83,18 @@ class World
    string endVec4;
    string radius;
    string endRadius;
+   string indexData;
+   string endIndexData;
+   string vertexData;
+   string endVertexData;
+   string uvData;
+   string endUVData;
+   string iniTexture;
+   string endTexture;
+   BZK_List<float> lstVertex;
+   BZK_List<float> lstUV;
+   BZK_List<int> lstInt;
+
    ifstream Datafile;
    float stepSize;
    void getObjectDetails();
@@ -90,6 +102,10 @@ class World
    void getCube();
    void getMesh();
    void getSphere();
+   void getTexture(Object* obj);
+   void getIndexData();
+   void getVertexData();
+   void getUVData();
    void getMaterial(Object *obj);
    vec3d getVec();
    vec4d getVec4();

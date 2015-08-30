@@ -8,15 +8,15 @@
 #include "TexturePCX.h"
 #include "Texture.h"
 #include <string.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_opengl.h>
+//#include <SDL/SDL_image.h>
+//#include <SDL/SDL_opengl.h>
 static int texCount = 1;
 /**
  * @param  filename Load a Texteture
  */
 TexturePCX::TexturePCX (const char * filename )
 {
-    id = 0;
+    /*id = 0;
     image = IMG_Load(filename);
 
     if (image)
@@ -67,7 +67,7 @@ TexturePCX::TexturePCX (const char * filename )
 
 
         glTexEnvf (GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-    }
+    }*/
 }
 
 

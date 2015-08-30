@@ -6,7 +6,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-#include <Windows.h>
+
 #include <GL/glew.h>
 #include <sys/stat.h>
 #include <sys/types.h>

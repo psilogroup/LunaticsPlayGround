@@ -18,6 +18,8 @@ public:
     ObjectManager rootSceneNode;
     Camera rootCamera;
     dJointGroupID contactGroup;
+    SDL_Window *mainwindow;
+    SDL_GLContext maincontext;
 
     // Função-membro que retorna sempre a mesma instância do objeto
     static Singleton& getInstance()

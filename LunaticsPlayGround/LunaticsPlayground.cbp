@@ -9,24 +9,27 @@
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/LunaticsPlayground" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../LunaticsPlayGround" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-w" />
 			<Add option="-g" />
 			<Add directory="../newbie-engine/include" />
+			<Add directory="/usr/local/include/SDL2" />
+			<Add directory="/usr/local/include" />
 		</Compiler>
+		<Linker>
+			<Add option="-lGL -lode -lglut -lGLU -lGLEW -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lSDL2 -lpthread -lSDL2_image" />
+		</Linker>
 		<Unit filename="../newbie-engine/include/AbstractVeichle.h" />
+		<Unit filename="../newbie-engine/include/AssetLibrary.h" />
 		<Unit filename="../newbie-engine/include/BZK_DOMNode.h" />
 		<Unit filename="../newbie-engine/include/BZK_List.h" />
 		<Unit filename="../newbie-engine/include/BZK_ParsingTools.h" />
-		<Unit filename="../newbie-engine/include/BZK_Time.h" />
 		<Unit filename="../newbie-engine/include/BZK_XMLReader.h" />
 		<Unit filename="../newbie-engine/include/BZK_XMLTag.h" />
 		<Unit filename="../newbie-engine/include/BZK_XMLTagManager.h" />
@@ -53,6 +56,8 @@
 		<Unit filename="../newbie-engine/include/Plane.h" />
 		<Unit filename="../newbie-engine/include/Scene.h" />
 		<Unit filename="../newbie-engine/include/Shader.h" />
+		<Unit filename="../newbie-engine/include/Singleton.h" />
+		<Unit filename="../newbie-engine/include/SkyBox.h" />
 		<Unit filename="../newbie-engine/include/Space.h" />
 		<Unit filename="../newbie-engine/include/SpaceManager.h" />
 		<Unit filename="../newbie-engine/include/Sphere.h" />
@@ -67,12 +72,10 @@
 		<Unit filename="../newbie-engine/include/World.h" />
 		<Unit filename="../newbie-engine/include/definitions.h" />
 		<Unit filename="../newbie-engine/include/glsl.h" />
-		<Unit filename="../newbie-engine/include/sdlfunc.h" />
 		<Unit filename="../newbie-engine/include/vec3d.h" />
 		<Unit filename="../newbie-engine/include/vec4.h" />
 		<Unit filename="../newbie-engine/include/wavefrontLoader.h" />
 		<Unit filename="../newbie-engine/src/BZK_DOMNode.cpp" />
-		<Unit filename="../newbie-engine/src/BZK_Time.cpp" />
 		<Unit filename="../newbie-engine/src/BZK_XMLReader.cpp" />
 		<Unit filename="../newbie-engine/src/BZK_XMLTag.cpp" />
 		<Unit filename="../newbie-engine/src/BZK_XMLTagManager.cpp" />
@@ -94,6 +97,8 @@
 		<Unit filename="../newbie-engine/src/Plane.cpp" />
 		<Unit filename="../newbie-engine/src/Scene.cpp" />
 		<Unit filename="../newbie-engine/src/Shader.cpp" />
+		<Unit filename="../newbie-engine/src/Singleton.cpp" />
+		<Unit filename="../newbie-engine/src/SkyBox.cpp" />
 		<Unit filename="../newbie-engine/src/Space.cpp" />
 		<Unit filename="../newbie-engine/src/SpaceManager.cpp" />
 		<Unit filename="../newbie-engine/src/Sphere.cpp" />
@@ -105,7 +110,6 @@
 		<Unit filename="../newbie-engine/src/Wavefront.cpp" />
 		<Unit filename="../newbie-engine/src/World.cpp" />
 		<Unit filename="../newbie-engine/src/glsl.cpp" />
-		<Unit filename="../newbie-engine/src/sdlfunc.cpp" />
 		<Unit filename="../newbie-engine/src/wavefrontLoader.cpp" />
 		<Unit filename="Lunatics.cpp" />
 		<Unit filename="R1D1.h" />

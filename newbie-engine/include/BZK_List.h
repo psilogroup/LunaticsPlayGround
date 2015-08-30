@@ -6,7 +6,7 @@
 # endif
 
 #include <vector>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 template <class T>
 class BZK_List
 {
@@ -17,7 +17,7 @@ class BZK_List
       _list=new std::vector<T>;
     }
   T& operator[](Uint32 aIndex)
-    {  
+    {
       return (*_list)[aIndex % TotalItems() ];
     }
   Uint32 Add(T aItem)
