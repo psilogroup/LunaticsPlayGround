@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<FileVersion>1</FileVersion>
+<CodeXL>
+    <ProjectName>Project2</ProjectName>
+    <ApplicationPath>CodeXLEmptyString</ApplicationPath>
+    <WorkingDirectory>CodeXLEmptyString</WorkingDirectory>
+    <SourceFilesDirectory>CodeXLEmptyString</SourceFilesDirectory>
+    <SourceCodeRootDirectory>CodeXLEmptyString</SourceCodeRootDirectory>
+    <ApplicationArguments>CodeXLEmptyString</ApplicationArguments>
+    <LastActiveMode>Debug Mode</LastActiveMode>
+    <IsRemoteSession>no</IsRemoteSession>
+    <RemoteDaemonHostName>CodeXLEmptyString</RemoteDaemonHostName>
+    <RemoteDaemonPortNumber>27015</RemoteDaemonPortNumber>
+    <RecentlyUsedRemoteIPAddresses>;</RecentlyUsedRemoteIPAddresses>
+    <LastSessionType>CPU: Time-based Sampling</LastSessionType>
+    <ProfileName>CodeXLEmptyString</ProfileName>
+    <ApplicationEnvironmentVariables></ApplicationEnvironmentVariables>
+    <ProductExtensions>
+        <GPUDebug>
+            <InterceptionMethod>2</InterceptionMethod>
+            <DebuggerBreakpoints>
+                <Breakpoints />
+            </DebuggerBreakpoints>
+            <OpenGLStateVariables>
+                <StateVariables />
+            </OpenGLStateVariables>
+            <FrameTerminators>131073</FrameTerminators>
+            <GLDebugOutput>
+                <GLDebugOutputLoggingEnabled>CodeXLEmptyString</GLDebugOutputLoggingEnabled>
+                <GLDebugOutputBreakOnReports>CodeXLEmptyString</GLDebugOutputBreakOnReports>
+                <GLDebugOutputMessagesMask>CodeXLEmptyString</GLDebugOutputMessagesMask>
+                <GLDebugOutputSeverity>CodeXLEmptyString</GLDebugOutputSeverity>
+            </GLDebugOutput>
+        </GPUDebug>
+        <SharedProfile>
+            <ProfileScope>0</ProfileScope>
+            <ProfileEntireDuration>true</ProfileEntireDuration>
+            <ProfilePaused>false</ProfilePaused>
+            <ProfileStartDelay>0</ProfileStartDelay>
+            <ProfileEndAfter>0</ProfileEndAfter>
+            <ProfileTerminateAfter>false</ProfileTerminateAfter>
+        </SharedProfile>
+        <CpuProfile>
+            <Session type="Current">
+                <profileName />
+                <profilePath />
+                <profileType>CPU: Time-based Sampling</profileType>
+                <isImported>0</isImported>
+                <launchTarget />
+                <commandArguments />
+                <workingDir />
+                <envVariables />
+                <startTime />
+                <endTime />
+                <startAffinity>255</startAffinity>
+                <css>T</css>
+                <cssInterval>1</cssInterval>
+                <cssFpoTimeBased>T</cssFpoTimeBased>
+                <cssFpo>F</cssFpo>
+                <cssUnwindTimeBased>128</cssUnwindTimeBased>
+                <cssUnwind>32</cssUnwind>
+                <saveRawFiles>F</saveRawFiles>
+                <profileScope>0</profileScope>
+                <startDelay>0</startDelay>
+                <startPaused>F</startPaused>
+                <profileEntire>T</profileEntire>
+                <duration>0</duration>
+                <terminateProcess>F</terminateProcess>
+                <msInterval>0,000000</msInterval>
+                <EventCount>0</EventCount>
+                <fetchSample>F</fetchSample>
+                <opSample>F</opSample>
+                <opCycleCount>F</opCycleCount>
+                <fetchInterval>250000l</fetchInterval>
+                <opInterval>250000l</opInterval>
+                <cluSample>F</cluSample>
+                <cluCycleCount>F</cluCycleCount>
+                <cluInterval>250000l</cluInterval>
+                <cacheLineUtilChecked>F</cacheLineUtilChecked>
+                <cacheLineUtilEnabled>F</cacheLineUtilEnabled>
+                <ldstChecked>F</ldstChecked>
+                <ldstEnabled>F</ldstEnabled>
+                <applyFilter>F</applyFilter>
+                <utilMask>0</utilMask>
+            </Session>
+        </CpuProfile>
+        <CpuProfileCustom />
+        <OpenCLAppTrace>
+            <Session type="Current">
+                <GenerateOccupancyInfo>T</GenerateOccupancyInfo>
+                <AlwaysShowAPIErrorCode>F</AlwaysShowAPIErrorCode>
+                <CollapseAllclGetEventInfoCalls>T</CollapseAllclGetEventInfoCalls>
+                <EnableNavigationToSourceCode>F</EnableNavigationToSourceCode>
+                <GenerateSummaryPage>T</GenerateSummaryPage>
+                <APIsToTrace>F</APIsToTrace>
+                <MaximumNumberOfAPIs>200000</MaximumNumberOfAPIs>
+                <WriteDataTimeOut>T</WriteDataTimeOut>
+                <TimeOutInterval>100</TimeOutInterval>
+                <RuleTree>
+                    <Detect_deprecated_API_calls>T</Detect_deprecated_API_calls>
+                    <Detect_failed_API_calls>T</Detect_failed_API_calls>
+                    <Detect_non-optimized_data_transfer>T</Detect_non-optimized_data_transfer>
+                    <Detect_non-optimized_work_size>T</Detect_non-optimized_work_size>
+                    <Detect_redundant_synchronization>T</Detect_redundant_synchronization>
+                    <Detect_resource_leaks>T</Detect_resource_leaks>
+                    <Detect_unnecessary_blocking_writes>T</Detect_unnecessary_blocking_writes>
+                </RuleTree>
+                <APIsFilterTree>
+                    <clBuildProgram>T</clBuildProgram>
+                    <clCompileProgram>T</clCompileProgram>
+                    <clCreateBuffer>T</clCreateBuffer>
+                    <clCreateCommandQueue>T</clCreateCommandQueue>
+                    <clCreateCommandQueueWithProperties>T</clCreateCommandQueueWithProperties>
+                    <clCreateContext>T</clCreateContext>
+                    <clCreateContextFromType>T</clCreateContextFromType>
+                    <clCreateEventFromGLsyncKHR>T</clCreateEventFromGLsyncKHR>
+                    <clCreateFromGLBuffer>T</clCreateFromGLBuffer>
+                    <clCreateFromGLRenderbuffer>T</clCreateFromGLRenderbuffer>
+                    <clCreateFromGLTexture>T</clCreateFromGLTexture>
+                    <clCreateFromGLTexture2D>T</clCreateFromGLTexture2D>
+                    <clCreateFromGLTexture3D>T</clCreateFromGLTexture3D>
+                    <clCreateImage>T</clCreateImage>
+                    <clCreateImage2D>T</clCreateImage2D>
+                    <clCreateImage3D>T</clCreateImage3D>
+                    <clCreateKernel>T</clCreateKernel>
+                    <clCreateKernelsInProgram>T</clCreateKernelsInProgram>
+                    <clCreatePipe>T</clCreatePipe>
+                    <clCreateProgramWithBinary>T</clCreateProgramWithBinary>
+                    <clCreateProgramWithBuiltInKernels>T</clCreateProgramWithBuiltInKernels>
+                    <clCreateProgramWithSource>T</clCreateProgramWithSource>
+                    <clCreateSampler>T</clCreateSampler>
+                    <clCreateSamplerWithProperties>T</clCreateSamplerWithProperties>
+                    <clCreateSubBuffer>T</clCreateSubBuffer>
+                    <clCreateSubDevices>T</clCreateSubDevices>
+                    <clCreateSubDevicesEXT>T</clCreateSubDevicesEXT>
+                    <clCreateUserEvent>T</clCreateUserEvent>
+                    <clEnqueueAcquireGLObjects>T</clEnqueueAcquireGLObjects>
+                    <clEnqueueBarrier>T</clEnqueueBarrier>
+                    <clEnqueueBarrierWithWaitList>T</clEnqueueBarrierWithWaitList>
+                    <clEnqueueCopyBuffer>T</clEnqueueCopyBuffer>
+                    <clEnqueueCopyBufferRect>T</clEnqueueCopyBufferRect>
+                    <clEnqueueCopyBufferToImage>T</clEnqueueCopyBufferToImage>
+                    <clEnqueueCopyImage>T</clEnqueueCopyImage>
+                    <clEnqueueCopyImageToBuffer>T</clEnqueueCopyImageToBuffer>
+                    <clEnqueueFillBuffer>T</clEnqueueFillBuffer>
+                    <clEnqueueFillImage>T</clEnqueueFillImage>
+                    <clEnqueueMapBuffer>T</clEnqueueMapBuffer>
+                    <clEnqueueMapImage>T</clEnqueueMapImage>
+                    <clEnqueueMarker>T</clEnqueueMarker>
+                    <clEnqueueMarkerWithWaitList>T</clEnqueueMarkerWithWaitList>
+                    <clEnqueueMigrateMemObjects>T</clEnqueueMigrateMemObjects>
+                    <clEnqueueNDRangeKernel>T</clEnqueueNDRangeKernel>
+                    <clEnqueueNativeKernel>T</clEnqueueNativeKernel>
+                    <clEnqueueReadBuffer>T</clEnqueueReadBuffer>
+                    <clEnqueueReadBufferRect>T</clEnqueueReadBufferRect>
+                    <clEnqueueReadImage>T</clEnqueueReadImage>
+                    <clEnqueueReleaseGLObjects>T</clEnqueueReleaseGLObjects>
+                    <clEnqueueSVMFree>T</clEnqueueSVMFree>
+                    <clEnqueueSVMFreeAMD>T</clEnqueueSVMFreeAMD>
+                    <clEnqueueSVMMap>T</clEnqueueSVMMap>
+                    <clEnqueueSVMMapAMD>T</clEnqueueSVMMapAMD>
+                    <clEnqueueSVMMemFill>T</clEnqueueSVMMemFill>
+                    <clEnqueueSVMMemFillAMD>T</clEnqueueSVMMemFillAMD>
+                    <clEnqueueSVMMemcpy>T</clEnqueueSVMMemcpy>
+                    <clEnqueueSVMMemcpyAMD>T</clEnqueueSVMMemcpyAMD>
+                    <clEnqueueSVMUnmap>T</clEnqueueSVMUnmap>
+                    <clEnqueueSVMUnmapAMD>T</clEnqueueSVMUnmapAMD>
+                    <clEnqueueTask>T</clEnqueueTask>
+                    <clEnqueueUnmapMemObject>T</clEnqueueUnmapMemObject>
+                    <clEnqueueWaitForEvents>T</clEnqueueWaitForEvents>
+                    <clEnqueueWriteBuffer>T</clEnqueueWriteBuffer>
+                    <clEnqueueWriteBufferRect>T</clEnqueueWriteBufferRect>
+                    <clEnqueueWriteImage>T</clEnqueueWriteImage>
+                    <clFinish>T</clFinish>
+                    <clFlush>T</clFlush>
+                    <clGetCommandQueueInfo>T</clGetCommandQueueInfo>
+                    <clGetContextInfo>T</clGetContextInfo>
+                    <clGetDeviceIDs>T</clGetDeviceIDs>
+                    <clGetDeviceInfo>T</clGetDeviceInfo>
+                    <clGetEventInfo>T</clGetEventInfo>
+                    <clGetEventProfilingInfo>T</clGetEventProfilingInfo>
+                    <clGetExtensionFunctionAddress>T</clGetExtensionFunctionAddress>
+                    <clGetExtensionFunctionAddressForPlatform>T</clGetExtensionFunctionAddressForPlatform>
+                    <clGetGLContextInfoKHR>T</clGetGLContextInfoKHR>
+                    <clGetGLObjectInfo>T</clGetGLObjectInfo>
+                    <clGetGLTextureInfo>T</clGetGLTextureInfo>
+                    <clGetImageInfo>T</clGetImageInfo>
+                    <clGetKernelArgInfo>T</clGetKernelArgInfo>
+                    <clGetKernelInfo>T</clGetKernelInfo>
+                    <clGetKernelWorkGroupInfo>T</clGetKernelWorkGroupInfo>
+                    <clGetMemObjectInfo>T</clGetMemObjectInfo>
+                    <clGetPipeInfo>T</clGetPipeInfo>
+                    <clGetPlatformIDs>T</clGetPlatformIDs>
+                    <clGetPlatformInfo>T</clGetPlatformInfo>
+                    <clGetProgramBuildInfo>T</clGetProgramBuildInfo>
+                    <clGetProgramInfo>T</clGetProgramInfo>
+                    <clGetSamplerInfo>T</clGetSamplerInfo>
+                    <clGetSupportedImageFormats>T</clGetSupportedImageFormats>
+                    <clLinkProgram>T</clLinkProgram>
+                    <clReleaseCommandQueue>T</clReleaseCommandQueue>
+                    <clReleaseContext>T</clReleaseContext>
+                    <clReleaseDevice>T</clReleaseDevice>
+                    <clReleaseDeviceEXT>T</clReleaseDeviceEXT>
+                    <clReleaseEvent>T</clReleaseEvent>
+                    <clReleaseKernel>T</clReleaseKernel>
+                    <clReleaseMemObject>T</clReleaseMemObject>
+                    <clReleaseProgram>T</clReleaseProgram>
+                    <clReleaseSampler>T</clReleaseSampler>
+                    <clRetainCommandQueue>T</clRetainCommandQueue>
+                    <clRetainContext>T</clRetainContext>
+                    <clRetainDevice>T</clRetainDevice>
+                    <clRetainDeviceEXT>T</clRetainDeviceEXT>
+                    <clRetainEvent>T</clRetainEvent>
+                    <clRetainKernel>T</clRetainKernel>
+                    <clRetainMemObject>T</clRetainMemObject>
+                    <clRetainProgram>T</clRetainProgram>
+                    <clRetainSampler>T</clRetainSampler>
+                    <clSVMAlloc>T</clSVMAlloc>
+                    <clSVMAllocAMD>T</clSVMAllocAMD>
+                    <clSVMFree>T</clSVMFree>
+                    <clSVMFreeAMD>T</clSVMFreeAMD>
+                    <clSetCommandQueueProperty>T</clSetCommandQueueProperty>
+                    <clSetEventCallback>T</clSetEventCallback>
+                    <clSetKernelArg>T</clSetKernelArg>
+                    <clSetKernelArgSVMPointer>T</clSetKernelArgSVMPointer>
+                    <clSetKernelArgSVMPointerAMD>T</clSetKernelArgSVMPointerAMD>
+                    <clSetKernelExecInfo>T</clSetKernelExecInfo>
+                    <clSetKernelExecInfoAMD>T</clSetKernelExecInfoAMD>
+                    <clSetMemObjectDestructorCallback>T</clSetMemObjectDestructorCallback>
+                    <clSetUserEventStatus>T</clSetUserEventStatus>
+                    <clUnloadCompiler>T</clUnloadCompiler>
+                    <clUnloadPlatformCompiler>T</clUnloadPlatformCompiler>
+                    <clWaitForEvents>T</clWaitForEvents>
+                </APIsFilterTree>
+            </Session>
+        </OpenCLAppTrace>
+        <GPUPerformanceCounters>
+            <Session type="Current">
+                <IsRemoteSession>F</IsRemoteSession>
+                <GenerateOccupancyInfo>T</GenerateOccupancyInfo>
+                <GpuTimeCollect>T</GpuTimeCollect>
+                <ProfileSpecificKernels />
+                <CounterTree>
+                    <ALUBusy>T</ALUBusy>
+                    <ALUFetchRatio>T</ALUFetchRatio>
+                    <ALUInsts>T</ALUInsts>
+                    <ALUPacking>T</ALUPacking>
+                    <CacheHit>T</CacheHit>
+                    <CompletePath>T</CompletePath>
+                    <FastPath>T</FastPath>
+                    <FetchInsts>T</FetchInsts>
+                    <FetchSize>T</FetchSize>
+                    <FetchUnitBusy>T</FetchUnitBusy>
+                    <FetchUnitStalled>T</FetchUnitStalled>
+                    <FlatLDSInsts>T</FlatLDSInsts>
+                    <FlatVMemInsts>T</FlatVMemInsts>
+                    <GDSInsts>T</GDSInsts>
+                    <LDSBankConflict>T</LDSBankConflict>
+                    <LDSFetchInsts>T</LDSFetchInsts>
+                    <LDSInsts>T</LDSInsts>
+                    <LDSWriteInsts>T</LDSWriteInsts>
+                    <MemUnitBusy>T</MemUnitBusy>
+                    <MemUnitStalled>T</MemUnitStalled>
+                    <PathUtilization>T</PathUtilization>
+                    <SALUBusy>T</SALUBusy>
+                    <SALUInsts>T</SALUInsts>
+                    <SFetchInsts>T</SFetchInsts>
+                    <VALUBusy>T</VALUBusy>
+                    <VALUInsts>T</VALUInsts>
+                    <VALUUtilization>T</VALUUtilization>
+                    <VFetchInsts>T</VFetchInsts>
+                    <VWriteInsts>T</VWriteInsts>
+                    <Wavefronts>T</Wavefronts>
+                    <WriteInsts>T</WriteInsts>
+                    <WriteSize>T</WriteSize>
+                    <WriteUnitStalled>T</WriteUnitStalled>
+                </CounterTree>
+            </Session>
+        </GPUPerformanceCounters>
+        <KernelAnalyzer>
+            <FilesSection />
+            <BuildOptions />
+            <ShaderCompileType />
+            <ShaderBuildOptions />
+            <ShaderD3dBuilderPath />
+            <ShaderFxcBuilderPath />
+            <ShaderMacros />
+            <ShaderIncludes />
+        </KernelAnalyzer>
+        <KernelAnalyzerOther />
+        <PowerProfile>
+            <EnabledCounters />
+            <SamplingInterval>100</SamplingInterval>
+        </PowerProfile>
+    </ProductExtensions>
+</CodeXL>
