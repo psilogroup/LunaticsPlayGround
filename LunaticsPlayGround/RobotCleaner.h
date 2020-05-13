@@ -10,16 +10,18 @@ public:
 
 	Cube* chassi;
 	
+	
+
 	Cylinder* rodaFrontalEsquerda;
 	Cylinder* rodaFrontalDireita;
 
 	Cylinder* rodaTraseiraEsquerda;
-	Cylinder* rodaTraseiraDireita;
+	
 
 	CarWheel* jointRodaFL;
 	CarWheel* jointRodaFR;
 	CarWheel* jointRodaBL;
-	CarWheel* jointRodaBR;
+	
 	bool rightPressed;
 	bool leftPressed;
 	bool accellPressed;
@@ -103,61 +105,20 @@ public:
 		rodaTraseiraEsquerda->MakeGeom(world->topLevelSpace);
 		rodaTraseiraEsquerda->MakeBody(world->world);
 		rodaTraseiraEsquerda->LinkBodyWithGeom();
-		rodaTraseiraEsquerda->setPosition(pos.x - chassi->iSize.x / 2, pos.y + chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-
-		rodaTraseiraDireita = new Cylinder(0.6, 0.6, 24, 24);
-		rodaTraseiraDireita->iM = 0.2;
-		rodaTraseiraDireita->MakeGeom(world->topLevelSpace);
-		rodaTraseiraDireita->MakeBody(world->world);
-		rodaTraseiraDireita->LinkBodyWithGeom();
-		rodaTraseiraDireita->setPosition(pos.x - chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
+		rodaTraseiraEsquerda->setPosition(pos.x - chassi->iSize.x / 2, pos.y, pos.z - chassi->iSize.z / 2);
 
 
 		p.x = pos.x + 2;
 		p.y = pos.y + 1.5;
 		p.z = pos.z - 0.5;
 
-		rodaFrontalEsquerda = new Cylinder(0.6, 0.6, 24, 24);
-		rodaFrontalEsquerda->iM = 0.2;
-		rodaFrontalEsquerda->MakeGeom(world->topLevelSpace);
-		rodaFrontalEsquerda->MakeBody(world->world);
-		rodaFrontalEsquerda->LinkBodyWithGeom();
-		rodaFrontalEsquerda->setPosition(pos.x + chassi->iSize.x / 2, pos.y + chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-		rodaFrontalDireita = new Cylinder(0.6, 0.6, 24, 24);
-		rodaFrontalDireita->iM = 0.2;
-		rodaFrontalDireita->MakeGeom(world->topLevelSpace);
-		rodaFrontalDireita->MakeBody(world->world);
-		rodaFrontalDireita->LinkBodyWithGeom();
-		rodaFrontalDireita->setPosition(pos.x + chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-		rodaTraseiraEsquerda = new Cylinder(0.6, 0.6, 24, 24);
-		rodaTraseiraEsquerda->iM = 0.2;
-		rodaTraseiraEsquerda->MakeGeom(world->topLevelSpace);
-		rodaTraseiraEsquerda->MakeBody(world->world);
-		rodaTraseiraEsquerda->LinkBodyWithGeom();
-		rodaTraseiraEsquerda->setPosition(pos.x - chassi->iSize.x / 2, pos.y + chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-
-		rodaTraseiraDireita = new Cylinder(0.6, 0.6, 24, 24);
-		rodaTraseiraDireita->iM = 0.2;
-		rodaTraseiraDireita->MakeGeom(world->topLevelSpace);
-		rodaTraseiraDireita->MakeBody(world->world);
-		rodaTraseiraDireita->LinkBodyWithGeom();
-		rodaTraseiraDireita->setPosition(pos.x - chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
 
 		vec3d servoBodyPos = { pos.x,pos.y,pos.z + 1.0 };
 		vec3d servoGunPos = { pos.x,pos.y - 0.5,pos.z + 1.0 };
 		vec3d rodaFLPos = { pos.x + chassi->iSize.x / 2,pos.y + chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
 		vec3d rodaFDPos = { pos.x + chassi->iSize.x / 2,pos.y - chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
-		vec3d rodaBLPos = { pos.x - chassi->iSize.x / 2,pos.y + chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
-		vec3d rodaBRPos = { pos.x - chassi->iSize.x / 2,pos.y - chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
+		vec3d rodaBLPos = { pos.x - chassi->iSize.x / 2,pos.y,pos.z - chassi->iSize.z / 2 };
+		
 
 		vec3d xAixis = { 1,0,0 };
 		vec3d yAixis = { 0,1,0 };
@@ -181,10 +142,7 @@ public:
 		dJointSetHinge2Param(jointRodaBL->iJoint, dParamSuspensionERP, 0.8);
 		dJointSetHinge2Param(jointRodaBL->iJoint, dParamSuspensionCFM, 0.5);
 
-		jointRodaBR = new CarWheel(chassi, rodaTraseiraDireita, rodaBRPos, zAixis, yAixis, world);
-
-		dJointSetHinge2Param(jointRodaBR->iJoint, dParamSuspensionERP, 0.8);
-		dJointSetHinge2Param(jointRodaBR->iJoint, dParamSuspensionCFM, 0.5);
+		
 
 
 
@@ -203,9 +161,7 @@ public:
 		setColor(rodaTraseiraEsquerda->Mat->Kd, 0.0, 0.0, 1.0);
 		setColor(rodaTraseiraEsquerda->Mat->Ks, 1.0, 1.0, 1.0);
 
-		setColor(rodaTraseiraDireita->Mat->Ka, 0.0, 0.0, 1.0);
-		setColor(rodaTraseiraDireita->Mat->Kd, 0.0, 0.0, 1.0);
-		setColor(rodaTraseiraDireita->Mat->Ks, 1.0, 1.0, 1.0);
+		
 
 		setColor(chassi->Mat->Ka, 1.0, 0.0, 0.0);
 		setColor(chassi->Mat->Kd, 1.0, 0.0, 0.0);
@@ -242,18 +198,17 @@ public:
 			turn = -0.3;
 
 
-		dJointID _joint[4] =
+		dJointID _joint[3] =
 		{
 			jointRodaFL->iJoint,
 			jointRodaFR->iJoint,
 			jointRodaBL->iJoint,
-			jointRodaBR->iJoint
 		};
 
 		speed = 1.2;
 		force = 76;
 
-		for (j = 0; j < 4; j++)
+		for (j = 0; j < 3; j++)
 		{
 			dReal curturn = dJointGetHinge2Angle1(_joint[j]);
 
@@ -274,7 +229,7 @@ public:
 		rodaFrontalEsquerda->Update();
 		rodaFrontalDireita->Update();
 		rodaTraseiraEsquerda->Update();
-		rodaTraseiraDireita->Update();
+
 	};
 
 	void Draw()
@@ -284,7 +239,8 @@ public:
 		rodaFrontalEsquerda->Draw();
 		rodaFrontalDireita->Draw();
 		rodaTraseiraEsquerda->Draw();
-		rodaTraseiraDireita->Draw();
+	
+
 	};
 
 };
