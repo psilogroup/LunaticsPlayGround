@@ -1,6 +1,6 @@
 #include "NewbieEngine.h"
 
-#include "R1D1.h"
+#include "RobotCleaner.h"
 
 void onKeyUp(void* k);
 void onKeyDown(void* k);
@@ -12,7 +12,7 @@ static Uint32 elapsedTime = 1;
 Terrain* terreno = NULL;
 Camera* eye = NULL;
 
-Robot1* R1D1 = NULL; //Nosso Robo
+RobotCleaner* cleaner = NULL; //Nosso Robo
 
 bool quit = false;
 void process_events();
@@ -50,7 +50,7 @@ static void draw_screen(void) {
 		//        eye->rotation.x,eye->rotation.y,eye->rotation.z);
 
 
-	if (R1D1 != NULL)
+	if (cleaner != NULL)
 	{
 
 
@@ -58,8 +58,8 @@ static void draw_screen(void) {
 		glLoadIdentity();
 		//glScalef(0.5f,0.5f,0.5f);
 		//Camera acompanhando o robo
-		const dReal* pos = dBodyGetPosition(R1D1->chassi->iBody);
-		const dReal* rot = dBodyGetRotation(R1D1->chassi->iBody);
+		const dReal* pos = dBodyGetPosition(cleaner->chassi->iBody);
+		const dReal* rot = dBodyGetRotation(cleaner->chassi->iBody);
 		gluLookAt(
 			pos[0] + 13 - rot[0] + rot[2],
 			pos[1] - rot[4] + rot[6],
@@ -73,7 +73,7 @@ static void draw_screen(void) {
 
 
 	terreno->Draw();
-	R1D1->Draw();
+	cleaner->Draw();
 	currentWorld->Draw();
 
 	SDL_GL_SwapWindow(Singleton::getInstance().mainwindow);
@@ -128,7 +128,7 @@ int main(int argc, char* argv[]) {
 
 
 
-	R1D1 = new Robot1(R1Pos, currentWorld);
+	cleaner = new RobotCleaner(R1Pos, currentWorld);
 	double simstep = 0.05;
 	next_time = SDL_GetTicks() + TICK_INTERVAL;
 	while (!quit) {
@@ -136,7 +136,7 @@ int main(int argc, char* argv[]) {
 		int nrofsteps = (int)ceilf((TICK_INTERVAL / simstep) / 100);
 
 		process_events();
-		R1D1->Update(0.05);
+		cleaner->Update(0.05);
 		for (int i = 0; i < nrofsteps; i++)
 		{
 			dSpaceCollide(currentWorld->topLevelSpace, 0, &nearCallback);
@@ -161,14 +161,14 @@ void process_events()
 	while (SDL_PollEvent(&e) != 0)
 	{
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-		R1D1->accellPressed = false;
-		R1D1->rightPressed = false;
-		R1D1->leftPressed = false;
-		R1D1->reversePressed = false;
-		R1D1->rotingLeft = false;
-		R1D1->rotingRight = false;
-		R1D1->rotingUp = false;
-		R1D1->rotingDown = false;
+		cleaner->accellPressed = false;
+		cleaner->rightPressed = false;
+		cleaner->leftPressed = false;
+		cleaner->reversePressed = false;
+		cleaner->rotingLeft = false;
+		cleaner->rotingRight = false;
+		cleaner->rotingUp = false;
+		cleaner->rotingDown = false;
 
 		if (e.type == SDL_QUIT)
 		{
@@ -195,44 +195,44 @@ void process_events()
 
 		if (currentKeyStates[SDL_SCANCODE_LEFT])
 		{
-			R1D1->rotingLeft = true;
+			cleaner->rotingLeft = true;
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_RIGHT])
 		{
-			R1D1->rotingRight = true;
+			cleaner->rotingRight = true;
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_SPACE])
 		{
-			R1D1->shot();
+			cleaner->shot();
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_UP])
 		{
-			R1D1->rotingUp = true;
+			cleaner->rotingUp = true;
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_DOWN])
 		{
-			R1D1->rotingDown = true;
+			cleaner->rotingDown = true;
 		}
 	}
 }
 
 void MarchaRe()
 {
-	R1D1->reversePressed = true;
+	cleaner->reversePressed = true;
 }
 
 void VirarEsquerda()
 {
-	R1D1->leftPressed = true;
+	cleaner->leftPressed = true;
 }
 
 void VirarDireita()
 {
-	R1D1->rightPressed = true;
+	cleaner->rightPressed = true;
 }
 
 
@@ -240,5 +240,5 @@ void VirarDireita()
 
 void MoverFrente()
 {
-	R1D1->accellPressed = true;
+	cleaner->accellPressed = true;
 }

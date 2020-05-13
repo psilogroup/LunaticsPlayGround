@@ -9,7 +9,7 @@ class RobotCleaner
 public:
 
 	Cube* chassi;
-
+	
 	Cylinder* rodaFrontalEsquerda;
 	Cylinder* rodaFrontalDireita;
 
@@ -20,7 +20,6 @@ public:
 	CarWheel* jointRodaFR;
 	CarWheel* jointRodaBL;
 	CarWheel* jointRodaBR;
-
 	bool rightPressed;
 	bool leftPressed;
 	bool accellPressed;
@@ -77,30 +76,6 @@ public:
 		chassi->setPosition(pos.x, pos.y, pos.z);
 		chassi->setRotation(0, 0, 0);
 
-
-
-
-		canonBody = new Sphere(1.0, 128, 128);
-		canonBody->iM = 0.1;
-		canonBody->data->setName("CanonBody");
-		canonBody->MakeGeom(world->topLevelSpace);
-		canonBody->MakeBody(world->world);
-		canonBody->LinkBodyWithGeom();
-		canonBody->setPosition(pos.x, pos.y, pos.z + 1);
-		canonBody->setRotation(0, 0, 90);
-
-		canonGun = new Cylinder(0.2, 3.0, 24, 24);
-		canonGun->iM = 0.1;
-		canonBody->data->setName("GunBody");
-		canonGun->MakeGeom(world->topLevelSpace);
-		canonGun->MakeBody(world->world);
-		canonGun->LinkBodyWithGeom();
-		canonGun->setPosition(pos.x, pos.y - 0.5, pos.z + 1.0);
-		//canonGun->setRotation(0,0,0);
-
-
-
-
 		vec3d p;
 		p.x = pos.x + 2;
 		p.y = pos.y + 1.5;
@@ -141,14 +116,9 @@ public:
 
 
 
-
-
-
-
 		p.x = pos.x + 2;
 		p.y = pos.y + 1.5;
 		p.z = pos.z - 0.5;
-
 
 		rodaFrontalEsquerda = new Cylinder(0.6, 0.6, 24, 24);
 		rodaFrontalEsquerda->iM = 0.2;
@@ -194,10 +164,6 @@ public:
 		vec3d zAixis = { 0,0,1 };
 
 
-		servoBody = new Servo(chassi, canonBody, servoBodyPos, zAixis, world->world);
-		servoGun = new Servo(canonBody, canonGun, servoGunPos, xAixis, world->world);
-
-
 		jointRodaFL = new CarWheel(chassi, rodaFrontalEsquerda, rodaFLPos, zAixis, yAixis, world);
 
 		dJointSetHinge2Param(jointRodaFL->iJoint, dParamSuspensionERP, 0.8);
@@ -241,89 +207,15 @@ public:
 		setColor(rodaTraseiraDireita->Mat->Kd, 0.0, 0.0, 1.0);
 		setColor(rodaTraseiraDireita->Mat->Ks, 1.0, 1.0, 1.0);
 
-
-
-		//setColor(baseRodaFrontal->Mat->Ka,0.0,0.0,1.0);
-		//setColor(baseRodaFrontal->Mat->Kd,0.0,0.0,1.0);
-		//setColor(baseRodaFrontal->Mat->Ks,1.0,1.0,1.0);
-
-		setColor(canonGun->Mat->Ka, 0.0, 0.0, 0.0);
-		setColor(canonGun->Mat->Kd, 0.0, 0.0, 0.0);
-		setColor(canonGun->Mat->Ks, 1.0, 1.0, 1.0);
-
-
-
-		setColor(canonBody->Mat->Ka, 0.4, 0.4, 0.0);
-		setColor(canonBody->Mat->Kd, 0.4, 0.4, 0.0);
-		setColor(canonBody->Mat->Ks, 0.0, 0.0, 0.0);
-
-
 		setColor(chassi->Mat->Ka, 1.0, 0.0, 0.0);
 		setColor(chassi->Mat->Kd, 1.0, 0.0, 0.0);
 		setColor(chassi->Mat->Ks, 1.0, 1.0, 1.0);
-
-
-		canonBals = new Sphere * [20];
-
-		for (int i = 0; i < 20; i++)
-		{
-			canonBals[i] = new Sphere(0.5, 32, 32);
-			canonBals[i]->iM = 0.4;
-			canonBody->data->setName("CanonBall");
-
-			setColor(canonBals[i]->Mat->Ka, 0.1, 0.1, 0.1);
-			setColor(canonBals[i]->Mat->Kd, 0.1, 0.1, 0.1);
-			setColor(canonBals[i]->Mat->Ks, 0.6, 0.5, 0.6);
-
-
-
-		}
 
 	};
 
 	void shot()
 	{
-		shots++;
-
-		if (shots >= 20)
-		{
-			shots = 1;
-			allShotsAlocated = true;
-		}
-
-
-		if (allShotsAlocated == false)
-		{
-
-
-			canonBals[shots - 1]->MakeGeom(dGeomGetSpace(chassi->iGeom));
-			canonBals[shots - 1]->MakeBody(dBodyGetWorld(chassi->iBody));
-			canonBals[shots - 1]->LinkBodyWithGeom();
-
-		}
-		else
-		{
-
-
-
-		}
-		dMatrix3 R2, R3;
-		const dReal* R4 = dGeomGetRotation(canonGun->iGeom);
-
-		//dMultiply0 (R4,R2,R3,3,3,3);
-		const dReal* ccpos = dGeomGetPosition(canonGun->iGeom);
-		dReal cpos[3] = { ccpos[0],ccpos[1],ccpos[2] };
-		for (int i = 0; i < 3; i++) cpos[i] += 3 * R4[i * 4 + 2];
-		dBodySetPosition(canonBals[shots - 1]->iBody, cpos[0], cpos[1], cpos[2]);
-		dReal force = 25;
-		dBodySetLinearVel(canonBals[shots - 1]->iBody, force * R4[2], force * R4[6], force * R4[10]);
-		dBodyAddForce(canonBals[shots - 1]->iBody, force * (-R4[2]), force * (-R4[6]), force * (-R4[10]));
-		dBodySetAngularVel(canonBals[shots - 1]->iBody, 0, 0, 0);
-
-
-
-
-
+		
 
 	}
 
@@ -378,57 +270,11 @@ public:
 
 		}
 
-
-		servoBody->setTorque(dInfinity);
-		servoGun->setTorque(dInfinity);
-
-		if (rotingRight == true)
-		{
-			dJointSetHingeParam(servoBody->iJoint, dParamVel, 0.2);
-		}
-		else if (rotingLeft == true)
-		{
-			dJointSetHingeParam(servoBody->iJoint, dParamVel, -0.2);
-		}
-		else
-		{
-			dJointSetHingeParam(servoBody->iJoint, dParamVel, 0.0);
-		}
-
-		if (rotingUp == true)
-		{
-			gunRot++;
-			dJointSetHingeParam(servoGun->iJoint, dParamHiStop, DEG2RAD(gunRot));
-			dJointSetHingeParam(servoGun->iJoint, dParamLoStop, DEG2RAD(gunRot));
-			if (gunRot > 13)
-				gunRot = 13;
-		}
-
-		if (rotingDown == true)
-		{
-			gunRot--;
-			dJointSetHingeParam(servoGun->iJoint, dParamHiStop, DEG2RAD(gunRot));
-			dJointSetHingeParam(servoGun->iJoint, dParamLoStop, DEG2RAD(gunRot));
-			if (gunRot < -13)
-				gunRot = -13;
-
-		}
-
-
-
-
-
 		chassi->Update();
 		rodaFrontalEsquerda->Update();
 		rodaFrontalDireita->Update();
 		rodaTraseiraEsquerda->Update();
 		rodaTraseiraDireita->Update();
-		canonBody->Update();
-		canonGun->Update();
-		for (int i = 0; i < shots; i++)
-		{
-			canonBals[i]->Update();
-		}
 	};
 
 	void Draw()
@@ -439,13 +285,6 @@ public:
 		rodaFrontalDireita->Draw();
 		rodaTraseiraEsquerda->Draw();
 		rodaTraseiraDireita->Draw();
-		canonBody->Draw();
-		canonGun->Draw();
-		for (int i = 0; i < shots; i++)
-		{
-			canonBals[i]->Draw();
-
-		}
 	};
 
 };

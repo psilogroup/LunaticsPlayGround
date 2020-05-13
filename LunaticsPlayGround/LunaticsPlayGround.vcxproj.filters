@@ -137,10 +137,10 @@
     <ClInclude Include="..\newbie-engine\include\Terrian.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="R1D1.h">
+    <ClInclude Include="..\newbie-engine\include\Joint.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="..\newbie-engine\include\Joint.h">
+    <ClInclude Include="RobotCleaner.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

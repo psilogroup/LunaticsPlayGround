@@ -62,7 +62,7 @@
     <ClInclude Include="..\newbie-engine\include\VertexBufferObject.h" />
     <ClInclude Include="..\newbie-engine\include\Wavefront.h" />
     <ClInclude Include="..\newbie-engine\include\World.h" />
-    <ClInclude Include="R1D1.h" />
+    <ClInclude Include="RobotCleaner.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
