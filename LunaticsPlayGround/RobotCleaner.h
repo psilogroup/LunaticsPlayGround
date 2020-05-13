@@ -8,20 +8,20 @@ class RobotCleaner
 {
 public:
 
-	Cube* chassi;
-	
-	
+	Cylinder* chassi;
+
+
 
 	Cylinder* rodaFrontalEsquerda;
 	Cylinder* rodaFrontalDireita;
 
-	Cylinder* rodaTraseiraEsquerda;
-	
+	Cylinder* rodaCentral;
 
-	CarWheel* jointRodaFL;
-	CarWheel* jointRodaFR;
+
+	CarWheel* rodaEsquerda;
+	CarWheel* RodaDireita;
 	CarWheel* jointRodaBL;
-	
+
 	bool rightPressed;
 	bool leftPressed;
 	bool accellPressed;
@@ -55,7 +55,6 @@ public:
 
 	RobotCleaner(vec3d pos, World* world)
 	{
-
 		rightPressed = leftPressed = accellPressed = reversePressed =
 			breaking = rotingRight = rotingLeft =
 			rotingUp = rotingDown = allShotsAlocated = false;
@@ -65,7 +64,7 @@ public:
 		rho = 1.29;
 		aceleador = 0;
 		shots = 0;
-		chassi = new Cube();
+		chassi = new Cylinder(3.8, 1.5, 64, 64);
 		chassi->iSize.x = 4.5;
 		chassi->iSize.y = 3.5;
 		chassi->iSize.z = 1.0;
@@ -100,12 +99,12 @@ public:
 		rodaFrontalDireita->setPosition(pos.x + chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
 
 
-		rodaTraseiraEsquerda = new Cylinder(0.6, 0.6, 24, 24);
-		rodaTraseiraEsquerda->iM = 0.2;
-		rodaTraseiraEsquerda->MakeGeom(world->topLevelSpace);
-		rodaTraseiraEsquerda->MakeBody(world->world);
-		rodaTraseiraEsquerda->LinkBodyWithGeom();
-		rodaTraseiraEsquerda->setPosition(pos.x - chassi->iSize.x / 2, pos.y, pos.z - chassi->iSize.z / 2);
+		rodaCentral = new Cylinder(0.6, 0.6, 24, 24);
+		rodaCentral->iM = 0.2;
+		rodaCentral->MakeGeom(world->topLevelSpace);
+		rodaCentral->MakeBody(world->world);
+		rodaCentral->LinkBodyWithGeom();
+		rodaCentral->setPosition(pos.x - chassi->iSize.x / 2, pos.y, pos.z - chassi->iSize.z / 2);
 
 
 		p.x = pos.x + 2;
@@ -115,34 +114,34 @@ public:
 
 		vec3d servoBodyPos = { pos.x,pos.y,pos.z + 1.0 };
 		vec3d servoGunPos = { pos.x,pos.y - 0.5,pos.z + 1.0 };
-		vec3d rodaFLPos = { pos.x + chassi->iSize.x / 2,pos.y + chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
-		vec3d rodaFDPos = { pos.x + chassi->iSize.x / 2,pos.y - chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
-		vec3d rodaBLPos = { pos.x - chassi->iSize.x / 2,pos.y,pos.z - chassi->iSize.z / 2 };
-		
+		vec3d rodaEsquerdaPos = { pos.x + chassi->iSize.x / 2,pos.y + chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
+		vec3d rodaDireitaPos = { pos.x + chassi->iSize.x / 2,pos.y - chassi->iSize.y / 2,pos.z - chassi->iSize.z / 2 };
+		vec3d rodaCentralPos = { pos.x - chassi->iSize.x / 2,pos.y,pos.z - chassi->iSize.z / 2 };
+
 
 		vec3d xAixis = { 1,0,0 };
 		vec3d yAixis = { 0,1,0 };
 		vec3d zAixis = { 0,0,1 };
 
 
-		jointRodaFL = new CarWheel(chassi, rodaFrontalEsquerda, rodaFLPos, zAixis, yAixis, world);
+		rodaEsquerda = new CarWheel(chassi, rodaFrontalEsquerda, rodaEsquerdaPos, zAixis, yAixis, world);
 
-		dJointSetHinge2Param(jointRodaFL->iJoint, dParamSuspensionERP, 0.8);
-		dJointSetHinge2Param(jointRodaFL->iJoint, dParamSuspensionCFM, 0.5);
-
-
-		jointRodaFR = new CarWheel(chassi, rodaFrontalDireita, rodaFDPos, zAixis, yAixis, world);
-
-		dJointSetHinge2Param(jointRodaFR->iJoint, dParamSuspensionERP, 0.8);
-		dJointSetHinge2Param(jointRodaFR->iJoint, dParamSuspensionCFM, 0.5);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamSuspensionERP, 0.8);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamSuspensionCFM, 0.5);
 
 
-		jointRodaBL = new CarWheel(chassi, rodaTraseiraEsquerda, rodaBLPos, zAixis, yAixis, world);
+		RodaDireita = new CarWheel(chassi, rodaFrontalDireita, rodaDireitaPos, zAixis, yAixis, world);
+
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamSuspensionERP, 0.8);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamSuspensionCFM, 0.5);
+
+
+		jointRodaBL = new CarWheel(chassi, rodaCentral, rodaCentralPos, zAixis, yAixis, world);
 
 		dJointSetHinge2Param(jointRodaBL->iJoint, dParamSuspensionERP, 0.8);
 		dJointSetHinge2Param(jointRodaBL->iJoint, dParamSuspensionCFM, 0.5);
 
-		
+
 
 
 
@@ -157,11 +156,11 @@ public:
 		setColor(rodaFrontalDireita->Mat->Kd, 0.0, 0.0, 1.0);
 		setColor(rodaFrontalDireita->Mat->Ks, 1.0, 1.0, 1.0);
 
-		setColor(rodaTraseiraEsquerda->Mat->Ka, 0.0, 0.0, 1.0);
-		setColor(rodaTraseiraEsquerda->Mat->Kd, 0.0, 0.0, 1.0);
-		setColor(rodaTraseiraEsquerda->Mat->Ks, 1.0, 1.0, 1.0);
+		setColor(rodaCentral->Mat->Ka, 0.0, 0.0, 1.0);
+		setColor(rodaCentral->Mat->Kd, 0.0, 0.0, 1.0);
+		setColor(rodaCentral->Mat->Ks, 1.0, 1.0, 1.0);
 
-		
+
 
 		setColor(chassi->Mat->Ka, 1.0, 0.0, 0.0);
 		setColor(chassi->Mat->Kd, 1.0, 0.0, 0.0);
@@ -171,7 +170,7 @@ public:
 
 	void shot()
 	{
-		
+
 
 	}
 
@@ -197,38 +196,28 @@ public:
 		else if (leftPressed)
 			turn = -0.3;
 
-
-		dJointID _joint[3] =
-		{
-			jointRodaFL->iJoint,
-			jointRodaFR->iJoint,
-			jointRodaBL->iJoint,
-		};
-
 		speed = 1.2;
-		force = 76;
+		force = 2;
 
-		for (j = 0; j < 3; j++)
-		{
-			dReal curturn = dJointGetHinge2Angle1(_joint[j]);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamVel, 0);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamFMax, 0);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamLoStop, 0);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamHiStop, 0);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamVel2, speed);
+		dJointSetHinge2Param(rodaEsquerda->iJoint, dParamFMax2, force);
 
-			if (j > 1)
-				dJointSetHinge2Param(_joint[j], dParamVel, (turn - curturn) * 1.0);
-			else
-				dJointSetHinge2Param(_joint[j], dParamVel, (0 - curturn) * 1.0);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamVel, 0);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamFMax, 0);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamVel2, speed);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamFMax2, force);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamLoStop, 0);
+		dJointSetHinge2Param(RodaDireita->iJoint, dParamHiStop, 0);
 
-			dJointSetHinge2Param(_joint[j], dParamFMax, dInfinity);
-			dJointSetHinge2Param(_joint[j], dParamVel2, speed > 0 ? u * speed : 0);
-			dJointSetHinge2Param(_joint[j], dParamFMax2, force > 0 ? force / 4 : 0);
-			dBodyEnable(dJointGetBody(_joint[j], 0));
-			dBodyEnable(dJointGetBody(_joint[j], 1));
-
-		}
 
 		chassi->Update();
 		rodaFrontalEsquerda->Update();
 		rodaFrontalDireita->Update();
-		rodaTraseiraEsquerda->Update();
+		rodaCentral->Update();
 
 	};
 
@@ -238,8 +227,8 @@ public:
 
 		rodaFrontalEsquerda->Draw();
 		rodaFrontalDireita->Draw();
-		rodaTraseiraEsquerda->Draw();
-	
+		rodaCentral->Draw();
+
 
 	};
 
