@@ -5,8 +5,8 @@
 #ifdef WIN32
 #include <windows.h>
 #endif
-#include <GL/glew.h>
-#include <GL/gl.h>
+//#include <GL/glew.h>
+
 #define M(x,y) (y*4+x)
 
 /**

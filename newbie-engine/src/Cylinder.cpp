@@ -1,6 +1,4 @@
 #include "Cylinder.h"
-#include "Graphics.h"
-#include <GL/glut.h>
 #include <stdio.h>
 #include "VertexBufferObject.h"
 

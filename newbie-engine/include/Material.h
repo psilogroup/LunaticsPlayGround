@@ -1,20 +1,18 @@
 #ifndef __MATERIAL__
 #define __MATERIAL__
-#ifdef WIN32
-#include <windows.h>
-#endif
 
-#include <GL/glew.h>
-#include <GL/gl.h>
+#include <windows.h>
+
+//#include <GL/gl.h>
 #include <string.h>
 class Material
 {
       public:
-        GLfloat Ka[3];
-        GLfloat Kd[3];
-        GLfloat Ks[3];
-        GLfloat Ke[3];
-        GLfloat ShiniNess;
+        float Ka[3];
+        float Kd[3];
+        float Ks[3];
+        float Ke[3];
+        float ShiniNess;
         Material();
         void Build();
 };

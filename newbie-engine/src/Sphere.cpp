@@ -1,5 +1,4 @@
 #include "Sphere.h"
-#include <GL/glut.h>
 #include <stdio.h>
 
 const int vCount = 1296;
@@ -40,7 +39,7 @@ void Sphere::Draw()
    if (Mat != NULL)
      Mat->Build();
    Transform();
-   glutSolidSphere(iRadius,iSlices,iStacks);
+   //glutSolidSphere(iRadius,32,32);
    glPopMatrix();
 }
 

@@ -1,8 +1,5 @@
 #ifndef __CUBE__
 #define __CUBE__
-# ifdef WIN32
-#  include <windows.h>
-# endif
 #include "Object.h"
 #include "Texture.h"
 class Cube:public Object

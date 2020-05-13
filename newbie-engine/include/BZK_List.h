@@ -1,12 +1,12 @@
 #ifndef __BZK_LIST__
 #define __BZK_LIST__
 
-# ifdef WIN32
-#  include <windows.h>
-# endif
+
+#include <windows.h>
+
 
 #include <vector>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 template <class T>
 class BZK_List
 {

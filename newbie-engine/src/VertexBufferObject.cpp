@@ -1,6 +1,5 @@
 #include "VertexBufferObject.h"
-//#include <Windows.h>
-#include <GL/glew.h>
+
 
 VertexBufferObject::VertexBufferObject()
 {

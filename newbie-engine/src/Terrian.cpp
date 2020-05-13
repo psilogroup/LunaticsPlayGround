@@ -1,18 +1,12 @@
-#ifdef WIN32
-#include <windows.h>
-#endif
-#include "Terrian.h"
-#include <stdlib.h>
-#include <GL/gl.h>
-#include "vec3d.h"
-#include "Graphics.h"
 #include <math.h>
 #include <stdio.h>
-#include <SDL2/SDL.h>
-
 #include <cassert>
 #include <cstdlib>
 #include <ctime>
+#include "Terrian.h"
+#include "vec3d.h"
+#include "Graphics.h"
+#include <stdlib.h>
 
 
 Terrain::Terrain(unsigned int width, unsigned int height, float scale) {
@@ -22,7 +16,6 @@ Terrain::Terrain(unsigned int width, unsigned int height, float scale) {
 
 
     texture = NULL;
-
 
  //Prepara a Malha de terreno
     for (int y = 0; y < height; y++)
@@ -111,7 +104,7 @@ void Terrain::Draw() {
     glMatrixMode(GL_MODELVIEW);
 
     glTranslatef(iPosition.x, iPosition.y, iPosition.z);
-
+	glScalef(3.0f, 3.0f, 3.0f);
      if (texture != NULL)
     {
         glDisable(GL_LIGHTING);

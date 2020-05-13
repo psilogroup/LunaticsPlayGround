@@ -1,11 +1,8 @@
 #ifndef __CYLINDER__
 #define __CYLINDER__
-# ifdef WIN32
-#  include <windows.h>
-# endif
 
 #include "Object.h"
-#include "TexturePCX.h"
+#include "Texture.h"
 
 class Cylinder:public Object
 {
@@ -21,7 +18,7 @@ class Cylinder:public Object
    virtual void Draw();
    virtual void Update();
    bool useTexture;
-   TexturePCX *texture;
+   Texture *texture;
 
 
 

@@ -1,15 +1,13 @@
 #ifndef __BZK_PARSINGTOOLS__
 # define __BZK_PARSINGTOOLS__
 
-# ifdef WIN32
-#  include <windows.h>
-# endif
+#include <windows.h>
 
 # include <iostream>
 # include <fstream>
 #include <string>
 #include <sstream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <math.h>
 using namespace std;
 

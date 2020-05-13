@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "definitions.h"
+#include "baselib.h"
 #include <math.h>
 
 Camera::Camera() {
@@ -41,13 +41,13 @@ void Camera::Turn(int deltaX, int deltaY)
 
 void Camera::UpDown(int deltaX,int deltaY)
 {
-   //float side = 0.01f * float(deltaX);
-   //float fwd = 0.01f * float(deltaY);
-   //float s = sinf(DEG2RAD(position.x));
-   //float c = cosf(DEG2RAD(position.y));
+   float side = 0.01f * float(deltaX);
+   float fwd = 0.01f * float(deltaY);
+   float s = sinf(DEG2RAD(position.x));
+   float c = cosf(DEG2RAD(position.y));
 
-   //position.x += -s*side + c*fwd;
-   //position.y += c*side + s*fwd;
+   position.x += -s*side + c*fwd;
+   position.y += c*side + s*fwd;
 }
 
 void Camera::setFollower(vec3d *follow)

@@ -7,7 +7,7 @@
 #include <string>
 #include <sstream>
 
-#include <GL/glew.h>
+//#include <GL/glew.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "Shader.h"

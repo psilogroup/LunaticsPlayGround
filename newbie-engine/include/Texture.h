@@ -2,13 +2,10 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-#include <SDL2/SDL.h>
-//#include <SDL/SDL_image.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include "baselib.h"
+
+
+
 
 
 /**< Geracao de Texturas */

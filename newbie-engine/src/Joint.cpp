@@ -111,8 +111,9 @@ CarWheel::CarWheel (Object *chassi,Object *roda,vec3d anchor,vec3d aixs,vec3d ai
     dJointAttach(iJoint,chassi->iBody,roda->iBody);
 
     dJointSetHinge2Anchor(iJoint,anchor.x,anchor.y,anchor.z);
-    dJointSetHinge2Axis1(iJoint,aixs.x,aixs.y,aixs.z);
-    dJointSetHinge2Axis2(iJoint,aixs2.x,aixs2.y,aixs2.z);
+	float a1[3] = { aixs.x,aixs.y,aixs.z };
+	float a2[3] = {aixs2.x,aixs2.y,aixs2.z };
+	dJointSetHinge2Axes(iJoint, a1, a2);
 
 }
 

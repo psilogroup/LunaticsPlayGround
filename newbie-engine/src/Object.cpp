@@ -1,7 +1,8 @@
+#include "baselib.h"
 #include "Object.h"
 #include "Graphics.h"
 #include "vec4.h"
-#include "definitions.h"
+
 
 Object::Object()
 {
@@ -112,23 +113,7 @@ Object::~Object()
 
 void Object::showAABB()
 {
-	dReal aabb[6];
-	dGeomGetAABB (iGeom,aabb);
-	dVector3 bbpos;
-	for (int i=0; i<3; i++) bbpos[i] = 0.5*(aabb[i*2] + aabb[i*2+1]);
-	dVector3 bbsides;
-	for (int j=0; j<3; j++) bbsides[j] = aabb[j*2+1] - aabb[j*2];
-	dMatrix3 RI;
-	dRSetIdentity (RI);
-
-
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-
-	glTranslatef(bbpos[0],bbpos[1],bbpos[2]);
-
-	Graphics::cube(bbsides[0],bbsides[1],bbsides[0]);
-	glPopMatrix();
+	
 }
 
 void Object::setRotation(float x,float y,float z)

@@ -1,15 +1,12 @@
 #ifndef __XML_TAG__
 # define __XML_TAG__
-
-# ifdef WIN32
-#  include <windows.h>
-# endif
+#include <windows.h>
 
 # include <iostream>
 # include <fstream>
 #include <string>
 #include <sstream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 # include "vec3d.h"
 #include "vec4.h"

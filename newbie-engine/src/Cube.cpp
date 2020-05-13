@@ -1,9 +1,5 @@
 #include "Cube.h"
-#include "Graphics.h"
-#include <GL/glut.h>
-#include <stdio.h>
 #include "VertexBufferObject.h"
-
 #include <math.h>
 
 Cube::Cube()
@@ -123,22 +119,16 @@ void Cube::Draw()
     Transform();
     glScalef(iSize.x*0.5,iSize.y*0.5,iSize.z*0.5);
 
-    if (texture != NULL)
-    {
-        glDisable(GL_LIGHTING);
-        glDisable(GL_LIGHT0);
-        texture->bind();
-    }
+   
+	if (Mat != NULL) {
+		Mat->Build();
+
+	}
+
     if (vbo != NULL)
         vbo->draw();
 
-     if (texture != NULL)
-    {
-        texture->end();
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0);
-    }
-
+    
 
     glPopMatrix();
 

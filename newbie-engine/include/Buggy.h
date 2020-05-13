@@ -1,9 +1,9 @@
 #ifndef __BUG__
 #define __BUG__
 
-# ifdef WIN32
-#  include <windows.h>
-# endif
+
+#include <windows.h>
+
 
 #include "Veichle.h"
 #include <ode/ode.h>

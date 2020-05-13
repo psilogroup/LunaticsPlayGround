@@ -1,9 +1,8 @@
+
 #ifndef __ABSTRACT_VEICHLE__
 #define __ABSTRACT_VEICHLE__
 
-# ifdef WIN32
-#  include <windows.h>
-# endif
+#include <windows.h>
 #include "ode/ode.h"
 
 class AbstractVeiclhe

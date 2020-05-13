@@ -1,12 +1,8 @@
 #ifndef __VBO__
 #define __VBO__
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include "vec3d.h"
+
+#include "baselib.h"
 #include "TexCoord2.h"
 
 /**

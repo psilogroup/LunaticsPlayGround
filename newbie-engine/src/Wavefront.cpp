@@ -1,7 +1,7 @@
 #include "BZK_ParsingTools.h"
 #include "Wavefront.h"
 #include "Graphics.h"
-#include "definitions.h"
+#include "baselib.h"
 
 using namespace std;
 
@@ -38,10 +38,7 @@ void Wavefront::load(string filename)
      int nVecs=0;
      int nIndexs=0;
      datafile.open(filename.c_str());
-     if (datafile==NULL)
-     {
-     exit(0);
-     }
+    
      while(!datafile.eof())
      {
          echo=BZK_ParsingTools::GetNextToken(&datafile);

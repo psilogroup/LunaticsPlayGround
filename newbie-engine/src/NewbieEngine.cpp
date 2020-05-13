@@ -1,5 +1,6 @@
 #include "NewbieEngine.h"
-#include <GL/freeglut.h>
+
+#include <iostream>
 
 
 
@@ -37,7 +38,7 @@ void setup_opengl( int width, int height )
     glLoadIdentity();
 
     const float vnear = 0.1f;
-    const float vfar = 6000.0f;
+    const float vfar = 600.0f;
     const float k = 1.0f;
 
     if (width >= height)
@@ -61,7 +62,7 @@ void setup_opengl( int width, int height )
     glLoadIdentity();
     setCamera(xyz[0],xyz[1],xyz[2],hpr[0],hpr[1],hpr[2]);
 
-    GLfloat light_Ka[]  = {0.1f,0.1f,0.1f,1.0f};
+    GLfloat light_Ka[]  = {1.0f,1.0f,1.0f,1.0f};
     GLfloat light_Kd[]  = {1.0f,1.0f,1.0f,1.0f};
     GLfloat light_Ks[]  = {1.0f,1.0f,1.0f,1.0f};
 
@@ -97,8 +98,8 @@ int Iniciar()
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    Singleton::getInstance().rootCamera.width = 800;
-    Singleton::getInstance().rootCamera.height = 600;
+    Singleton::getInstance().rootCamera.width = 1024;
+    Singleton::getInstance().rootCamera.height = 768;
 
     Singleton::getInstance().mainwindow = SDL_CreateWindow( "Lunatycs PlayGround",
                                           SDL_WINDOWPOS_UNDEFINED,
@@ -155,7 +156,7 @@ void drawString(const char *str,int x,int y,vec4d color, void *font)
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
-    gluOrtho2D(0,800,0,600);
+   // gluOrtho2D(0,800,0,600);
 
 
     glPushAttrib(GL_LIGHTING_BIT | GL_CURRENT_BIT);
@@ -165,7 +166,7 @@ void drawString(const char *str,int x,int y,vec4d color, void *font)
 
     while (*str)
     {
-        glutBitmapCharacter(font,*str);
+        //glutBitmapCharacter(font,*str);
         ++str;
     }
 

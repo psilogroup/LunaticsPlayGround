@@ -3,9 +3,9 @@
 #ifdef WIN32
 #include <windows.h>
 #endif
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+//#include <GL/glew.h>
+
+
 #include "vec3d.h"
 #include "vec4.h"
 

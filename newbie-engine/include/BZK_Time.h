@@ -1,11 +1,8 @@
 #ifndef __BZK_TIME__
 #define __BZK_TIME__
 
-# ifdef WIN32
-#  include <windows.h>
-# endif
-
-#include <SDL2/SDL.h>
+#include <windows.h>
+#include <SDL.h>
 
 class BZK_Time
 {

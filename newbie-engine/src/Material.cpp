@@ -1,5 +1,9 @@
 #include "Material.h"
 #include <stdio.h>
+#include <windows.h>
+#include <SDL.h>
+#include <gl/GL.h>
+
 
 Material::Material()
 {

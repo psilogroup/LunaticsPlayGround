@@ -6,13 +6,13 @@
 #endif
 
 #include <ode/ode.h>
+#include "baselib.h"
 #include "vec3d.h"
 #include "Material.h"
-#include "definitions.h"
+
 #include "BZK_List.h"
 #include "VertexBufferObject.h"
 #include "Texture.h"
-#include "glsl.h"
 # include <iostream>
 # include <fstream>
 #include <string>

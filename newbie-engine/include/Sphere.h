@@ -1,9 +1,6 @@
 #ifndef __SPHERE__
 #define __SPHERE__
-#ifdef WIN32
-#include <windows.h>
-#endif
-#include <ode/ode.h>
+
 #include "Object.h"
 
 class Sphere:public Object
