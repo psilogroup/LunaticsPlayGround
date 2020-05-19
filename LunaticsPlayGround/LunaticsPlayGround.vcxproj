@@ -29,6 +29,7 @@
     <ClCompile Include="..\newbie-engine\src\Object.cpp" />
     <ClCompile Include="..\newbie-engine\src\ObjectManager.cpp" />
     <ClCompile Include="..\newbie-engine\src\Scene.cpp" />
+    <ClCompile Include="..\newbie-engine\src\Shader.cpp" />
     <ClCompile Include="..\newbie-engine\src\Singleton.cpp" />
     <ClCompile Include="..\newbie-engine\src\Space.cpp" />
     <ClCompile Include="..\newbie-engine\src\SpaceManager.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="..\newbie-engine\include\Object.h" />
     <ClInclude Include="..\newbie-engine\include\ObjectManager.h" />
     <ClInclude Include="..\newbie-engine\include\Scene.h" />
+    <ClInclude Include="..\newbie-engine\include\Shader.h" />
     <ClInclude Include="..\newbie-engine\include\Singleton.h" />
     <ClInclude Include="..\newbie-engine\include\Space.h" />
     <ClInclude Include="..\newbie-engine\include\SpaceManager.h" />
@@ -117,7 +119,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\build\win32</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,15 +137,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;dSINGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;dSINGLE;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Development\win32\glew\include;D:\Development\win32\ode\include;D:\Development\win32\SDL2_image\include;C:\workspace\LunaticsPlayGround\newbie-engine\include;D:\Development\win32\SDL2\include;D:\Development\win32\freeglut\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Development\win32\assimp\include;D:\Development\win32\glew\include;D:\Development\win32\ode\include;D:\Development\win32\SDL2_image\include;C:\workspace\LunaticsPlayGround\newbie-engine\include;D:\Development\win32\SDL2\include;D:\Development\win32\freeglut\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Development\win32\ode\lib\DebugSingleDLL;D:\Development\win32\glew\lib\Release\Win32;D:\Development\win32\freeglut\lib;D:\Development\win32\SDL2\lib\x86;D:\Development\win32\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;ode_singled.lib;glew32.lib;freeglut.lib;opengl32.lib;glu32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Development\win32\assimp\lib;D:\Development\win32\ode\lib\DebugSingleDLL;D:\Development\win32\glew\lib\Release\Win32;D:\Development\win32\freeglut\lib;D:\Development\win32\SDL2\lib\x86;D:\Development\win32\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc142-mtd.lib;SDL2.lib;SDL2main.lib;ode_singled.lib;glew32.lib;freeglut.lib;opengl32.lib;glu32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

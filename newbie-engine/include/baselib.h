@@ -1,6 +1,7 @@
 #ifndef __DEF__
 #define __DEF__
 
+#define NOMINMAX
 #include <Windows.h>
 #include <GL/glew.h>
 #include <gl/GL.h>

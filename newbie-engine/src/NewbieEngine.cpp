@@ -66,11 +66,15 @@ void setup_opengl( int width, int height )
     GLfloat light_Kd[]  = {1.0f,1.0f,1.0f,1.0f};
     GLfloat light_Ks[]  = {1.0f,1.0f,1.0f,1.0f};
 
+    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+    glEnable(GL_NORMALIZE);
+    
     glLightfv(GL_LIGHT0,GL_POSITION, light_pos);
     glLightfv(GL_LIGHT0,GL_AMBIENT,light_Ka);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light_Kd);
     glLightfv(GL_LIGHT0,GL_SPECULAR,light_Ks);
     glMateriali(GL_FRONT,GL_SHININESS,60);
+
 
 }
 
@@ -131,10 +135,11 @@ int Iniciar()
     char *fakeargv[] = { fakeParam, NULL };
     int fakeargc = 1;
 
+    glewInit();
     glutInit( &fakeargc, fakeargv );
     dInitODE2(0);
     dAllocateODEDataForThread(dAllocateMaskAll);
-    glewInit();
+    
     return 1;
 
 

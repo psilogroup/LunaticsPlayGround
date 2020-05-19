@@ -1,4 +1,3 @@
-/* File: Shader.h; Mode: C++; Tab-width: 3; Author: Simon Flannery;           */
 
 #ifndef SHADER_H
 #define SHADER_H
@@ -6,19 +5,20 @@
 class Shader
 {
 public:
-   void Load(const char*);
+   void Load(std::string vertexName,std::string fragmentName);
    void Delete();
 
    void Enable();
    void Disable();
-   void Bind();
 
-   void EnvParameter(unsigned int index, float, float, float, float);
-   void LocalParameter(unsigned int index, float, float, float, float);
+   void EnvParameterVec(std::string name, float x, float y, float z, float w);
+   void LocalParameterVec(std::string name, float x, float y, float z, float w);
 
 private:
    unsigned int target;
    unsigned int id;
+
+   void checkCompileErrors(unsigned int shader, std::string type);
 };
 
 #endif

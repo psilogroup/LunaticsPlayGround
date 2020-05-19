@@ -13,7 +13,8 @@
 #include "World.h"
 #include "Event.h"
 #include "Singleton.h"
-
+#include "Shader.h"
+#include "Wavefront.h"
 //static SDL_Surface *surface;
 
 

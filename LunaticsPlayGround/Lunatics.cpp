@@ -13,7 +13,9 @@ Terrain* terreno = NULL;
 Camera* eye = NULL;
 
 RobotCleaner* cleaner = NULL; //Nosso Robo
+Shader* perpixelLighting = NULL;
 
+Mesh* model = NULL;
 bool quit = false;
 void process_events();
 void MarchaRe();
@@ -73,8 +75,19 @@ static void draw_screen(void) {
 
 
 	terreno->Draw();
+	if (perpixelLighting != NULL)
+		perpixelLighting->Enable();
+
 	cleaner->Draw();
+
+	if (model != NULL)
+	{
+		model->Draw();
+	}
 	currentWorld->Draw();
+
+	if (perpixelLighting != NULL)
+		perpixelLighting->Disable();
 
 	SDL_GL_SwapWindow(Singleton::getInstance().mainwindow);
 }
@@ -126,9 +139,15 @@ int main(int argc, char* argv[]) {
 	R1Pos.y = 0;
 	R1Pos.z = 1;
 
-
-
 	cleaner = new RobotCleaner(R1Pos, currentWorld);
+	perpixelLighting = new Shader();
+	model = new	Mesh("storage\\models\\Sphere.obj");
+	
+	model->iPosition.x = 60;
+	model->iPosition.y = 0;
+	model->iPosition.z = 3;
+
+	perpixelLighting->Load("storage\\shaders\\PerPixelLight\\vertexshader.txt", "storage\\shaders\\PerPixelLight\\fragmentshader.txt");
 	double simstep = 0.05;
 	next_time = SDL_GetTicks() + TICK_INTERVAL;
 	while (!quit) {

@@ -82,7 +82,7 @@ public:
 		p.z = pos.z - 0.5;
 
 
-		rodaFrontalEsquerda = new Cylinder(0.6, 0.6, 24, 24);
+		rodaFrontalEsquerda = new Cylinder(0.6, 0.4, 24, 24);
 		rodaFrontalEsquerda->iM = 0.2;
 		rodaFrontalEsquerda->MakeGeom(world->topLevelSpace);
 		rodaFrontalEsquerda->MakeBody(world->world);
@@ -90,7 +90,7 @@ public:
 		rodaFrontalEsquerda->setPosition(pos.x + chassi->iSize.x / 2, pos.y + chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
 
 
-		rodaFrontalDireita = new Cylinder(0.6, 0.6, 24, 24);
+		rodaFrontalDireita = new Cylinder(0.6, 0.4, 24, 24);
 		rodaFrontalDireita->iM = 0.2;
 		rodaFrontalDireita->MakeGeom(world->topLevelSpace);
 		rodaFrontalDireita->MakeBody(world->world);
@@ -98,7 +98,7 @@ public:
 		rodaFrontalDireita->setPosition(pos.x + chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
 
 
-		rodaTraseiraEsquerda = new Cylinder(0.6, 0.6, 24, 24);
+		rodaTraseiraEsquerda = new Cylinder(0.6, 0.4, 24, 24);
 		rodaTraseiraEsquerda->iM = 0.2;
 		rodaTraseiraEsquerda->MakeGeom(world->topLevelSpace);
 		rodaTraseiraEsquerda->MakeBody(world->world);
@@ -107,50 +107,18 @@ public:
 
 
 
-		rodaTraseiraDireita = new Cylinder(0.6, 0.6, 24, 24);
+		rodaTraseiraDireita = new Cylinder(0.6, 0.4, 24, 24);
 		rodaTraseiraDireita->iM = 0.2;
 		rodaTraseiraDireita->MakeGeom(world->topLevelSpace);
 		rodaTraseiraDireita->MakeBody(world->world);
 		rodaTraseiraDireita->LinkBodyWithGeom();
 		rodaTraseiraDireita->setPosition(pos.x - chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
 
 
 		p.x = pos.x + 2;
 		p.y = pos.y + 1.5;
 		p.z = pos.z - 0.5;
 
-		rodaFrontalEsquerda = new Cylinder(0.6, 0.6, 24, 24);
-		rodaFrontalEsquerda->iM = 0.2;
-		rodaFrontalEsquerda->MakeGeom(world->topLevelSpace);
-		rodaFrontalEsquerda->MakeBody(world->world);
-		rodaFrontalEsquerda->LinkBodyWithGeom();
-		rodaFrontalEsquerda->setPosition(pos.x + chassi->iSize.x / 2, pos.y + chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-		rodaFrontalDireita = new Cylinder(0.6, 0.6, 24, 24);
-		rodaFrontalDireita->iM = 0.2;
-		rodaFrontalDireita->MakeGeom(world->topLevelSpace);
-		rodaFrontalDireita->MakeBody(world->world);
-		rodaFrontalDireita->LinkBodyWithGeom();
-		rodaFrontalDireita->setPosition(pos.x + chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-		rodaTraseiraEsquerda = new Cylinder(0.6, 0.6, 24, 24);
-		rodaTraseiraEsquerda->iM = 0.2;
-		rodaTraseiraEsquerda->MakeGeom(world->topLevelSpace);
-		rodaTraseiraEsquerda->MakeBody(world->world);
-		rodaTraseiraEsquerda->LinkBodyWithGeom();
-		rodaTraseiraEsquerda->setPosition(pos.x - chassi->iSize.x / 2, pos.y + chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
-
-
-
-		rodaTraseiraDireita = new Cylinder(0.6, 0.6, 24, 24);
-		rodaTraseiraDireita->iM = 0.2;
-		rodaTraseiraDireita->MakeGeom(world->topLevelSpace);
-		rodaTraseiraDireita->MakeBody(world->world);
-		rodaTraseiraDireita->LinkBodyWithGeom();
-		rodaTraseiraDireita->setPosition(pos.x - chassi->iSize.x / 2, pos.y - chassi->iSize.y / 2, pos.z - chassi->iSize.z / 2);
 
 		vec3d servoBodyPos = { pos.x,pos.y,pos.z + 1.0 };
 		vec3d servoGunPos = { pos.x,pos.y - 0.5,pos.z + 1.0 };
@@ -237,9 +205,9 @@ public:
 
 
 		if (rightPressed)
-			turn = 0.3;
+			turn = 0.6;
 		else if (leftPressed)
-			turn = -0.3;
+			turn = -0.6;
 
 
 		dJointID _joint[4] =

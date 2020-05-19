@@ -14,6 +14,7 @@ class Wavefront: public Mesh
    
    Wavefront(std::string filename);
    Wavefront();
+   
    void load(std::string filename);
    
    ~Wavefront();

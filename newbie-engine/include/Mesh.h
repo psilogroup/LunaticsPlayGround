@@ -32,6 +32,7 @@ public:
     int numElements;
 
     vec3d *vecs;
+    vec3d* normals;
     dTriMeshDataID triData;
     GLint listId;
     dTriIndex *indexs;
@@ -41,6 +42,7 @@ public:
     int numTrigs;
     int numIndexs;
     int numTexs;
+    int numNormals;
     ifstream Datafile;
 };
 

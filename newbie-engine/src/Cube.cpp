@@ -127,7 +127,7 @@ void Cube::Draw()
 
     if (vbo != NULL)
         vbo->draw();
-
+   // glutSolidCube(1.0);
     
 
     glPopMatrix();
