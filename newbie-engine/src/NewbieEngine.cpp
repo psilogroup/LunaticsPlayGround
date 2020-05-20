@@ -38,10 +38,10 @@ void setup_opengl( int width, int height )
     glLoadIdentity();
 
     const float vnear = 0.1f;
-    const float vfar = 600.0f;
+    const float vfar = 6000.0f;
     const float k = 1.0f;
 
-    if (width >= height)
+   /* if (width >= height)
     {
         float k2 = float(height)/float(width);
         glFrustum(-vnear*k,vnear*k,-vnear*k*k2,vnear*k*k2,vnear,vfar);
@@ -51,7 +51,9 @@ void setup_opengl( int width, int height )
         float k2 = float(width)/float(height);
         glFrustum (-vnear*k*k2,vnear*k*k2,-vnear*k,vnear*k,vnear,vfar);
 
-    }
+    }*/
+
+    gluPerspective(30.0f, float(width) / float(height), .1f, 200.0f);
 
 
 

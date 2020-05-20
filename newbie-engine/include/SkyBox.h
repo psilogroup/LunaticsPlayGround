@@ -1,7 +1,7 @@
 #ifndef SKYBOX_H
 #define SKYBOX_H
 
-#include <GL/gl.h>
+#include "baselib.h"
 #include "Texture.h"
 #include "vec3d.h"
 

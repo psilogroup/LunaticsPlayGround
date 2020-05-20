@@ -34,7 +34,7 @@ Mesh::Mesh(std::string filepath)
 
 	FILE* file = fopen(filepath.c_str(), "r");
 	std::vector<vec3d> temp_vertices;
-	std::vector<vec3d> temp_uvs;
+	std::vector<TexCoord2> temp_uvs;
 	std::vector<vec3d> temp_normals;
 	std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 
@@ -56,8 +56,8 @@ Mesh::Mesh(std::string filepath)
 
 		}
 		else if (strcmp(lineHeader, "vt") == 0) {
-			vec3d uv;
-			fscanf(file, "%f %f\n", &uv.x, &uv.y);
+			TexCoord2 uv;
+			fscanf(file, "%f %f\n", &uv.u, &uv.v);
 			temp_uvs.push_back(uv);
 		}
 		else if (strcmp(lineHeader, "vn") == 0) {
@@ -90,7 +90,7 @@ Mesh::Mesh(std::string filepath)
 	numVecs = temp_vertices.size();
 	numIndexs = vertexIndices.size();
 	numNormals = normalIndices.size();
-
+	numTexs = uvIndices.size();
 	std::cout << "Vetores: " << numVecs << " " << std::endl;
 	std::cout << "numIndexs: " << numIndexs << " " << std::endl;
 	std::cout << "numNormals: " << numNormals << " " << std::endl;
@@ -98,6 +98,7 @@ Mesh::Mesh(std::string filepath)
 	vecs = new vec3d[numIndexs];
 	indexs = new dTriIndex[numIndexs];
 	normals = new vec3d[numIndexs];
+	texCoord = new TexCoord2[numIndexs];
 
 	for (unsigned int i = 0; i < numIndexs; i++) {
 		unsigned int vertexIndex = vertexIndices[i];
@@ -111,6 +112,9 @@ Mesh::Mesh(std::string filepath)
 		normals[i].x = temp_normals[normalIndex - 1].x;
 		normals[i].y = temp_normals[normalIndex - 1].y;
 		normals[i].z = temp_normals[normalIndex - 1].z;
+
+		texCoord[i].u = temp_uvs[uvIndex - 1].u;
+		texCoord[i].v = 1-temp_uvs[uvIndex - 1].v;
 	}
 
 
@@ -136,12 +140,12 @@ Mesh::Mesh(std::string filepath)
 
 	if (numNormals > 0)
 		vbo->setNormals(normals, numIndexs);
-	/*
+
 	if (numTexs > 0)
 	{
 		vbo->setTexCoords(texCoord, numTexs);
 	}
-	*/
+
 
 }
 void Mesh::MakeBody(dWorldID world)
@@ -184,20 +188,25 @@ void Mesh::Draw()
 
 
 	glTranslatef(iPosition.x, iPosition.y, iPosition.z);
-	
+	//glRotatef(-90, 1, 0, 0);
+	//glScalef(3.0f, 3.0f, 3.0f);
 	if (Mat != NULL)
 	{
-		Mat->Build();
+		//Mat->Build();
 
 	}
 	//Draw Here
+
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 	if (texture != NULL)
 	{
+
 		texture->bind();
 	}
-
 	vbo->draw();
 
+	
 	if (texture != NULL)
 	{
 		texture->end();
@@ -220,4 +229,5 @@ Mesh::~Mesh()
 	delete vecs;
 	delete indexs;
 	delete normals;
+	delete texCoord;
 }

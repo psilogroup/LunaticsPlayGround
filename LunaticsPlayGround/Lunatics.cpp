@@ -35,23 +35,22 @@ void posicionaCamera() {
 	//        eye->rotation.x,eye->rotation.y,eye->rotation.z);
 
 
-	
+
 }
 
 char strBuff[255];
 
 
-
+int yaw = 0.1f;
 static void draw_screen(void) {
 
 	int i;
 
-	glClearColor(0.3, 0.3, 0.5, 1.0);
+	glClearColor(0.0, 0.5, 0.8, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//setCamera(eye->position.x, eye->position.y, eye->position.z,
-		//        eye->rotation.x,eye->rotation.y,eye->rotation.z);
 
 
+	yaw += 1.0f;
 	if (cleaner != NULL)
 	{
 
@@ -62,32 +61,41 @@ static void draw_screen(void) {
 		//Camera acompanhando o robo
 		const dReal* pos = dBodyGetPosition(cleaner->chassi->iBody);
 		const dReal* rot = dBodyGetRotation(cleaner->chassi->iBody);
-		gluLookAt(
+		setCamera(pos[0] + 13, pos[1], pos[2] + 2,
+			eye->rotation.x, eye->rotation.y, eye->rotation.z);
+
+		/*gluLookAt(
 			pos[0] + 13 - rot[0] + rot[2],
-			pos[1] - rot[4] + rot[6],
+			pos[1] + rot[4] + rot[6],
 			pos[2] + 1.5 - rot[8] + rot[10],
-			pos[0] + rot[0],
+			pos[0] + rot[0] ,
 			pos[1] + rot[4],
 			pos[2] + rot[8],
 			rot[2], rot[6], rot[10]
-		);
+		);*/
 	}
 
 
 	terreno->Draw();
+	if (model != NULL)
+	{
+		model->Draw();
+	}
 	if (perpixelLighting != NULL)
 		perpixelLighting->Enable();
 
 	cleaner->Draw();
 
-	if (model != NULL)
-	{
-		model->Draw();
-	}
 	currentWorld->Draw();
 
 	if (perpixelLighting != NULL)
 		perpixelLighting->Disable();
+
+
+
+
+
+
 
 	SDL_GL_SwapWindow(Singleton::getInstance().mainwindow);
 }
@@ -120,16 +128,17 @@ int main(int argc, char* argv[]) {
 
 	terreno->MakeGeom(currentWorld->topLevelSpace);
 	ground = dCreatePlane(currentWorld->topLevelSpace, 0, 0, 1, 0);
-	terreno->texture = new Texture("storage/textures/ground1.png");
+	terreno->texture = new Texture("storage/textures/ground2.jpg");
 	eye = new Camera();
-
+	SDL_ShowCursor(SDL_DISABLE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	vec3d p;
 	p.x = 0;
 	p.y = -0;
-	p.z = 5;
+	p.z = 0;
 	vec3d r;
-	r.x = 180.0;
-	r.y = -20;
+	r.x = 180;
+	r.y = -10;
 	r.z = 0;
 	eye->setPosition(p);
 	eye->setRotation(r);
@@ -141,11 +150,14 @@ int main(int argc, char* argv[]) {
 
 	cleaner = new RobotCleaner(R1Pos, currentWorld);
 	perpixelLighting = new Shader();
-	model = new	Mesh("storage\\models\\Sphere.obj");
-	
+	model = new	Mesh("storage\\models\\caixa_warning.obj");
+
 	model->iPosition.x = 60;
 	model->iPosition.y = 0;
-	model->iPosition.z = 3;
+	model->iPosition.z = 2;
+	model->texture = new Texture("storage\\textures\\textura_cubo_warning.png");
+
+
 
 	perpixelLighting->Load("storage\\shaders\\PerPixelLight\\vertexshader.txt", "storage\\shaders\\PerPixelLight\\fragmentshader.txt");
 	double simstep = 0.05;
@@ -163,12 +175,12 @@ int main(int argc, char* argv[]) {
 		}
 		draw_screen();
 
-		
+
 
 		SDL_Delay(time_left());
 		next_time += TICK_INTERVAL;
-	}	
-	
+	}
+
 	return 0;
 }
 
@@ -214,12 +226,12 @@ void process_events()
 
 		if (currentKeyStates[SDL_SCANCODE_LEFT])
 		{
-			cleaner->rotingLeft = true;
+			eye->Turn(1, 0);
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_RIGHT])
 		{
-			cleaner->rotingRight = true;
+			eye->Turn(-1, 0);
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_SPACE])
@@ -236,6 +248,17 @@ void process_events()
 		{
 			cleaner->rotingDown = true;
 		}
+
+		if (currentKeyStates[SDL_SCANCODE_ESCAPE])
+		{
+			quit = true;
+		}
+		if (e.type == SDL_MOUSEMOTION) {
+			int mouseX = (e.motion.xrel*-1) * 0.4;
+			int mouseY = (e.motion.yrel*-1) * 0.4;
+			eye->Turn(mouseX, mouseY);
+		}
+
 	}
 }
 

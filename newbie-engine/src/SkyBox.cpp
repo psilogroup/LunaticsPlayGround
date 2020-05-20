@@ -27,6 +27,7 @@ void SkyBox::Draw(vec3d angles)
     glLoadIdentity();
     glRotatef(angles.z,0,1,0);
     glScalef(Size,Size,Size);
+    glTranslatef(Position.x, Position.y, Position.z);
 
     // Draw Front side
     glDisable(GL_CULL_FACE);

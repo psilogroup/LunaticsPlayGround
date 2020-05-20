@@ -31,6 +31,7 @@
     <ClCompile Include="..\newbie-engine\src\Scene.cpp" />
     <ClCompile Include="..\newbie-engine\src\Shader.cpp" />
     <ClCompile Include="..\newbie-engine\src\Singleton.cpp" />
+    <ClCompile Include="..\newbie-engine\src\SkyBox.cpp" />
     <ClCompile Include="..\newbie-engine\src\Space.cpp" />
     <ClCompile Include="..\newbie-engine\src\SpaceManager.cpp" />
     <ClCompile Include="..\newbie-engine\src\Sphere.cpp" />
@@ -42,6 +43,7 @@
     <ClCompile Include="Lunatics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\newbie-engine\include\AssetLibrary.h" />
     <ClInclude Include="..\newbie-engine\include\baselib.h" />
     <ClInclude Include="..\newbie-engine\include\Camera.h" />
     <ClInclude Include="..\newbie-engine\include\Cube.h" />
@@ -55,6 +57,7 @@
     <ClInclude Include="..\newbie-engine\include\Scene.h" />
     <ClInclude Include="..\newbie-engine\include\Shader.h" />
     <ClInclude Include="..\newbie-engine\include\Singleton.h" />
+    <ClInclude Include="..\newbie-engine\include\SkyBox.h" />
     <ClInclude Include="..\newbie-engine\include\Space.h" />
     <ClInclude Include="..\newbie-engine\include\SpaceManager.h" />
     <ClInclude Include="..\newbie-engine\include\Sphere.h" />
