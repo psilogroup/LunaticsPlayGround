@@ -11,11 +11,11 @@ static Uint32 elapsedTime = 1;
 
 Terrain* terreno = NULL;
 Camera* eye = NULL;
-
+SkyBox* sky = NULL;
 RobotCleaner* cleaner = NULL; //Nosso Robo
 Shader* perpixelLighting = NULL;
 
-Mesh* model = NULL;
+
 bool quit = false;
 void process_events();
 void MarchaRe();
@@ -76,25 +76,18 @@ static void draw_screen(void) {
 	}
 
 
+	//if (sky)
+	//	sky->Draw(vec3d{ 0,0,0 });
+
 	terreno->Draw();
-	if (model != NULL)
-	{
-		model->Draw();
-	}
-	if (perpixelLighting != NULL)
-		perpixelLighting->Enable();
 
-	cleaner->Draw();
-
-	currentWorld->Draw();
 
 	if (perpixelLighting != NULL)
 		perpixelLighting->Disable();
 
+	cleaner->Draw();
 
-
-
-
+	currentWorld->Draw();
 
 
 	SDL_GL_SwapWindow(Singleton::getInstance().mainwindow);
@@ -121,17 +114,17 @@ int main(int argc, char* argv[]) {
 
 	}
 
-	currentWorld = new World("storage/Assets.xml");
+	currentWorld = new World("storage/Asset.xml");
 	currentWorld->iSpaces->Update();
 
 	terreno = new Terrain(256, 256, 2);
 
 	terreno->MakeGeom(currentWorld->topLevelSpace);
 	ground = dCreatePlane(currentWorld->topLevelSpace, 0, 0, 1, 0);
-	terreno->texture = new Texture("storage/textures/ground2.jpg");
+	terreno->texture = new Texture("storage/textures/ground1.png");
 	eye = new Camera();
 	SDL_ShowCursor(SDL_DISABLE);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	vec3d p;
 	p.x = 0;
 	p.y = -0;
@@ -150,15 +143,14 @@ int main(int argc, char* argv[]) {
 
 	cleaner = new RobotCleaner(R1Pos, currentWorld);
 	perpixelLighting = new Shader();
-	model = new	Mesh("storage\\models\\caixa_warning.obj");
+	sky = new SkyBox("storage\\textures\\skybox\\front.png",
+		"storage\\textures\\skybox\\back.png",
+		"storage\\textures\\skybox\\left.png",
+		"storage\\textures\\skybox\\right.png",
+		"storage\\textures\\skybox\\top.png");
 
-	model->iPosition.x = 60;
-	model->iPosition.y = 0;
-	model->iPosition.z = 2;
-	model->texture = new Texture("storage\\textures\\textura_cubo_warning.png");
-
-
-
+	sky->SetPosition(vec3d{ 0,0,40 });
+	sky->SetSize(40);
 	perpixelLighting->Load("storage\\shaders\\PerPixelLight\\vertexshader.txt", "storage\\shaders\\PerPixelLight\\fragmentshader.txt");
 	double simstep = 0.05;
 	next_time = SDL_GetTicks() + TICK_INTERVAL;

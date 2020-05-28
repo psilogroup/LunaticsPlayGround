@@ -6,35 +6,28 @@
 #endif
 
 #include "vec3d.h"
-#include "Object.h"
 #include "Graphics.h"
 #include "TexCoord2.h"
-#include "TexturePCX.h"
+#include "Texture.h"
 #include "VertexBufferObject.h"
 #include "BZK_ParsingTools.h"
-#include <ode/ode.h>
+#include "baselib.h"
 #include <string>
 #include <iostream>
 
-class Mesh:public Object
+class Mesh
 {
 
 public:
     Mesh();
     Mesh(std::string filepath);
-    virtual void MakeBody(dWorldID world);
-    virtual void MakeGeom(dSpaceID space);
     virtual void Draw();
-    virtual void Update();
-
     ~Mesh();
 
     int numElements;
 
     vec3d *vecs;
     vec3d* normals;
-    dTriMeshDataID triData;
-    GLint listId;
     dTriIndex *indexs;
     TexCoord2 *texCoord;
     Texture *texture;
@@ -43,7 +36,8 @@ public:
     int numIndexs;
     int numTexs;
     int numNormals;
-    ifstream Datafile;
+    VertexBufferObject* vbo;
+    
 };
 
 #endif

@@ -53,7 +53,7 @@ void setup_opengl( int width, int height )
 
     }*/
 
-    gluPerspective(30.0f, float(width) / float(height), .1f, 200.0f);
+    gluPerspective(50.0f, float(width) / float(height), .1f, 1200.0f);
 
 
 

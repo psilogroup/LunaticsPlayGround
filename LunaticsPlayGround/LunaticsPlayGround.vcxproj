@@ -38,7 +38,6 @@
     <ClCompile Include="..\newbie-engine\src\Terrian.cpp" />
     <ClCompile Include="..\newbie-engine\src\Texture.cpp" />
     <ClCompile Include="..\newbie-engine\src\VertexBufferObject.cpp" />
-    <ClCompile Include="..\newbie-engine\src\Wavefront.cpp" />
     <ClCompile Include="..\newbie-engine\src\World.cpp" />
     <ClCompile Include="Lunatics.cpp" />
   </ItemGroup>
@@ -65,7 +64,6 @@
     <ClInclude Include="..\newbie-engine\include\Texture.h" />
     <ClInclude Include="..\newbie-engine\include\vec4.h" />
     <ClInclude Include="..\newbie-engine\include\VertexBufferObject.h" />
-    <ClInclude Include="..\newbie-engine\include\Wavefront.h" />
     <ClInclude Include="..\newbie-engine\include\World.h" />
     <ClInclude Include="RobotCleaner.h" />
   </ItemGroup>

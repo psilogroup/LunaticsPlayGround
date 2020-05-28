@@ -5,31 +5,12 @@
 
 Mesh::Mesh()
 {
-	iSize.x = iSize.y = iSize.z = 1;
-	iPosition.x = iPosition.y = iPosition.z = 0;
-	iVel.x = iVel.y = iVel.z = 0;
-
-	iM = 1;
-
-	Mat = new Material();
-	setColor(Mat->Ka, 0.0, 0.0, 0.0);
-	setColor(Mat->Kd, 1.0, 0.0, 0.0);
-	setColor(Mat->Ks, 0.0, 0.0, 1.0);
+	
 }
 
 
 Mesh::Mesh(std::string filepath)
 {
-	iSize.x = iSize.y = iSize.z = 1;
-	iPosition.x = iPosition.y = iPosition.z = 0;
-	iVel.x = iVel.y = iVel.z = 0;
-	//   dMassSetZero(&iMass);
-	iM = 1;
-
-	Mat = new Material();
-	setColor(Mat->Ka, 0.0, 0.0, 1.0);
-	setColor(Mat->Kd, 0.0, 0.0, 1.0);
-	setColor(Mat->Ks, 1.0, 1.0, 1.0);
 	texture = NULL;
 
 	FILE* file = fopen(filepath.c_str(), "r");
@@ -148,81 +129,31 @@ Mesh::Mesh(std::string filepath)
 
 
 }
-void Mesh::MakeBody(dWorldID world)
-{
 
-	/*iBody = dBodyCreate(world);
-	dGeomSetBody(iGeom, iBody);
-	dMassSetZero(&iMass);
-	dMassSetTrimesh(&iMass, iM, iGeom);
-	dMassTranslate(&iMass, -iMass.c[0], -iMass.c[1], -iMass.c[2]);
-	dBodySetMass(iBody, &iMass);
-	*/
 
-}
-
-void Mesh::MakeGeom(dSpaceID space)
-{
-
-	/*triData = dGeomTriMeshDataCreate();
-	dGeomTriMeshDataBuildSimple(triData, (dReal*)vecs, numVecs, (dTriIndex*)indexs, numIndexs);
-	iGeom = dCreateTriMesh(space, triData, 0, 0, 0);
-
-	dMatrix3 R, R0, R1, R2, R3;
-
-	dRFromAxisAndAngle(R1, 1, 0, 0, DEG2RAD(iRotate.x));
-	dRFromAxisAndAngle(R2, 0, 1, 0, DEG2RAD(iRotate.y));
-	dRFromAxisAndAngle(R3, 0, 0, 1, DEG2RAD(iRotate.z));
-	dMultiply0(R0, R1, R2, 3, 3, 3);
-	dMultiply0(R, R0, R3, 3, 3, 3);
-	dGeomSetRotation(iGeom, R);
-	// dGeomSetQuaternion(iGeom,q);
-	dGeomSetPosition(iGeom, iPosition.x, iPosition.y, iPosition.z);
-	//dMassTranslate(&iMass,-iPosition.x, -iPosition.y, -iPosition.z);*/
-}
 
 void Mesh::Draw()
 {
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-
-
-	glTranslatef(iPosition.x, iPosition.y, iPosition.z);
-	//glRotatef(-90, 1, 0, 0);
-	//glScalef(3.0f, 3.0f, 3.0f);
-	if (Mat != NULL)
+	
+	if (texture != NULL)
 	{
-		//Mat->Build();
-
+		texture->bind();
 	}
-	//Draw Here
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
-	if (texture != NULL)
-	{
-
-		texture->bind();
-	}
+	
 	vbo->draw();
-
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	
 	if (texture != NULL)
 	{
 		texture->end();
 	}
-	glPopMatrix();
+	
 
 }
-
-void Mesh::Update()
-{
-	/*const dReal* p = dGeomGetPosition(iGeom);
-	iPosition.x = p[0];
-	iPosition.y = p[1];
-	iPosition.z = p[2];
-	*/
-};
 
 Mesh::~Mesh()
 {
@@ -230,4 +161,6 @@ Mesh::~Mesh()
 	delete indexs;
 	delete normals;
 	delete texCoord;
+	delete vbo;
+	delete texture;
 }

@@ -1,6 +1,7 @@
 #ifndef __TERRIAN__
 #define __TERRIAN__
 
+#include "Object.h"
 #include "VertexBufferObject.h"
 #include "vec3d.h"
 #include "Mesh.h"
@@ -8,7 +9,7 @@
 
 
 
-class Terrain : public Mesh
+class Terrain : public Object
 {
 public:
 	unsigned int w;
@@ -18,7 +19,11 @@ public:
 	std::vector<vec3d> temp_vecsA;
 	std::vector<vec3d> temp_vecsB;
 	std::vector<TexCoord2> temp_tex;
-
+	vec3d* vecs;
+	vec3d* normals;
+	dTriIndex* indexs;
+	TexCoord2* texCoord;
+	Texture* texture;
 	Terrain(unsigned int width, unsigned int height, float scale);
 
 	void MakeGeom(dSpaceID space);

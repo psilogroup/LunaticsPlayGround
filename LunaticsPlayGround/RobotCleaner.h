@@ -218,8 +218,8 @@ public:
 			jointRodaBR->iJoint
 		};
 
-		speed = 1.2;
-		force = 76;
+		speed = 3;
+		force = 10;
 
 		for (j = 0; j < 4; j++)
 		{

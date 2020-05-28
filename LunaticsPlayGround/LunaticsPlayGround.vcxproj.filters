@@ -60,9 +60,6 @@
     <ClCompile Include="..\newbie-engine\src\Scene.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="..\newbie-engine\src\Wavefront.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="..\newbie-engine\src\Mesh.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="..\newbie-engine\include\Event.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="..\newbie-engine\include\Wavefront.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="..\newbie-engine\include\Mesh.h">

@@ -14,7 +14,7 @@
 #include "Event.h"
 #include "Singleton.h"
 #include "Shader.h"
-#include "Wavefront.h"
+
 #include "SkyBox.h"
 //static SDL_Surface *surface;
 
