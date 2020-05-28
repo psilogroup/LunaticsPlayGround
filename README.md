@@ -28,3 +28,7 @@ The environment uses blender as level editor, in Blender file you can run the py
 	- Wavefront Loading
 	- Scene Loading
 
+
+# Build
+Use Visual Studio 2019 for building, all dependencies are added in this repository.
+
