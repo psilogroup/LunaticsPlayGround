@@ -140,13 +140,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;dSINGLE;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Development\win32\assimp\include;D:\Development\win32\glew\include;D:\Development\win32\ode\include;D:\Development\win32\SDL2_image\include;C:\workspace\LunaticsPlayGround\newbie-engine\include;D:\Development\win32\SDL2\include;D:\Development\win32\freeglut\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\glew\include;..\vendor\ode\include;..\vendor\SDL2_image\include;..\newbie-engine\include;..\vendor\SDL2\include;..\vendor\freeglut\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Development\win32\assimp\lib;D:\Development\win32\ode\lib\DebugSingleDLL;D:\Development\win32\glew\lib\Release\Win32;D:\Development\win32\freeglut\lib;D:\Development\win32\SDL2\lib\x86;D:\Development\win32\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimp-vc142-mtd.lib;SDL2.lib;SDL2main.lib;ode_singled.lib;glew32.lib;freeglut.lib;opengl32.lib;glu32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\vendor\ode\lib\DebugSingleDLL;..\vendor\glew\lib\Release\Win32;..\vendor\freeglut\lib;..\vendor\SDL2\lib\x86;..\vendor\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;ode_singled.lib;glew32.lib;freeglut.lib;opengl32.lib;glu32.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
   </ItemDefinitionGroup>
@@ -159,12 +159,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Development\win32\SDL2\include;D:\Development\win32\SDL2_image\include;D:\Development\win32\ode\include;D:\Development\win32\glew\include;D:\Development\win32\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\glew\include;..\vendor\ode\include;..\vendor\SDL2_image\include;..\newbie-engine\include;..\vendor\SDL2\include;..\vendor\freeglut\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Development\win32\SDL2_image\lib\x86;D:\Development\win32\SDL2\lib\x86;D:\Development\win32\freeglut\lib;D:\Development\win32\glew\lib\Release\Win32;D:\Development\win32\ode\lib\DebugSingleDLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\vendor\ode\lib\DebugSingleDLL;..\vendr\glew\lib\Release\Win32;..\vendor\freeglut\lib;..\vendor\SDL2\lib\x86;..\vendor\SDL2_image\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL.lib;SDLmain.lib;ode_single.lib;glew32d.lib;freeglut.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -198,14 +198,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Development\win32\SDL2\include;D:\Development\win32\SDL2_image\include;D:\Development\win32\ode\include;D:\Development\win32\glew\include;D:\Development\win32\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\glew\include;..\vendor\ode\include;..\vendor\SDL2_image\include;..\newbie-engine\include;..\vendor\SDL2\include;..\vendor\freeglut\include\GL;%(AdditionalIncludeDirectories</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Development\win32\SDL2_image\lib\x86;D:\Development\win32\SDL2\lib\x86;D:\Development\win32\freeglut\lib;D:\Development\win32\glew\lib\Release\Win32;D:\Development\win32\ode\lib\DebugSingleDLL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\vendor\ode\lib\DebugSingleDLL;..\vendr\glew\lib\Release\Win32;..\vendor\freeglut\lib;..\vendor\SDL2\lib\x86;..\vendor\SDL2_image\lib\x86;%(AdditionalLibraryDirectories</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL.lib;SDLmain.lib;ode_single.lib;glew32d.lib;freeglut.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

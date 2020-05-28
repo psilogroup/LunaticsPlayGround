@@ -81,11 +81,13 @@ static void draw_screen(void) {
 
 	terreno->Draw();
 
+	if (perpixelLighting != NULL)
+		perpixelLighting->Enable();
+
+	cleaner->Draw();
 
 	if (perpixelLighting != NULL)
 		perpixelLighting->Disable();
-
-	cleaner->Draw();
 
 	currentWorld->Draw();
 
