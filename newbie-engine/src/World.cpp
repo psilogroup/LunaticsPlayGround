@@ -1,7 +1,6 @@
 #include "World.h"
 #include "Mesh.h"
 #include "Sphere.h"
-#include "Wavefront.h"
 #include "BZK_ParsingTools.h"
 #include <stdio.h>
 #include "BZK_XMLTag.h"
@@ -87,6 +86,11 @@ World::World(string aWorld)
 	sceneNode->camera->setPosition(pos);
 	sceneNode->camera->setRotation(rot);
 
+	dThreadingImplementationID threading = dThreadingAllocateMultiThreadedImplementation();
+	dThreadingThreadPoolID pool = dThreadingAllocateThreadPool(4, 0, dAllocateFlagBasicData, NULL);
+	dThreadingThreadPoolServeMultiThreadedImplementation(pool, threading);
+	// dWorldSetStepIslandsProcessingMaxThreadCount(world, 1);
+	dWorldSetStepThreadingImplementation(world, dThreadingImplementationGetFunctions(threading), threading);
 	Datafile.clear();
 	Datafile.open(aWorld.c_str());
 
@@ -166,7 +170,10 @@ void World::NextObjectProperty(Object* obj)
 
 	if (Echo == size)
 	{
-		obj->iSize = getVec();
+		vec3d temp = getVec();
+		obj->iSize.x = temp.x;
+		obj->iSize.y = temp.y;
+		obj->iSize.z = temp.z;
 	}
 
 	if (Echo == position)
@@ -238,56 +245,28 @@ void World::getCube()
 		NextObjectProperty(Cubo);
 	}
 
+	Cubo->SetTexture(Cubo->texture);
 
-	/*
-	std::cout << "Cubo: Indices " << lstInt.TotalItems() << " Vertices " << lstVertex.TotalItems() << " UV " << lstUV.TotalItems() << std::endl;
-
-	//Dados do VertexBuffer Object
-	void* vecs = malloc(lstVertex.TotalItems()*sizeof(float));
-	memcpy(vecs,&lstVertex[0],lstVertex.TotalItems()*sizeof(float));
-
-	//Dados das Coordendas UV
-	void* uvs = malloc(lstUV.TotalItems()*sizeof(float));
-	memcpy(uvs,&lstUV[0],lstUV.TotalItems()*sizeof(float));
-
-	//Dados dos indices
-	void* indexs = malloc(lstInt.TotalItems()*sizeof(unsigned int));
-	memcpy(indexs,&lstInt[0],lstInt.TotalItems()*sizeof(unsigned int));
-
-	Cubo->vbo = new VertexBufferObject();
-	Cubo->vbo->glMode = GL_TRIANGLES;
-
-	Cubo->vbo->setVertices(vecs,lstVertex.TotalItems());
-	Cubo->vbo->setTexCoords(uvs,lstUV.TotalItems()/2);
-	Cubo->vbo->setIndexs(indexs,lstInt.TotalItems());
-
-	Cubo->texture = new Texture("storage/textures/layout_cubo.png");
-	free(vecs);
-	free(uvs);
-	free(indexs);
-
-
-*/
 	currentSpace->addObject(Cubo);
 	//delete Cubo;
 }
 
 void World::getMesh()
 {
-	Wavefront* obj = new Wavefront();
+	
 	while (Echo != endMesh)
 	{
 		if (Datafile.eof()) //Memory leak!!
 			return;
 
-		NextObjectProperty(obj);
+		//NextObjectProperty(obj);
 
 
 	}
 
 	printf("Mesh Adicionado\n");
 
-	currentSpace->addObject(obj);
+	//currentSpace->addObject(obj);
 }
 
 void World::getSphere()
@@ -444,7 +423,7 @@ void World::getUVData()
 void World::Update(float dt)
 {
 
-	dWorldStep(world, dt);
+	dWorldQuickStep(world, dt);
 	dJointGroupEmpty(contactGroup);
 
 }

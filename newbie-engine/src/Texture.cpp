@@ -47,8 +47,7 @@ Texture::Texture (const char * filename )
         glTexImage2D( GL_TEXTURE_2D, 0, nOfColors, image->w, image->h, 0,
                       texture_format, GL_UNSIGNED_BYTE, image->pixels );
 
-        gluBuild2DMipmaps (GL_TEXTURE_2D, nOfColors, image->w, image->h,
-                           texture_format, GL_UNSIGNED_BYTE, image->pixels);
+		glGenerateMipmap(GL_TEXTURE_2D);
 
 
 

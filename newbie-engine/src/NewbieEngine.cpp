@@ -38,10 +38,10 @@ void setup_opengl( int width, int height )
     glLoadIdentity();
 
     const float vnear = 0.1f;
-    const float vfar = 600.0f;
+    const float vfar = 6000.0f;
     const float k = 1.0f;
 
-    if (width >= height)
+   /* if (width >= height)
     {
         float k2 = float(height)/float(width);
         glFrustum(-vnear*k,vnear*k,-vnear*k*k2,vnear*k*k2,vnear,vfar);
@@ -51,7 +51,9 @@ void setup_opengl( int width, int height )
         float k2 = float(width)/float(height);
         glFrustum (-vnear*k*k2,vnear*k*k2,-vnear*k,vnear*k,vnear,vfar);
 
-    }
+    }*/
+
+    gluPerspective(50.0f, float(width) / float(height), .1f, 1200.0f);
 
 
 
@@ -66,11 +68,15 @@ void setup_opengl( int width, int height )
     GLfloat light_Kd[]  = {1.0f,1.0f,1.0f,1.0f};
     GLfloat light_Ks[]  = {1.0f,1.0f,1.0f,1.0f};
 
+    glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+    glEnable(GL_NORMALIZE);
+    
     glLightfv(GL_LIGHT0,GL_POSITION, light_pos);
     glLightfv(GL_LIGHT0,GL_AMBIENT,light_Ka);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,light_Kd);
     glLightfv(GL_LIGHT0,GL_SPECULAR,light_Ks);
     glMateriali(GL_FRONT,GL_SHININESS,60);
+
 
 }
 
@@ -131,10 +137,11 @@ int Iniciar()
     char *fakeargv[] = { fakeParam, NULL };
     int fakeargc = 1;
 
+    glewInit();
     glutInit( &fakeargc, fakeargv );
     dInitODE2(0);
     dAllocateODEDataForThread(dAllocateMaskAll);
-    glewInit();
+    
     return 1;
 
 
