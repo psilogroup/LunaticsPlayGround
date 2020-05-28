@@ -13,17 +13,15 @@ The environment uses blender as level editor, in Blender file you can run the py
 ### Drawing Primitives:
 
 - Drawing primitivies:
- - Cube
- - Sphere
- - Cylinder
- - Terrain Mesh
-
-- Joint
+	- Cube
+	- Sphere
+	- Cylinder
+	- Terrain Mesh
+- Joints
 	- Servo
 	- Angular Motor
 	- Hinge
 	- Car Wheel
-	
 - Misc
 	- GLSL Shaders
 	- Texture Loading
