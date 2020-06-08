@@ -1,11 +1,7 @@
 #ifndef __OBJECT_C__
 #define __OBJECT_C__
 
-#ifdef WIN32
-#include <windows.h>
-#endif
 
-#include <ode/ode.h>
 #include "baselib.h"
 #include "vec3d.h"
 #include "Material.h"
@@ -13,6 +9,7 @@
 #include "BZK_List.h"
 #include "VertexBufferObject.h"
 #include "Texture.h"
+#include "Shader.h"
 # include <iostream>
 # include <fstream>
 #include <string>
@@ -37,7 +34,7 @@ public:
     virtual void LinkBodyWithGeom();
     virtual void Update();
     virtual void UpdateDisableState();
-    virtual void Draw();
+    virtual void Draw(Shader * shader);
 
     virtual void showAABB();
     void setRotation(float x,float y,float z);

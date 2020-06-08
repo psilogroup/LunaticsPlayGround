@@ -1,11 +1,8 @@
 #include "Matrix.h"
-#include "definitions.h"
+#include "baselib.h"
 #include "string.h"
 #include <math.h>
-#ifdef WIN32
-#include <windows.h>
-#endif
-//#include <GL/glew.h>
+
 
 #define M(x,y) (y*4+x)
 

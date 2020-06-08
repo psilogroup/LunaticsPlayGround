@@ -24,6 +24,7 @@
     <ClCompile Include="..\newbie-engine\src\Cylinder.cpp" />
     <ClCompile Include="..\newbie-engine\src\Joint.cpp" />
     <ClCompile Include="..\newbie-engine\src\Material.cpp" />
+    <ClCompile Include="..\newbie-engine\src\Matrix.cpp" />
     <ClCompile Include="..\newbie-engine\src\Mesh.cpp" />
     <ClCompile Include="..\newbie-engine\src\NewbieEngine.cpp" />
     <ClCompile Include="..\newbie-engine\src\Object.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="..\newbie-engine\src\Texture.cpp" />
     <ClCompile Include="..\newbie-engine\src\VertexBufferObject.cpp" />
     <ClCompile Include="..\newbie-engine\src\World.cpp" />
+    <ClCompile Include="baselib.cpp" />
     <ClCompile Include="Lunatics.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +51,7 @@
     <ClInclude Include="..\newbie-engine\include\Event.h" />
     <ClInclude Include="..\newbie-engine\include\Joint.h" />
     <ClInclude Include="..\newbie-engine\include\Material.h" />
+    <ClInclude Include="..\newbie-engine\include\Matrix.h" />
     <ClInclude Include="..\newbie-engine\include\Mesh.h" />
     <ClInclude Include="..\newbie-engine\include\NewbieEngine.h" />
     <ClInclude Include="..\newbie-engine\include\Object.h" />
@@ -64,6 +67,7 @@
     <ClInclude Include="..\newbie-engine\include\Texture.h" />
     <ClInclude Include="..\newbie-engine\include\vec4.h" />
     <ClInclude Include="..\newbie-engine\include\VertexBufferObject.h" />
+    <ClInclude Include="..\newbie-engine\include\VertexData.h" />
     <ClInclude Include="..\newbie-engine\include\World.h" />
     <ClInclude Include="RobotCleaner.h" />
   </ItemGroup>
@@ -140,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;dSINGLE;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\vendor\glew\include;..\vendor\ode\include;..\vendor\SDL2_image\include;..\newbie-engine\include;..\vendor\SDL2\include;..\vendor\freeglut\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\vendor\glew\include;..\vendor\ode\include;..\vendor\SDL2_image\include;..\newbie-engine\include;..\vendor\SDL2\include;..\vendor\freeglut\include\GL;..\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

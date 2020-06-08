@@ -7,10 +7,8 @@
 
 #ifndef __SCENE__
 #define __SCENE__
-#ifdef WIN32
-#include <windows.h>
-#endif
 #include "Camera.h"
+#include "baselib.h"
 
 class Scene
 {

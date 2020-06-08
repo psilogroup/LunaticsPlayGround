@@ -9,11 +9,15 @@
 #include "Graphics.h"
 #include "TexCoord2.h"
 #include "Texture.h"
+#include "VertexData.h"
 #include "VertexBufferObject.h"
 #include "BZK_ParsingTools.h"
+#include "Shader.h"
 #include "baselib.h"
 #include <string>
 #include <iostream>
+
+
 
 class Mesh
 {
@@ -24,19 +28,13 @@ public:
     virtual void Draw();
     ~Mesh();
 
-    int numElements;
-
-    vec3d *vecs;
-    vec3d* normals;
-    dTriIndex *indexs;
-    TexCoord2 *texCoord;
+   
     Texture *texture;
     int numVecs;
-    int numTrigs;
     int numIndexs;
-    int numTexs;
-    int numNormals;
-    VertexBufferObject* vbo;
+    
+private:
+    unsigned int VBO, VAO;
     
 };
 

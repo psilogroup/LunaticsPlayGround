@@ -1,10 +1,10 @@
 #ifndef __OBJECT_MANAGER__
 #define __OBJECT_MANAGER__
 
-#include <windows.h>
-#include <SDL.h>
+#include "baselib.h"
 #include "BZK_List.h"
 #include "Object.h"
+#include "Shader.h"
 
 class ObjectManager
 {
@@ -14,7 +14,7 @@ class ObjectManager
    int totalObjects();
    void Erase();
    void Update();
-   void Draw();
+   void Draw(Shader *shader);
    BZK_List <Object*> iActors;
 };
 #endif

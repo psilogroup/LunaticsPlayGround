@@ -31,12 +31,12 @@ void ObjectManager::Update()
      }
 }
 
-void ObjectManager::Draw()
+void ObjectManager::Draw(Shader *shader)
 {
    int i;
    for(i=0;i<totalObjects();i++)
      {
-	iActors[i]->Draw();
+	iActors[i]->Draw(shader);
 //	printf("z\n");
      }
 }

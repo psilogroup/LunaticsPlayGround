@@ -11,6 +11,10 @@
 
 Terrain::Terrain(unsigned int width, unsigned int height, float scale) {
 
+	std::vector<vec3d> temp_vecsA;
+	std::vector<vec3d> temp_vecsB;
+	std::vector<TexCoord2> temp_tex;
+
 	w = width * scale;
 	h = height * scale;
 
@@ -64,16 +68,56 @@ Terrain::Terrain(unsigned int width, unsigned int height, float scale) {
 	iPosition.y = -(height * scale) / 2.0f;
 	iPosition.z = 0.0;
 
-	vecs = new vec3d[temp_vecsB.size()];
-	texCoord = new TexCoord2[temp_tex.size()];
+	numVecs = temp_vecsB.size();
 
-	memcpy(vecs, &temp_vecsB[0], temp_vecsB.size() * 3 * sizeof(float));
-	memcpy(texCoord, &temp_tex[0], temp_tex.size() * 2 * sizeof(float));
-	vbo = new VertexBufferObject();
-	vbo->glMode = GL_QUADS;
 
-	vbo->setVertices(vecs, temp_vecsB.size());
-	vbo->setTexCoords(texCoord, temp_tex.size());
+	VertexData* vData = new VertexData[temp_vecsB.size()];
+
+	for (unsigned int i = 0; i < numVecs; i++) {
+		
+
+
+		vData[i].vector.x = temp_vecsB[i].x;
+		vData[i].vector.y = temp_vecsB[i].y;
+		vData[i].vector.z = temp_vecsB[i].z;
+
+
+		vData[i].normal.x = 0.0f;
+		vData[i].normal.y = 0.0f;
+		vData[i].normal.z = 1.0f;
+
+
+		vData[i].texCoord.u = temp_tex[i].u;
+		vData[i].texCoord.v = temp_tex[i].v;
+	}
+
+
+	// first, configure the cube's VAO (and VBO)
+
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * numVecs * 8, vData, GL_STATIC_DRAW);
+
+	glBindVertexArray(VAO);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	delete vData;
+	temp_vecsA.clear();
+	temp_vecsB.clear();
+	temp_tex.clear();
+
+
 
 }
 
@@ -91,31 +135,25 @@ void Terrain::MakeGeom(dSpaceID space) {
 	printf("Terreno Criado\n");
 }
 
-void Terrain::Draw() {
-	glColor3f(0.0, 0.0, 1.0);
+void Terrain::Draw(Shader* shader) {
+	
+	glm::mat4 m1 = glm::mat4(1.0f);
+	glm::mat4 m2 = glm::scale(m1, glm::vec3{ 10.0f,10.0f,1.0f });
 
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
+	glm::mat4 model = glm::translate(m2, glm::vec3{ iPosition.x,iPosition.y,iPosition.z });
+	shader->SetMat4("u_model", glm::value_ptr(model));
 
-	glTranslatef(iPosition.x, iPosition.y, iPosition.z);
-	glScalef(10.0f, 10.0f, 1.0f);
 	if (texture != NULL)
 	{
-		glDisable(GL_LIGHTING);
-		glDisable(GL_LIGHT0);
 		texture->bind();
-
 	}
 
-
-	glDisable(GL_LIGHTING);
-	vbo->draw();
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_QUADS, 0, numVecs);
 
 	if (texture != NULL)
 	{
 		texture->end();
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
 	}
 	glPopMatrix();
 }

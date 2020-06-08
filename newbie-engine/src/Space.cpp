@@ -16,9 +16,9 @@ void Space::Update()
    iObjects.Update();
 }
 
-void Space::Draw()
+void Space::Draw(Shader *shader)
 {
-   iObjects.Draw();
+   iObjects.Draw(shader);
 }
 
 int getNumberOfObjects()

@@ -10,12 +10,12 @@ static Uint32 elapsedTime = 1;
 
 
 Terrain* terreno = NULL;
-Camera* eye = NULL;
 SkyBox* sky = NULL;
 RobotCleaner* cleaner = NULL; //Nosso Robo
 Shader* perpixelLighting = NULL;
-
-
+Shader* textureShader = NULL;
+vec3d _lightPos = { 1.2f, 1.0f, 2.0f };
+Mesh* Car = NULL;
 bool quit = false;
 void process_events();
 void MarchaRe();
@@ -29,19 +29,10 @@ void sair(int code) {
 	exit(code);
 };
 
-void posicionaCamera() {
-
-	// setCamera(eye->position.x,eye->position.y,eye->position.z,
-	//        eye->rotation.x,eye->rotation.y,eye->rotation.z);
-
-
-
-}
-
 char strBuff[255];
-
-
 int yaw = 0.1f;
+
+
 static void draw_screen(void) {
 
 	int i;
@@ -50,48 +41,67 @@ static void draw_screen(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-	yaw += 1.0f;
 	if (cleaner != NULL)
 	{
-
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		//glScalef(0.5f,0.5f,0.5f);
-		//Camera acompanhando o robo
 		const dReal* pos = dBodyGetPosition(cleaner->chassi->iBody);
-		const dReal* rot = dBodyGetRotation(cleaner->chassi->iBody);
-		setCamera(pos[0] + 13, pos[1], pos[2] + 2,
-			eye->rotation.x, eye->rotation.y, eye->rotation.z);
-
-		/*gluLookAt(
-			pos[0] + 13 - rot[0] + rot[2],
-			pos[1] + rot[4] + rot[6],
-			pos[2] + 1.5 - rot[8] + rot[10],
-			pos[0] + rot[0] ,
-			pos[1] + rot[4],
-			pos[2] + rot[8],
-			rot[2], rot[6], rot[10]
-		);*/
+		Singleton::getInstance().rootCamera.setPosition(vec3d{ pos[0] + 13,pos[1], pos[2] + 2 });
+		Singleton::getInstance().rootCamera.setCamera();
 	}
 
+	Singleton::getInstance().rootCamera.recalculateViewMatrix();
 
 	//if (sky)
-	//	sky->Draw(vec3d{ 0,0,0 });
+		//sky->Draw(vec3d{ 0,0,0 });
 
-	terreno->Draw();
+	textureShader->Enable();
+	textureShader->SetInteger("texture_slot_0", 0);
+	textureShader->SetMat4("u_projection", glm::value_ptr(Singleton::getInstance().rootCamera.projection));
+	textureShader->SetMat4("u_view", glm::value_ptr(Singleton::getInstance().rootCamera.view));
 
-	if (perpixelLighting != NULL)
+	currentWorld->Draw(textureShader);
+
+	const float* pos = dGeomGetPosition(cleaner->chassi->iGeom);
+	const float* R = dGeomGetRotation(cleaner->chassi->iGeom);
+
+	glm::mat4 m1 = glm::mat4(1.0f);
+
+	float* matrix = glm::value_ptr(m1);
+	matrix[0] = R[0];
+	matrix[1] = R[4];
+	matrix[2] = R[8];
+	matrix[3] = 0;
+	matrix[4] = R[1];
+	matrix[5] = R[5];
+	matrix[6] = R[9];
+	matrix[7] = 0;
+	matrix[8] = R[2];
+	matrix[9] = R[6];
+	matrix[10] = R[10];
+	matrix[11] = 0;
+	matrix[12] = pos[0];
+	matrix[13] = pos[1];
+	matrix[14] = pos[2];
+	matrix[15] = 1;
+
+	glm::mat4 model = glm::scale(m1, glm::vec3{ 1.0f,1.0f,1.0f });
+	
+	textureShader->SetMat4("u_model", glm::value_ptr(model));
+
+	Car->Draw();
+
+	
+	terreno->Draw(textureShader);
+
+	textureShader->Disable();
+
+	/*if (perpixelLighting != NULL)
 		perpixelLighting->Enable();
 
-	cleaner->Draw();
+	//cleaner->Draw(textureShader);
 
 	if (perpixelLighting != NULL)
 		perpixelLighting->Disable();
-
-	currentWorld->Draw();
-
-
+*/
 	SDL_GL_SwapWindow(Singleton::getInstance().mainwindow);
 }
 
@@ -119,12 +129,13 @@ int main(int argc, char* argv[]) {
 	currentWorld = new World("storage/Asset.xml");
 	currentWorld->iSpaces->Update();
 
-	terreno = new Terrain(256, 256, 2);
+	terreno = new Terrain(512, 512, 1);
 
-	terreno->MakeGeom(currentWorld->topLevelSpace);
+	//terreno->MakeGeom(currentWorld->topLevelSpace);
 	ground = dCreatePlane(currentWorld->topLevelSpace, 0, 0, 1, 0);
 	terreno->texture = new Texture("storage/textures/ground1.png");
-	eye = new Camera();
+	Car = new Mesh("storage\\models\\car.obj");
+	Car->texture = new Texture("storage\\textures\\CarTexture.png");
 	SDL_ShowCursor(SDL_DISABLE);
 	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	vec3d p;
@@ -133,10 +144,11 @@ int main(int argc, char* argv[]) {
 	p.z = 0;
 	vec3d r;
 	r.x = 180;
-	r.y = -10;
+	r.y = 0;
 	r.z = 0;
-	eye->setPosition(p);
-	eye->setRotation(r);
+	Singleton::getInstance().rootCamera.setPosition(p);
+	Singleton::getInstance().rootCamera.setRotation(r);
+	Singleton::getInstance().rootCamera.setProjectionMatrix(50.0f, 0.1f, 1200.0f);
 
 	vec3d R1Pos;
 	R1Pos.x = 60;
@@ -144,7 +156,7 @@ int main(int argc, char* argv[]) {
 	R1Pos.z = 1;
 
 	cleaner = new RobotCleaner(R1Pos, currentWorld);
-	perpixelLighting = new Shader();
+	
 	sky = new SkyBox("storage\\textures\\skybox\\front.png",
 		"storage\\textures\\skybox\\back.png",
 		"storage\\textures\\skybox\\left.png",
@@ -153,23 +165,28 @@ int main(int argc, char* argv[]) {
 
 	sky->SetPosition(vec3d{ 0,0,40 });
 	sky->SetSize(40);
-	perpixelLighting->Load("storage\\shaders\\PerPixelLight\\vertexshader.txt", "storage\\shaders\\PerPixelLight\\fragmentshader.txt");
+	
+	textureShader = new Shader();
+	textureShader->Load("storage\\shaders\\Texture\\vertexshader.glsl", "storage\\shaders\\Texture\\fragmentshader.glsl");
+
 	double simstep = 0.05;
+
 	next_time = SDL_GetTicks() + TICK_INTERVAL;
+
 	while (!quit) {
 
 		int nrofsteps = (int)ceilf((TICK_INTERVAL / simstep) / 100);
-
+		simstep = 0.05;
+		
+		simstep = simstep > 0 ? simstep : 0.05;
 		process_events();
-		cleaner->Update(0.05);
+		cleaner->Update(simstep);
 		for (int i = 0; i < nrofsteps; i++)
 		{
 			dSpaceCollide(currentWorld->topLevelSpace, 0, &nearCallback);
-			currentWorld->Update(0.05f);
+			currentWorld->Update(simstep);
 		}
 		draw_screen();
-
-
 
 		SDL_Delay(time_left());
 		next_time += TICK_INTERVAL;
@@ -220,12 +237,12 @@ void process_events()
 
 		if (currentKeyStates[SDL_SCANCODE_LEFT])
 		{
-			eye->Turn(1, 0);
+			Singleton::getInstance().rootCamera.Turn(1, 0);
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_RIGHT])
 		{
-			eye->Turn(-1, 0);
+			Singleton::getInstance().rootCamera.Turn(-1, 0);
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_SPACE])
@@ -250,7 +267,7 @@ void process_events()
 		if (e.type == SDL_MOUSEMOTION) {
 			int mouseX = (e.motion.xrel*-1) * 0.4;
 			int mouseY = (e.motion.yrel*-1) * 0.4;
-			eye->Turn(mouseX, mouseY);
+			Singleton::getInstance().rootCamera.Turn(mouseX, mouseY);
 		}
 
 	}

@@ -1,7 +1,7 @@
 
 #ifndef SHADER_H
 #define SHADER_H
-
+#include <string>
 class Shader
 {
 public:
@@ -11,8 +11,8 @@ public:
    void Enable();
    void Disable();
 
-   void EnvParameterVec(std::string name, float x, float y, float z, float w);
-   void LocalParameterVec(std::string name, float x, float y, float z, float w);
+   void SetInteger(std::string name, int value);
+   void SetMat4(std::string name, const float* m);
 
 private:
    unsigned int target;

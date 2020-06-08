@@ -83,12 +83,16 @@ void Shader::Disable()
    
 }
 
-void Shader::EnvParameterVec(std::string name, float x, float y, float z, float w)
+void Shader::SetInteger(std::string name, int value)
 {
+	unsigned int location = glGetUniformLocation(id, name.c_str());
+	glUniform1i(location, value);
 }
 
-void Shader::LocalParameterVec(std::string name, float x, float y, float z, float w)
+void Shader::SetMat4(std::string name, const float* m)
 {
+	unsigned int location = glGetUniformLocation(id, name.c_str());
+	glUniformMatrix4fv(location, 1, GL_FALSE, m);
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type)

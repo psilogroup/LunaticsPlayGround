@@ -5,7 +5,7 @@
 #include "VertexBufferObject.h"
 #include "vec3d.h"
 #include "Mesh.h"
-
+#include "Shader.h"
 
 
 
@@ -16,20 +16,20 @@ public:
 	unsigned int h;
 	float centerX;
 	float centerY;
-	std::vector<vec3d> temp_vecsA;
-	std::vector<vec3d> temp_vecsB;
-	std::vector<TexCoord2> temp_tex;
-	vec3d* vecs;
-	vec3d* normals;
-	dTriIndex* indexs;
-	TexCoord2* texCoord;
-	Texture* texture;
+	
+	
+	int numVecs;
+	
 	Terrain(unsigned int width, unsigned int height, float scale);
 
 	void MakeGeom(dSpaceID space);
 	Terrain();
-	virtual void Draw();
+	virtual void Draw(Shader * shader);
 	virtual ~Terrain();
+
+private:
+	unsigned int VAO;
+	unsigned int VBO;
 
 };
 

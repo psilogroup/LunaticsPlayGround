@@ -9,6 +9,8 @@ Mesh::Mesh()
 }
 
 
+
+
 Mesh::Mesh(std::string filepath)
 {
 	texture = NULL;
@@ -19,11 +21,23 @@ Mesh::Mesh(std::string filepath)
 	std::vector<vec3d> temp_normals;
 	std::vector<unsigned int> vertexIndices, uvIndices, normalIndices;
 
-	numVecs = 0;
-	numTexs = 0;
+
 
 	while (1)
 	{
+
+		/*struct QuadVertex
+		{
+			glm::vec3 Position;
+			glm::vec4 Color;
+			glm::vec2 TexCoord;
+			float TexIndex;
+			float TilingFactor;
+		};*/
+
+		//vertex 12 bytes
+		//color 16 bytes
+		//tex 8 bytes
 
 		char lineHeader[128];
 		int res = fscanf(file, "%s", &lineHeader);
@@ -70,35 +84,50 @@ Mesh::Mesh(std::string filepath)
 
 	numVecs = temp_vertices.size();
 	numIndexs = vertexIndices.size();
-	numNormals = normalIndices.size();
-	numTexs = uvIndices.size();
-	std::cout << "Vetores: " << numVecs << " " << std::endl;
-	std::cout << "numIndexs: " << numIndexs << " " << std::endl;
-	std::cout << "numNormals: " << numNormals << " " << std::endl;
-	std::cout << "numUvs: " << temp_uvs.size() << " " << std::endl;
-	vecs = new vec3d[numIndexs];
-	indexs = new dTriIndex[numIndexs];
-	normals = new vec3d[numIndexs];
-	texCoord = new TexCoord2[numIndexs];
+
+
+	VertexData* vData = new VertexData[numIndexs];
 
 	for (unsigned int i = 0; i < numIndexs; i++) {
 		unsigned int vertexIndex = vertexIndices[i];
 		unsigned int normalIndex = normalIndices[i];
 		unsigned int uvIndex = uvIndices[i];
 
-		vecs[i].x = temp_vertices[vertexIndex - 1].x;
-		vecs[i].y = temp_vertices[vertexIndex - 1].y;
-		vecs[i].z = temp_vertices[vertexIndex - 1].z;
+		
+		vData[i].vector.x = temp_vertices[vertexIndex - 1].x;
+		vData[i].vector.y = temp_vertices[vertexIndex - 1].y;
+		vData[i].vector.z = temp_vertices[vertexIndex - 1].z;
 
-		normals[i].x = temp_normals[normalIndex - 1].x;
-		normals[i].y = temp_normals[normalIndex - 1].y;
-		normals[i].z = temp_normals[normalIndex - 1].z;
 
-		texCoord[i].u = temp_uvs[uvIndex - 1].u;
-		texCoord[i].v = 1-temp_uvs[uvIndex - 1].v;
+		vData[i].normal.x = temp_normals[normalIndex - 1].x;
+		vData[i].normal.y = temp_normals[normalIndex - 1].y;
+		vData[i].normal.z = temp_normals[normalIndex - 1].z;
+
+	
+		vData[i].texCoord.u = temp_uvs[uvIndex - 1].u;
+		vData[i].texCoord.v = 1-temp_uvs[uvIndex - 1].v;
 	}
 
 
+	// first, configure the cube's VAO (and VBO)
+	
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*numIndexs*8, vData, GL_STATIC_DRAW);
+
+	glBindVertexArray(VAO);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// normal attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 
 
@@ -109,23 +138,24 @@ Mesh::Mesh(std::string filepath)
 	uvIndices.clear();
 	normalIndices.clear();
 
+	delete vData;
 	fclose(file);
 
 
 
-	vbo = new VertexBufferObject();
-	vbo->glMode = GL_TRIANGLES;
+	//vbo = new VertexBufferObject();
+	//vbo->glMode = GL_TRIANGLES;
 
-	vbo->setVertices(vecs, numIndexs);
+	//vbo->setVertices(vecs, numIndexs);
 	//vbo->setIndexs(indexs, numIndexs);
 
-	if (numNormals > 0)
-		vbo->setNormals(normals, numIndexs);
+	//if (numNormals > 0)
+	//	vbo->setNormals(normals, numIndexs);
 
-	if (numTexs > 0)
-	{
-		vbo->setTexCoords(texCoord, numTexs);
-	}
+	//if (numTexs > 0)
+	//{
+	//	vbo->setTexCoords(texCoord, numTexs);
+//	}
 
 
 }
@@ -140,12 +170,12 @@ void Mesh::Draw()
 		texture->bind();
 	}
 
-	glDisable(GL_LIGHTING);
-	glDisable(GL_LIGHT0);
-	
-	vbo->draw();
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+
+	//vbo->draw();
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_TRIANGLES, 0, numIndexs);
+
+	glBindVertexArray(0);
 	
 	if (texture != NULL)
 	{
@@ -157,10 +187,7 @@ void Mesh::Draw()
 
 Mesh::~Mesh()
 {
-	delete vecs;
-	delete indexs;
-	delete normals;
-	delete texCoord;
-	delete vbo;
+	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, &VAO);
 	delete texture;
 }

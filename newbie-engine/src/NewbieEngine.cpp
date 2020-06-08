@@ -3,25 +3,6 @@
 #include <iostream>
 
 
-
-void setCamera (float x,float y,float z, float h, float p, float r)
-{
-    glMatrixMode(GL_MODELVIEW);
-
-    glLoadIdentity();
-
-
-    glRotatef(90, 0,0,1);
-    glRotatef(90, 0,1,0);
-    glRotatef(r, 1,0,0);
-    glRotatef(p, 0,1,0);
-    glRotatef(-h, 0,0,1);
-
-    glTranslatef(-x,-y,-z);
-
-}
-
-
 void setup_opengl( int width, int height )
 {
 
@@ -35,35 +16,12 @@ void setup_opengl( int width, int height )
 
     glViewport(0,0,width,height);
     glMatrixMode (GL_PROJECTION);
-    glLoadIdentity();
+    
 
-    const float vnear = 0.1f;
-    const float vfar = 6000.0f;
-    const float k = 1.0f;
-
-   /* if (width >= height)
-    {
-        float k2 = float(height)/float(width);
-        glFrustum(-vnear*k,vnear*k,-vnear*k*k2,vnear*k*k2,vnear,vfar);
-    }
-    else
-    {
-        float k2 = float(width)/float(height);
-        glFrustum (-vnear*k*k2,vnear*k*k2,-vnear*k,vnear*k,vnear,vfar);
-
-    }*/
-
-    gluPerspective(50.0f, float(width) / float(height), .1f, 1200.0f);
-
-
-
-    glClearColor (0.0,0.0,0.0,0);
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glMatrixMode (GL_MODELVIEW);
-    glLoadIdentity();
-    setCamera(xyz[0],xyz[1],xyz[2],hpr[0],hpr[1],hpr[2]);
-
+    //gluPerspective(50.0f, float(width) / float(height), .1f, 1200.0f);
+    glm::mat4 Proj = glm::perspective(glm::radians(50.0f), 1.33f, 0.1f, 1200.f);
+    glLoadMatrixf(glm::value_ptr(Proj));
+   
     GLfloat light_Ka[]  = {1.0f,1.0f,1.0f,1.0f};
     GLfloat light_Kd[]  = {1.0f,1.0f,1.0f,1.0f};
     GLfloat light_Ks[]  = {1.0f,1.0f,1.0f,1.0f};
@@ -84,14 +42,10 @@ void setup_opengl( int width, int height )
 
 int Iniciar()
 {
-
-
-
     int width = 0;
     int height = 0;
     double stepSize = 30/1000.0;
     int bpp = 32;
-
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -126,6 +80,7 @@ int Iniciar()
 
 
     Singleton::getInstance().maincontext = SDL_GL_CreateContext(Singleton::getInstance().mainwindow);
+
     if( Singleton::getInstance().maincontext == NULL )
     {
         printf( "OpenGL context could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -143,8 +98,6 @@ int Iniciar()
     dAllocateODEDataForThread(dAllocateMaskAll);
     
     return 1;
-
-
 }
 
 

@@ -50,7 +50,13 @@ public:
 	int shots;
 	bool allShotsAlocated;
 
+	vec3d getPosition()
+	{
+		const dReal* pos = dBodyGetPosition(chassi->iBody);
+		return vec3d{ pos[0],pos[1],pos[2] };
+	};
 
+	
 	RobotCleaner(vec3d pos, World* world)
 	{
 
@@ -245,14 +251,14 @@ public:
 		rodaTraseiraDireita->Update();
 	};
 
-	void Draw()
+	void Draw(Shader *shader)
 	{
-		chassi->Draw();
+		chassi->Draw(shader);
 
-		rodaFrontalEsquerda->Draw();
-		rodaFrontalDireita->Draw();
-		rodaTraseiraEsquerda->Draw();
-		rodaTraseiraDireita->Draw();
+		//rodaFrontalEsquerda->Draw();
+		//rodaFrontalDireita->Draw();
+		//rodaTraseiraEsquerda->Draw();
+		//rodaTraseiraDireita->Draw();
 	};
 
 };

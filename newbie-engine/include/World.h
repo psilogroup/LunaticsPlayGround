@@ -15,6 +15,7 @@
 #include "Camera.h"
 #include "Scene.h"
 #include "AssetLibrary.h"
+#include "Shader.h"
 using namespace std;
 
 /**
@@ -35,7 +36,7 @@ public:
 	Scene* sceneNode;
 	AssetLibrary* assetLib;
 	void Update(float dt);
-	void Draw();
+	void Draw(Shader* shader);
 
 private:
 	string space;

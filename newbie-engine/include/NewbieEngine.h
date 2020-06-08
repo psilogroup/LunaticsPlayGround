@@ -21,9 +21,7 @@
 
 static dGeomID ground;
 static World* currentWorld = NULL;
-static GLfloat light_pos[4] = { 1000.0f,1.0f,10000.0f,0.0f };
-static float xyz[3] = { 3.8548f,8.90843f,7.5900f };
-static float hpr[3] = { -145.5,-22.5,-0.25 };
+static GLfloat light_pos[4] = { 1,0.0f,30.0f,0.0f };
 static EventFn* kupFn = NULL;
 static EventFn* kdwFn = NULL;
 static EventManager inputEvents;
@@ -91,7 +89,7 @@ static void setKeyDownFunction(EventFn* fn)
 
 void drawGround();
 
-void setCamera(float x, float y, float z, float h, float p, float r);
+
 void drawString(const char* str, int x, int y, vec4d color, void* font);
 void setup_opengl(int width, int height);
 int Iniciar();

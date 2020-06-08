@@ -18,7 +18,7 @@ Object::Object()
 	data->setName("Object");
 };
 
-void Object::Draw()
+void Object::Draw(Shader *shader)
 {
 
 }
@@ -39,8 +39,11 @@ void Object::MakeBody(dWorldID world)
 
 	disabledSteps = 0;
 	dBodySetAutoDisableFlag(iBody,1);
+	
 	dBodySetData(iBody,data);
+	dBodySetAutoDisableSteps(iBody, 15);
 	dBodyDisable(iBody);
+
 };
 
 void Object::MakeGeom(dSpaceID space)

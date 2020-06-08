@@ -79,13 +79,7 @@ World::World(string aWorld)
 	currentSpace = new Space(topLevelSpace);
 	//  currentSpace->iSpace = topLevelSpace;
 	iSpaces->Add(currentSpace);
-	vec3d pos = { 0.0f,0.0f,-80.0f };
-	vec3d rot = { 0.0f,0.0f,0.0f };
-
-	sceneNode = new Scene();
-	sceneNode->camera->setPosition(pos);
-	sceneNode->camera->setRotation(rot);
-
+	
 	dThreadingImplementationID threading = dThreadingAllocateMultiThreadedImplementation();
 	dThreadingThreadPoolID pool = dThreadingAllocateThreadPool(4, 0, dAllocateFlagBasicData, NULL);
 	dThreadingThreadPoolServeMultiThreadedImplementation(pool, threading);
@@ -147,9 +141,7 @@ World::World(vec3d pos, vec3d rot, vec3d grav)
 	iSpaces = new SpaceManager();
 	currentSpace = new Space(topLevelSpace);
 	iSpaces->Add(currentSpace);
-	sceneNode = new Scene();
-	sceneNode->camera->setPosition(pos);
-	sceneNode->camera->setRotation(rot);
+
 
 }
 void World::getObjectDetails()
@@ -428,7 +420,8 @@ void World::Update(float dt)
 
 }
 
-void World::Draw()
+void World::Draw(Shader* shader)
 {
-	iSpaces->Draw();
+	iSpaces->Draw(shader);
 }
+

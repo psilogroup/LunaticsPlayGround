@@ -10,6 +10,8 @@
 #include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <freeglut.h>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -30,7 +32,7 @@ static void setColor(float k[3],float r,float g,float b)
     k[3] = 0.0;
 }
 
-static void setTransform (const float pos[3], const float R[12])
+inline static void setTransform (const float pos[3], const float R[12])
 {
   float matrix[16];
   matrix[0]=R[0];

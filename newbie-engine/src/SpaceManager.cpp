@@ -19,11 +19,11 @@ void SpaceManager::Update()
      }
 }
 
-void SpaceManager::Draw()
+void SpaceManager::Draw(Shader *shader)
 {
    int i;
    for (i=0;i<iSpaces.TotalItems();i++)
      {
-	  iSpaces[i]->Draw();
+	  iSpaces[i]->Draw(shader);
      }
 }

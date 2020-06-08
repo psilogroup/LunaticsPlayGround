@@ -3,12 +3,13 @@
 #include "Object.h"
 #include "Texture.h"
 #include "Mesh.h"
+#include "Shader.h"
 class Cube:public Object
 {
 public:
     Cube();
    
-    virtual void Draw();
+    virtual void Draw(Shader* shader);
     virtual void Update();
     virtual void SetTexture(Texture* tex);
     vec3d *vecs;

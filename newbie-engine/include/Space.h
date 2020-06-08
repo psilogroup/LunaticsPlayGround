@@ -12,7 +12,7 @@ class Space
    Space(dSpaceID spc);
    void addObject(Object *o);
    void Update();
-   void Draw();
+   void Draw(Shader *shader);
    int getNumberOfObjects();
    ObjectManager iObjects;
    dSpaceID iSpace;
