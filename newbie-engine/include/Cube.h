@@ -4,6 +4,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Shader.h"
+#include "baselib.h"
 class Cube:public Object
 {
 public:
@@ -12,6 +13,7 @@ public:
     virtual void Draw(Shader* shader);
     virtual void Update();
     virtual void SetTexture(Texture* tex);
+    virtual glm::mat4 GetModelMatrix();
     vec3d *vecs;
     dTriMeshDataID triData;
     dTriIndex *indexs;

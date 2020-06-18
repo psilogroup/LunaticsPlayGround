@@ -30,30 +30,7 @@ void Cube::Draw(Shader *shader)
     float lz = iSize.z*0.5f;
 
     
-    const float *pos = dGeomGetPosition(iGeom);
-    const float *R = dGeomGetRotation(iGeom);
-
-    glm::mat4 m1 = glm::mat4(1.0f);
-
-    float* matrix = glm::value_ptr(m1);
-    matrix[0] = R[0];
-    matrix[1] = R[4];
-    matrix[2] = R[8];
-    matrix[3] = 0;
-    matrix[4] = R[1];
-    matrix[5] = R[5];
-    matrix[6] = R[9];
-    matrix[7] = 0;
-    matrix[8] = R[2];
-    matrix[9] = R[6];
-    matrix[10] = R[10];
-    matrix[11] = 0;
-    matrix[12] = pos[0];
-    matrix[13] = pos[1];
-    matrix[14] = pos[2];
-    matrix[15] = 1;
-
-    glm::mat4 model = glm::scale(m1, glm::vec3{ iSize.x,iSize.y,iSize.z });
+    glm::mat4 model = this->GetModelMatrix();
     shader->SetMat4("u_model", glm::value_ptr(model));
 
     mesh->Draw();
@@ -76,6 +53,36 @@ void Cube::SetTexture(Texture* tex)
 {
     if (mesh != NULL)
         mesh->texture = tex;
+}
+
+glm::mat4 Cube::GetModelMatrix()
+{
+    const float* pos = dGeomGetPosition(iGeom);
+    const float* R = dGeomGetRotation(iGeom);
+
+    glm::mat4 m1 = glm::mat4(1.0f);
+
+    float* matrix = glm::value_ptr(m1);
+    matrix[0] = R[0];
+    matrix[1] = R[4];
+    matrix[2] = R[8];
+    matrix[3] = 0;
+    matrix[4] = R[1];
+    matrix[5] = R[5];
+    matrix[6] = R[9];
+    matrix[7] = 0;
+    matrix[8] = R[2];
+    matrix[9] = R[6];
+    matrix[10] = R[10];
+    matrix[11] = 0;
+    matrix[12] = pos[0];
+    matrix[13] = pos[1];
+    matrix[14] = pos[2];
+    matrix[15] = 1;
+
+    glm::mat4 model = glm::scale(m1, glm::vec3{ iSize.x,iSize.y,iSize.z });
+
+    return model;
 }
 
 Cube::~Cube()

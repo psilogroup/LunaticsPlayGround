@@ -58,15 +58,15 @@ int Iniciar()
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    Singleton::getInstance().rootCamera.width = 1024;
-    Singleton::getInstance().rootCamera.height = 768;
+    Singleton::getInstance().rootCamera.width = 1920;
+    Singleton::getInstance().rootCamera.height = 1080;
 
     Singleton::getInstance().mainwindow = SDL_CreateWindow( "Lunatycs PlayGround",
                                           SDL_WINDOWPOS_UNDEFINED,
                                           SDL_WINDOWPOS_UNDEFINED,
                                           Singleton::getInstance().rootCamera.width,
                                           Singleton::getInstance().rootCamera.height,
-                                          SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN );
+                                          SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP );
 
     if (!Singleton::getInstance().mainwindow)
     {

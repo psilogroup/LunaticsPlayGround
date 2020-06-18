@@ -9,7 +9,8 @@ class RobotCleaner
 public:
 
 	Cube* chassi;
-	
+	Mesh* bodyMesh;
+	Mesh* wheelMesh;
 	Cylinder* rodaFrontalEsquerda;
 	Cylinder* rodaFrontalDireita;
 
@@ -70,9 +71,9 @@ public:
 		aceleador = 0;
 		shots = 0;
 		chassi = new Cube();
-		chassi->iSize.x = 4.5;
-		chassi->iSize.y = 3.5;
-		chassi->iSize.z = 1.0;
+		chassi->iSize.x = 4.0f;
+		chassi->iSize.y = 1.8;
+		chassi->iSize.z = 1.2;
 		chassi->iM = 0.4;
 		chassi->data->setName("Chassi");
 		chassi->MakeGeom(world->topLevelSpace);
@@ -81,6 +82,9 @@ public:
 
 		chassi->setPosition(pos.x, pos.y, pos.z);
 		chassi->setRotation(0, 0, 0);
+
+		bodyMesh = new Mesh("storage\\models\\car.obj");
+		bodyMesh->texture = new Texture("storage\\textures\\CarTexture.png");
 
 		vec3d p;
 		p.x = pos.x + 2;
@@ -253,8 +257,37 @@ public:
 
 	void Draw(Shader *shader)
 	{
-		chassi->Draw(shader);
+		//chassi->Draw(shader);
 
+		const float* pos = dGeomGetPosition(this->chassi->iGeom);
+		const float* R = dGeomGetRotation(this->chassi->iGeom);
+
+		glm::mat4 m1 = glm::mat4(1.0f);
+
+		float* matrix = glm::value_ptr(m1);
+		matrix[0] = R[0];
+		matrix[1] = R[4];
+		matrix[2] = R[8];
+		matrix[3] = 0;
+		matrix[4] = R[1];
+		matrix[5] = R[5];
+		matrix[6] = R[9];
+		matrix[7] = 0;
+		matrix[8] = R[2];
+		matrix[9] = R[6];
+		matrix[10] = R[10];
+		matrix[11] = 0;
+		matrix[12] = pos[0];
+		matrix[13] = pos[1];
+		matrix[14] = pos[2];
+		matrix[15] = 1;
+
+		glm::mat4 model = glm::scale(m1, glm::vec3{ 1.0f,1.0f,1.0f });
+
+		
+		shader->SetMat4("u_model", glm::value_ptr(model));
+
+		bodyMesh->Draw();
 		//rodaFrontalEsquerda->Draw();
 		//rodaFrontalDireita->Draw();
 		//rodaTraseiraEsquerda->Draw();

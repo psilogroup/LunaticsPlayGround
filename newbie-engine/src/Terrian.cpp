@@ -138,7 +138,7 @@ void Terrain::MakeGeom(dSpaceID space) {
 void Terrain::Draw(Shader* shader) {
 	
 	glm::mat4 m1 = glm::mat4(1.0f);
-	glm::mat4 m2 = glm::scale(m1, glm::vec3{ 10.0f,10.0f,1.0f });
+	glm::mat4 m2 = glm::scale(m1, glm::vec3{ 1.0f,1.0f,1.0f });
 
 	glm::mat4 model = glm::translate(m2, glm::vec3{ iPosition.x,iPosition.y,iPosition.z });
 	shader->SetMat4("u_model", glm::value_ptr(model));

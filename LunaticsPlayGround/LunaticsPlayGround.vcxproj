@@ -71,6 +71,10 @@
     <ClInclude Include="..\newbie-engine\include\World.h" />
     <ClInclude Include="RobotCleaner.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="storage\shaders\Texture\fragmentshader.glsl" />
+    <None Include="storage\shaders\Texture\vertexshader.glsl" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{545CCB54-354F-4EAC-A3E9-9AF99ECAE947}</ProjectGuid>
